@@ -1,0 +1,351 @@
+[2m2022-05-18 12:54:50.257[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2m2022-05-18 12:54:50.260[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2m2022-05-18 12:54:51.666[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 12:54:51.881[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 1621 ms
+[2m2022-05-18 12:54:52.523[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 12:54:52.687[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 12:55:35.656[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-5][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 12:55:35.657[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-5][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 12:56:40.780[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 12:56:40.851[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 565 ms
+[2m2022-05-18 12:56:40.986[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 12:56:41.030[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 12:56:41.086[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 12:57:41.773[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 12:57:41.838[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 527 ms
+[2m2022-05-18 12:57:41.963[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 12:57:42.002[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 12:57:42.050[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 12:57:44.504[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 12:57:44.505[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 12:59:27.989[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 12:59:28.050[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 515 ms
+[2m2022-05-18 12:59:28.168[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 12:59:28.209[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 12:59:28.255[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 12:59:29.808[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 12:59:29.810[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 13:41:19.015[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 13:41:19.079[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 539 ms
+[2m2022-05-18 13:41:19.204[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 13:41:19.245[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 13:41:19.294[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 13:41:24.101[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 13:41:24.102[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 13:42:50.867[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 13:42:50.928[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 521 ms
+[2m2022-05-18 13:42:51.055[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 13:42:51.096[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 13:42:51.144[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 13:42:56.048[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 13:42:56.050[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 15:01:56.361[0;39m [31mERROR[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-7][0;39m [36mo.a.c.c.C.[.[.[.[dispatcherServlet]     [0;39m [2m:[0;39m Servlet.service() for servlet [dispatcherServlet] in context with path [/vue] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'happyhouse.board' doesn't exist
+### The error may exist in file [C:\Users\LHI\Desktop\project vue\happyhouse_vue\HappyHouse_boot\target\classes\mappers\board.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: select articleno, userid, subject, content, hit, regtime   from board    order by articleno desc
+### Cause: java.sql.SQLSyntaxErrorException: Table 'happyhouse.board' doesn't exist
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table 'happyhouse.board' doesn't exist] with root cause
+
+java.sql.SQLSyntaxErrorException: Table 'happyhouse.board' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:371)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:64)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:325)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:89)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:151)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:145)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at sun.reflect.GeneratedMethodAccessor207.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427)
+	at com.sun.proxy.$Proxy81.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:147)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:80)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at com.sun.proxy.$Proxy129.selectBoard(Unknown Source)
+	at com.ssafy.vue.service.BoardServiceImpl.retrieveBoard(BoardServiceImpl.java:20)
+	at com.ssafy.vue.service.BoardServiceImpl$$FastClassBySpringCGLIB$$1c39edf7.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386)
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704)
+	at com.ssafy.vue.service.BoardServiceImpl$$EnhancerBySpringCGLIB$$da723f67.retrieveBoard(<generated>)
+	at com.ssafy.vue.controller.BoardController.retrieveBoard(BoardController.java:40)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+[2m2022-05-18 15:44:00.812[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:44:00.877[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 572 ms
+[2m2022-05-18 15:44:01.029[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:44:01.088[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:44:01.144[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:44:12.566[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:44:12.629[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 474 ms
+[2m2022-05-18 15:44:12.747[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:44:12.792[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:44:12.838[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:45:05.627[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:45:05.707[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 696 ms
+[2m2022-05-18 15:45:05.913[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:45:05.965[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:45:06.036[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:45:18.995[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 15:45:18.998[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 2 ms
+[2m2022-05-18 15:45:35.240[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-6][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:45:35.245[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-7][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:46:15.103[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:46:15.164[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 550 ms
+[2m2022-05-18 15:46:15.284[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:46:15.330[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:46:15.374[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:46:20.354[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 15:46:20.356[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 15:46:24.602[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-4][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:46:24.606[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-3][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:46:42.296[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-5][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:46:42.300[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-6][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:47:39.106[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-7][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:47:39.111[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-8][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:47:39.114[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-9][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:47:39.118[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[-nio-80-exec-10][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dongcode' for method parameter type String is not present]
+[2m2022-05-18 15:48:35.144[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:48:35.234[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 580 ms
+[2m2022-05-18 15:48:35.354[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:48:35.395[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:48:35.440[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:48:38.366[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 15:48:38.368[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 15:48:38.370[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:48:38.375[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-2][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:48:38.379[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-3][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:48:38.382[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-4][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:48:52.750[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-7][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:48:52.755[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-9][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:48:52.758[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-8][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:48:52.764[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[-nio-80-exec-10][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:49:20.885[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-3][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:06.391[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-6][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:06.394[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-7][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:06.396[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-9][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:06.399[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-8][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:06.402[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[-nio-80-exec-10][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:06.405[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:06.407[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-2][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:21.276[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-5][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:50:41.685[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:50:41.744[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 509 ms
+[2m2022-05-18 15:50:41.857[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:50:41.895[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:50:41.931[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:50:47.907[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 15:50:47.908[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 0 ms
+[2m2022-05-18 15:50:52.026[0;39m [33m WARN[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-3][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 15:54:58.872[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:54:58.929[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 495 ms
+[2m2022-05-18 15:54:59.039[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:54:59.077[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:54:59.114[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:55:04.714[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 15:55:04.715[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 15:55:46.679[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:55:46.741[0;39m [32m INFO[0;39m [35m9152[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 506 ms
+[2m2022-05-18 15:55:56.699[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2m2022-05-18 15:55:56.702[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2m2022-05-18 15:55:58.028[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:55:58.236[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 1533 ms
+[2m2022-05-18 15:55:58.917[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:55:59.085[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:56:10.039[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 15:56:10.040[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 15:56:10.381[0;39m [31mERROR[0;39m [35m13840[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.a.c.c.C.[.[.[.[dispatcherServlet]     [0;39m [2m:[0;39m Servlet.service() for servlet [dispatcherServlet] in context with path [/vue] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'concat('11680','%');
+		limit 1000' at line 3
+### The error may exist in file [C:\Users\LHI\Desktop\project vue\happyhouse_vue\HappyHouse_boot\target\classes\mappers\Building.xml]
+### The error may involve com.ssafy.vue.mapper.BuildingMapper.around-Inline
+### The error occurred while setting parameters
+### SQL: select no,businessName,businessType,address,let,lng,dongCode   from aroundbusinessarea   where dongCodelike concat(?,'%');   limit 1000
+### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'concat('11680','%');
+		limit 1000' at line 3
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'concat('11680','%');
+		limit 1000' at line 3] with root cause
+
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'concat('11680','%');
+		limit 1000' at line 3
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:371)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:64)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:325)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:89)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:151)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:145)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427)
+	at com.sun.proxy.$Proxy81.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:147)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:80)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at com.sun.proxy.$Proxy83.around(Unknown Source)
+	at com.ssafy.vue.service.BuildingServiceImpl.around(BuildingServiceImpl.java:36)
+	at com.ssafy.vue.controller.BuildingController.around(BuildingController.java:55)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+[2m2022-05-18 15:57:55.803[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 15:57:55.869[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 540 ms
+[2m2022-05-18 15:57:56.002[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 15:57:56.044[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 15:57:56.097[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.ConditionEvaluationDeltaLoggingListener[0;39m [2m:[0;39m Condition evaluation unchanged
+[2m2022-05-18 15:57:59.917[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[p-nio-80-exec-2][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 15:57:59.919[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[p-nio-80-exec-2][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 18:18:56.803[0;39m [32m INFO[0;39m [35m13840[0;39m [2m---[0;39m [2m[(153)-127.0.0.1][0;39m [36minMXBeanRegistrar$SpringApplicationAdmin[0;39m [2m:[0;39m Application shutdown requested.
+[2m2022-05-18 21:23:36.842[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2m2022-05-18 21:23:36.845[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2m2022-05-18 21:23:38.223[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 21:23:38.454[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 1609 ms
+[2m2022-05-18 21:23:39.151[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 21:23:39.332[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 21:25:25.034[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 21:25:25.036[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+[2m2022-05-18 22:08:05.770[0;39m [32m INFO[0;39m [35m17812[0;39m [2m---[0;39m [2m[n(51)-127.0.0.1][0;39m [36minMXBeanRegistrar$SpringApplicationAdmin[0;39m [2m:[0;39m Application shutdown requested.
+[2m2022-05-18 22:14:21.675[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2m2022-05-18 22:14:21.676[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2m2022-05-18 22:14:23.041[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 22:14:23.245[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 1568 ms
+[2m2022-05-18 22:14:23.937[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2022-05-18 22:14:24.122[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 22:15:35.336[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[p-nio-80-exec-2][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 22:15:35.338[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[p-nio-80-exec-2][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 2 ms
+[2m2022-05-18 22:15:41.279[0;39m [33m WARN[0;39m [35m16212[0;39m [2m---[0;39m [2m[p-nio-80-exec-3][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 22:15:53.068[0;39m [33m WARN[0;39m [35m16212[0;39m [2m---[0;39m [2m[p-nio-80-exec-4][0;39m [36m.w.s.m.s.DefaultHandlerExceptionResolver[0;39m [2m:[0;39m Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'dong' for method parameter type String is not present]
+[2m2022-05-18 22:34:14.992[0;39m [32m INFO[0;39m [35m16212[0;39m [2m---[0;39m [2m[n(28)-127.0.0.1][0;39m [36minMXBeanRegistrar$SpringApplicationAdmin[0;39m [2m:[0;39m Application shutdown requested.
+[2m2022-05-18 22:57:54.336[0;39m [32m INFO[0;39m [35m17120[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2m2022-05-18 22:57:54.338[0;39m [32m INFO[0;39m [35m17120[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2m2022-05-18 22:57:55.486[0;39m [32m INFO[0;39m [35m17120[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 80 (http)
+[2m2022-05-18 22:57:55.664[0;39m [32m INFO[0;39m [35m17120[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 1326 ms
+[2m2022-05-18 22:57:56.281[0;39m [33m WARN[0;39m [35m17120[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m Unable to start LiveReload server
+[2m2022-05-18 22:57:56.459[0;39m [32m INFO[0;39m [35m17120[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 80 (http) with context path '/vue'
+[2m2022-05-18 22:57:58.137[0;39m [32m INFO[0;39m [35m17120[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2022-05-18 22:57:58.138[0;39m [32m INFO[0;39m [35m17120[0;39m [2m---[0;39m [2m[p-nio-80-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
