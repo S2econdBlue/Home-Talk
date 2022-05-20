@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.vue.mapper.BuildingMapper">
+
+	<select id="selectSi" resultType="SidocodeDto">
+		select left(sidoCode,2)
+		sidoCode,sidoName from sidocode
+		order by sidoCode
+	</select>
+
+	<select id="selectGu" parameterType="String"
+		resultType="GuguncodeDto">
+		select left(gugunCode,5) gugunCode,gugunName
+		from guguncode
+		where gugunCode like concat(#{si},'%')
+		order by gugunName
+	</select>
+
+	<select id="select" parameterType="String"
+		resultType="DongcodeDto">
+		select dongCode,sidoName,gugunName,dongName
+		from dongcode
+		where dongCode like concat(#{gu},'%');
+	</select>
+
+	<select id="around" parameterType="String" resultType="AroundbusinessareaDto">
+		select no,businessName,businessType,address,let,lng,dongCode
+		from aroundbusinessarea
+		where dongCode like concat(#{dong},'%')
+		limit 100
+	</select>
+
+</mapper>
+	
