@@ -3,7 +3,6 @@ package com.ssafy.vue.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.vue.dto.AroundbusinessareaDto;
 import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
+import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
 import com.ssafy.vue.service.BuildingService;
 
@@ -43,17 +43,22 @@ public class BuildingController {
 	}
 	@GetMapping("/Dong")
 	@ApiOperation(value = "시,도,구,군 정보에 맞는 동 정보를 조회한다.", response = List.class)
-	public @ResponseBody List<DongcodeDto> Dong(String gu) throws Exception {
-		List<DongcodeDto> list =  service.select(gu);
+	public @ResponseBody List<DongcodeDto> Dong(@RequestParam("gugun") String gu) throws Exception {
+		List<DongcodeDto> list =  service.selectDong(gu);
 		return list;
 	}
 	
 	@GetMapping("/around")
 	@ApiOperation(value = "동코드에 맞는 주변상권 정보를 조회한다", response = List.class)
 	public @ResponseBody List<AroundbusinessareaDto> around(@RequestParam("dong") String dongcode) throws Exception{
-		System.out.println(dongcode);
 		List<AroundbusinessareaDto> list = service.around(dongcode);
-		System.out.println(list.toString());
+		return list;
+	}
+	
+	@GetMapping("/House")
+	@ApiOperation(value = "동코드에 맞는 아파트 거래 정보를 조회한다", response = List.class)
+	public @ResponseBody List<HouseinfoDto> Apt(@RequestParam("dong") String apt) throws Exception {
+		List<HouseinfoDto> list =  service.selectApt(apt);
 		return list;
 	}
 }
