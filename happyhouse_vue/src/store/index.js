@@ -78,7 +78,6 @@ export default new Vuex.Store({
     },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
-      console.log(state.houses);
     },
     SET_DETAIL_HOUSE(state, house) {
       console.log("Mutations", house);

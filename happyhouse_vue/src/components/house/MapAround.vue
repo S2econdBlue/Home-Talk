@@ -9,56 +9,66 @@
         </b-col>
       </b-row>
     </div>
-    <div id="map"></div>
+    <b-row>
+      <b-col col="3"
+        ><b-table striped hover :items="checkhouse" :fields="fields"></b-table
+      ></b-col>
+
+      <b-col><div id="map"></div></b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { getMarker } from "@/api/map";
+import { getMarker, first } from "@/api/map";
 
 export default {
   data() {
     return {
-      map: null, // eslint-disable-line no-unused-vars
-      markers: [],
+      fields: ["aptName", "dealAmount"],
+      // map: null, // eslint-disable-line no-unused-vars
+      // markers: [],
     };
   },
   computed: {
     ...mapGetters(["checkhouse"]),
   },
   mounted() {
-    if (window.kakao && window.kakao.maps) {
-      this.initMap();
-    } else {
-      const script = document.createElement("script");
-      /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
-      script.src =
-        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c134421d6fa6f7922b8bfc742db52dbc";
-      document.head.appendChild(script);
-    }
+    first();
   },
+  // mounted() {
+  //   if (window.kakao && window.kakao.maps) {
+  //     this.initMap();
+  //   } else {
+  //     const script = document.createElement("script");
+  //     /* global kakao */
+  //     script.onload = () => kakao.maps.load(this.initMap);
+  //     script.src =
+  //       "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c134421d6fa6f7922b8bfc742db52dbc";
+  //     document.head.appendChild(script);
+  //   }
+  // },
   methods: {
-    initMap() {
-      var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-        mapOption = {
-          center: new kakao.maps.LatLng(37.564343, 126.947613), // 지도의 중심좌표
-          level: 10, // 지도의 확대 레벨
-        };
+    // initMap() {
+    //   var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+    //     mapOption = {
+    //       center: new kakao.maps.LatLng(37.564343, 126.947613), // 지도의 중심좌표
+    //       level: 10, // 지도의 확대 레벨
+    //     };
 
-      this.map = new kakao.maps.Map(mapContainer, mapOption); // eslint-disable-line no-unused-vars
-    },
+    //   this.map = new kakao.maps.Map(mapContainer, mapOption); // eslint-disable-line no-unused-vars
+    // },
     makeMarker() {
       console.log(this.checkhouse);
       if (this.checkhouse.length > 0) {
-        this.markers = getMarker(this.checkhouse, this.map);
+        getMarker(this.checkhouse);
 
-        if (this.markers.length > 0) {
-          this.markers.forEach((item) => {
-            item.setMap(this.map);
-          });
-        }
+        // if (this.markers.length > 0) {
+        //   this.markers.forEach((item) => {
+        //     item.setMap(this.map);
+        //   });
+        // }
       } else {
         alert("시 구 동 모두 선택해주세요");
       }

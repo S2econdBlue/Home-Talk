@@ -8,22 +8,22 @@
         <house-search-bar></house-search-bar>
       </b-col>
     </b-row>
-    <b-row>
+    <!-- <b-row>
       <b-col cols="12">
         <map-around />
       </b-col>
-    </b-row>
+    </b-row> -->
   </b-container>
 </template>
 <script>
 import HouseSearchBar from "@/components/house/HouseSearchBar copy.vue";
-import MapAround from "@/components/house/MapAround.vue";
+// import MapAround from "@/components/house/MapAround.vue";
 
 export default {
   name: "HouseView",
   components: {
     HouseSearchBar,
-    MapAround,
+    // MapAround,
   },
 };
 </script>
