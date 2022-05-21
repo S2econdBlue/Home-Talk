@@ -37,8 +37,12 @@ public class BuildingServiceImpl implements BuildingService {
 	}
 
 	@Override
-	public List<DongcodeDto> select(String gu) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DongcodeDto> selectDong(String gu) throws Exception {
+		return mapper.selectDong(gu);
+	}
+
+	@Override
+	public List<HouseinfoDto> selectApt(String code) throws Exception {
+		return mapper.selectApt(code);
 	}
 }

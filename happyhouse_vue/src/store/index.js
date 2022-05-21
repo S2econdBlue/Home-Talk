@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     sidos: [{ value: null, text: "선택하세요" }],
     guguns: [{ value: null, text: "선택하세요" }],
+    dongs: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
     todos: [
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     allObserveGuDongs(state) {
       return state.observegudongs;
     },
+    checkhouse(state) {
+      return state.houses;
+    },
   },
   mutations: {
     //////////////////////   observe start   //////////////////////
@@ -58,14 +62,23 @@ export default new Vuex.Store({
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
+    SET_DONG_LIST(state, dongs) {
+      dongs.forEach((dong) => {
+        state.dongs.push({ value: dong.dongCode, text: dong.dongName });
+      });
+    },
     CLEAR_SIDO_LIST(state) {
       state.sidos = [{ value: null, text: "선택하세요" }];
     },
     CLEAR_GUGUN_LIST(state) {
       state.guguns = [{ value: null, text: "선택하세요" }];
     },
+    CLEAR_DONG_LIST(state) {
+      state.dongs = [{ value: null, text: "선택하세요" }];
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
+      console.log(state.houses);
     },
     SET_DETAIL_HOUSE(state, house) {
       console.log("Mutations", house);
@@ -142,25 +155,23 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
-    getHouseList({ commit }, gugunCode) {
-      // vue cli enviroment variables 검색
-      //.env.local file 생성.
-      // 반드시 VUE_APP으로 시작해야 한다.
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
-      // const SERVICE_KEY =
-      //   "9Xo0vlglWcOBGUDxH8PPbuKnlBwbWU6aO7%2Bk3FV4baF9GXok1yxIEF%2BIwr2%2B%2F%2F4oVLT8bekKU%2Bk9ztkJO0wsBw%3D%3D";
-      const SERVICE_URL =
-        "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
-      const params = {
-        LAWD_CD: gugunCode,
-        DEAL_YMD: "202203",
-        serviceKey: decodeURIComponent(SERVICE_KEY),
-      };
+    getDong({ commit }, gugunCode) {
+      const params = { gugun: gugunCode };
       http
-        .get(SERVICE_URL, { params })
+        .get(`/Building/Dong`, { params })
         .then(({ data }) => {
-          // console.log(commit, data);
-          commit("SET_HOUSE_LIST", data.response.body.items.item);
+          commit("SET_DONG_LIST", data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getHouseList({ commit }, dongCode) {
+      const params = { dong: dongCode };
+      http
+        .get(`/Building/House`, { params })
+        .then(({ data }) => {
+          commit("SET_HOUSE_LIST", data);
         })
         .catch((error) => {
           console.log(error);

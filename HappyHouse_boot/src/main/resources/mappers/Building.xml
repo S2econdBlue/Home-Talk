@@ -20,7 +20,7 @@
 		order by gugunName
 	</select>
 
-	<select id="select" parameterType="String"
+	<select id="selectDong" parameterType="String"
 		resultType="DongcodeDto">
 		select dongCode,sidoName,gugunName,dongName
 		from dongcode
@@ -32,6 +32,21 @@
 		from aroundbusinessarea
 		where dongCode like concat(#{dong},'%')
 		limit 100
+	</select>
+	
+	<select id="selectApt" parameterType="String"
+		resultType="HouseinfoDto">
+		select h.aptCode, h.aptName, h.buildyear, h.dongCode,
+		h.dongName, h.jibun, h.lat, h.lng,
+		(select dealAmount from housedeal where aptCode = h.aptCode and no = (select
+		max(no) from housedeal where aptCode = h.aptCode)) dealAmount
+		from houseinfo h
+		left join sidocode si
+		on left(h.dongcode,2) = left(si.sidocode,2)
+		left join guguncode gu
+		on left(h.dongcode,5) = left(gu.guguncode,5)
+		where dongCode = #{code}
+		order by aptName;
 	</select>
 
 </mapper>

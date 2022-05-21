@@ -1,14 +1,21 @@
 <template>
   <div>
+    <div>
+      <b-row class="mt-4 mb-4 text-center">
+        <b-col>
+          <b-button block variant="primary" @click="makeMarker"
+            >시세 조회 하기</b-button
+          >
+        </b-col>
+      </b-row>
+    </div>
     <div id="map"></div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import EventBus from "@/main";
-import http from "@/api/http";
-import { mapp } from "@/api/map";
+import { mapGetters } from "vuex";
+import { getMarker } from "@/api/map";
 
 export default {
   data() {
@@ -18,11 +25,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["guguns"]),
-  },
-  created() {
-    EventBus.$off("change-guguns");
-    EventBus.$on("change-guguns", this.makers);
+    ...mapGetters(["checkhouse"]),
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -46,23 +49,19 @@ export default {
 
       this.map = new kakao.maps.Map(mapContainer, mapOption); // eslint-disable-line no-unused-vars
     },
-    makers(guguns) {
-      const params = { dong: guguns };
+    makeMarker() {
+      console.log(this.checkhouse);
+      if (this.checkhouse.length > 0) {
+        this.markers = getMarker(this.checkhouse, this.map);
 
-      http
-        .get(`/Building/around`, { params })
-        .then(({ data }) => {
-          this.markers = mapp(data, this.markers);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      if (this.markers.length > 0) {
-        this.markers.forEach((item) => {
-          item.setMap(this.map);
-        });
+        if (this.markers.length > 0) {
+          this.markers.forEach((item) => {
+            item.setMap(this.map);
+          });
+        }
+      } else {
+        alert("시 구 동 모두 선택해주세요");
       }
-      console.log(this.markers);
     },
   },
 };

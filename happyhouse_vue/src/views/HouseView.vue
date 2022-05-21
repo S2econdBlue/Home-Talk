@@ -16,7 +16,7 @@
   </b-container>
 </template>
 <script>
-import HouseSearchBar from "@/components/house/HouseSearchBar.vue";
+import HouseSearchBar from "@/components/house/HouseSearchBar copy.vue";
 import MapAround from "@/components/house/MapAround.vue";
 
 export default {
