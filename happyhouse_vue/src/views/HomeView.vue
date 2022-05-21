@@ -88,6 +88,7 @@
               <b-row align-h="center">출처 : 에어코리아 API</b-row>
             </b-col>
           </b-row>
+          <a href="">부동산 업자에게 상담 요청</a>
         </b-jumbotron>
       </b-col>
     </b-row>
@@ -120,6 +121,7 @@ export default {
         "https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?returnType=json&numOfRows=100&pageNo=1&dataTerm=DAILY&ver=1.0&serviceKey=";
       API += process.env.VUE_APP_AIR_KEY;
       API += "&stationName=" + stationName;
+      console.log(API);
       http
         .get(API)
         .then((res) => {

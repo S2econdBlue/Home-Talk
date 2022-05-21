@@ -17,6 +17,10 @@ export default new Vuex.Store({
     ],
     observesidos: [],
     observegudongs: [],
+    loginUser: {
+      id: null,
+      password: null,
+    },
   },
   getters: {
     allTodosCount(state) {
@@ -40,6 +44,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    //////////////////////  회원 관련 기능  //////////////////////
+    SET_USER_DATA(state, userdata) {
+      state.loginUser = userdata;
+    },
     //////////////////////   observe start   //////////////////////
     SET_OBSV_SIDO_LIST(state, sidos) {
       state.observesidos = sidos;
@@ -187,7 +195,6 @@ export default new Vuex.Store({
     },
     //////////////////////////// Todo List end //////////////////////////////////
   },
-  modules: {},
   plugins: [
     createPersistedState({
       // 브라우저 종료시 제거하기 위해 localStorage가 아닌 sessionStorage로 변경. (default: localStorage)

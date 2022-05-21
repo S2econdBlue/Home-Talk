@@ -16,7 +16,7 @@ const routes = [
     component: () => import("@/views/MemberView.vue"),
     children: [
       {
-        path: "singin",
+        path: "signin",
         name: "signIn",
         component: () => import("@/components/user/MemberLogin.vue"),
       },

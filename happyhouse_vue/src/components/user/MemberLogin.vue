@@ -10,7 +10,7 @@
       <b-col cols="8">
         <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
           <b-form class="text-left">
-            <b-alert show variant="danger" v-if="isLoginError"
+            <b-alert show variant="danger" v-if="isError"
               >아이디 또는 비밀번호를 확인하세요.</b-alert
             >
             <b-form-group label="아이디:" label-for="userid">
@@ -25,8 +25,8 @@
             <b-form-group label="비밀번호:" label-for="userpwd">
               <b-form-input
                 type="password"
-                id="userpwd"
-                v-model="user.userpwd"
+                id="userpw"
+                v-model="user.userpw"
                 required
                 placeholder="비밀번호 입력...."
                 @keyup.enter="confirm"
@@ -39,11 +39,7 @@
               @click="confirm"
               >로그인</b-button
             >
-            <b-button
-              type="button"
-              variant="success"
-              class="m-1"
-              @click="movePage"
+            <b-button type="button" variant="success" class="m-1"
               >회원가입</b-button
             >
           </b-form>
@@ -55,23 +51,36 @@
 </template>
 
 <script>
+import http from "@/api/http";
 export default {
   name: "MemberLogin",
   data() {
     return {
-      isLoginError: false,
+      isError: false,
       user: {
-        userid: "",
-        userpwd: "",
+        id: "",
+        pw: "",
       },
     };
   },
+  computed: {},
   methods: {
+    // 아이디, 비밀번호 입력하면 db 조회 후 로그인 세팅하기
     confirm() {
-      alert("로그인!!!");
+      console.log(this.user.userid.trim());
+      if (this.user.userid.trim() == "" || this.user.userpw.trim() == "") {
+        this.isError = true;
+        return;
+      }
+      this.RequestLogin();
     },
-    movePage() {
-      this.$router.push({ name: "SignUp" });
+    RequestLogin() {
+      http
+        .post("/user/", this.user)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch();
     },
   },
 };
