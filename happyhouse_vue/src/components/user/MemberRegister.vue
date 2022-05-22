@@ -105,6 +105,7 @@ export default {
         .then((res) => {
           console.log(res);
           if (res === "success") {
+            console.log("abcd");
           } else {
             this.isError = true;
           }
