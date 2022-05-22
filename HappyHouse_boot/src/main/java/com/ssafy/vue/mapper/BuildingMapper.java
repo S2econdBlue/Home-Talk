@@ -10,6 +10,7 @@ import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
+import com.ssafy.vue.dto.SubwayDto;
 
 
 @Mapper
@@ -19,4 +20,5 @@ public interface BuildingMapper {
 	List<SidocodeDto> selectSi() throws SQLException;
 	List<AroundbusinessareaDto> around(String dong) throws SQLException;
 	List<HouseinfoDto> selectApt(String code) throws SQLException;
+	List<SubwayDto> selectSubway() throws SQLException;
 }

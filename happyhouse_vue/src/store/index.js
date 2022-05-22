@@ -12,6 +12,7 @@ export default new Vuex.Store({
     dongs: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    subway: [],
     todos: [
       // { title: '할 일1', completed: false },
       // { title: '할 일2', completed: false },
@@ -54,6 +55,9 @@ export default new Vuex.Store({
     checkhouse(state) {
       return state.houses;
     },
+    allsubway(state) {
+      return state.subway;
+    },
   },
   mutations: {
     //////////////////////  회원 관련 기능  //////////////////////
@@ -86,6 +90,9 @@ export default new Vuex.Store({
       dongs.forEach((dong) => {
         state.dongs.push({ value: dong.dongCode, text: dong.dongName });
       });
+    },
+    SET_SUBWAY_LIST(state, subways) {
+      state.subway = subways;
     },
     CLEAR_SIDO_LIST(state) {
       state.sidos = [{ value: null, text: "선택하세요" }];
@@ -200,6 +207,16 @@ export default new Vuex.Store({
         .get(`/Building/House`, { params })
         .then(({ data }) => {
           commit("SET_HOUSE_LIST", data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getSubwayList({ commit }) {
+      http
+        .get(`/Building/Subway`)
+        .then(({ data }) => {
+          commit("SET_SUBWAY_LIST", data);
         })
         .catch((error) => {
           console.log(error);

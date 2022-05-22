@@ -15,6 +15,7 @@ import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
+import com.ssafy.vue.dto.SubwayDto;
 import com.ssafy.vue.service.BuildingService;
 
 import io.swagger.annotations.ApiOperation;
@@ -59,6 +60,12 @@ public class BuildingController {
 	@ApiOperation(value = "동코드에 맞는 아파트 거래 정보를 조회한다", response = List.class)
 	public @ResponseBody List<HouseinfoDto> Apt(@RequestParam("dong") String apt) throws Exception {
 		List<HouseinfoDto> list =  service.selectApt(apt);
+		return list;
+	}
+	@GetMapping("/Subway")
+	@ApiOperation(value = "동코드에 맞는 아파트 거래 정보를 조회한다", response = List.class)
+	public @ResponseBody List<SubwayDto> Subway() throws Exception {
+		List<SubwayDto> list =  service.selectSubway();
 		return list;
 	}
 }

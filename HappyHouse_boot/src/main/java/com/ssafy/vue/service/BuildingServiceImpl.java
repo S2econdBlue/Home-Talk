@@ -12,6 +12,7 @@ import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
+import com.ssafy.vue.dto.SubwayDto;
 import com.ssafy.vue.mapper.BuildingMapper;
 
 
@@ -44,5 +45,11 @@ public class BuildingServiceImpl implements BuildingService {
 	@Override
 	public List<HouseinfoDto> selectApt(String code) throws Exception {
 		return mapper.selectApt(code);
+	}
+
+	@Override
+	public List<SubwayDto> selectSubway() throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.selectSubway();
 	}
 }

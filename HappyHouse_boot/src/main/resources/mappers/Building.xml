@@ -48,6 +48,11 @@
 		where dongCode = #{code}
 		order by aptName;
 	</select>
+	
+	<select id="selectSubway" resultType="SubwayDto">
+		select no,line,name,lat,lng
+		from subway;
+	</select>
 
 </mapper>
 	

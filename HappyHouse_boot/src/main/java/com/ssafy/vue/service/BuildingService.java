@@ -7,6 +7,7 @@ import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
+import com.ssafy.vue.dto.SubwayDto;
 
 
 public interface BuildingService {
@@ -15,4 +16,5 @@ public interface BuildingService {
 	List<SidocodeDto> selectSi() throws Exception;
 	List<AroundbusinessareaDto> around(String dong) throws Exception;
 	List<HouseinfoDto> selectApt(String code) throws Exception;
+	List<SubwayDto> selectSubway() throws Exception;
 }
