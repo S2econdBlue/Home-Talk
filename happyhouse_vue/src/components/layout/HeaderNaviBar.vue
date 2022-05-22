@@ -55,20 +55,38 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
+          <b-card class="text-center" v-if="this.loginUser.id"
+            ><div>{{ this.loginUser.id }}님</div></b-card
+          >
           <b-nav-item-dropdown right>
             <template #button-content>
               <b-icon icon="people" font-scale="2"></b-icon>
             </template>
-            <b-dropdown-item href="#"
-              ><router-link :to="{ name: 'signUp' }" class="link"
-                ><b-icon icon="person-circle"></b-icon> 회원가입</router-link
-              ></b-dropdown-item
-            >
-            <b-dropdown-item href="#"
-              ><router-link :to="{ name: 'signIn' }" class="link"
-                ><b-icon icon="key"></b-icon> 로그인</router-link
-              ></b-dropdown-item
-            >
+
+            <template v-if="!this.loginUser.id">
+              <b-dropdown-item href="#"
+                ><router-link :to="{ name: 'signUp' }" class="link"
+                  ><b-icon icon="person-circle"></b-icon> 회원가입</router-link
+                ></b-dropdown-item
+              >
+              <b-dropdown-item href="#"
+                ><router-link :to="{ name: 'signIn' }" class="link"
+                  ><b-icon icon="key"></b-icon> 로그인</router-link
+                ></b-dropdown-item
+              >
+            </template>
+            <template v-else>
+              <b-dropdown-item href="#"
+                ><router-link :to="{ name: '#' }" class="link"
+                  ><b-icon icon="person-circle"></b-icon>회원정보</router-link
+                ></b-dropdown-item
+              >
+              <b-dropdown-item href="#" @click="this.logout"
+                ><router-link :to="{ name: 'home' }" class="link"
+                  ><b-icon icon="key"></b-icon> 로그아웃</router-link
+                ></b-dropdown-item
+              >
+            </template>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -78,12 +96,22 @@
 
 <script>
 import image from "@/assets/R.png";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "HeaderNaviBar",
   data() {
     return {
       image,
     };
+  },
+  computed: {
+    ...mapGetters(["loginUser"]),
+  },
+  created() {
+    console.log(this.loginUser);
+  },
+  methods: {
+    ...mapActions(["logout"]),
   },
 };
 </script>

@@ -29,11 +29,11 @@ import com.ssafy.vue.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -43,18 +43,35 @@ public class UserController {
 		List<UserInfoDto> userList = userService.ListAllUser();
 		return new ResponseEntity<List<UserInfoDto>>(userList, HttpStatus.OK);
 	}
-	
+
 //	회원 목록을 가지고 userlist로 이동
 	@PostMapping("/login")
 	public ResponseEntity<UserInfoDto> login(@RequestBody HashMap<String, Object> map) throws SQLException {
 		UserInfoDto userInfoDto = new UserInfoDto();
-		userInfoDto.setId((String)map.get("userid"));
-		userInfoDto.setPw((String)map.get("userpw"));
-		
+		userInfoDto.setId((String) map.get("userid"));
+		userInfoDto.setPw((String) map.get("userpw"));
+
 		UserInfoDto user = userService.GetUser(userInfoDto);
 		return new ResponseEntity<UserInfoDto>(user, HttpStatus.OK);
 	}
-	
+
+	@PostMapping("/regist")
+	public ResponseEntity<String> RegisterMember(@RequestBody HashMap<String, Object> map) throws SQLException {
+		UserInfoDto userInfoDto = new UserInfoDto();
+		userInfoDto.setId((String) map.get("id"));
+		userInfoDto.setPw((String) map.get("pw"));
+		userInfoDto.setPw((String) map.get("email"));
+		userInfoDto.setPw((String) map.get("age"));
+		userInfoDto.setPw((String) map.get("name"));
+
+		int rslt = userService.RegisterMember(userInfoDto);
+
+		if (rslt == 1)
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		else
+			return new ResponseEntity<String>(FAIL, HttpStatus.CREATED);
+	}
+
 //	@GetMapping("/userinfo")
 //	public ResponseEntity<UserInfoDto> userinfo(HttpSession session) throws SQLException {
 //		return new ResponseEntity<UserInfoDto>(user, HttpStatus.OK);
@@ -153,14 +170,14 @@ public class UserController {
 	// 비동기로 데이터 전송
 	@PostMapping("/getlist")
 	public String getlist(String id, HttpSession session) throws SQLException {
-		//추후 기능구현
+		// 추후 기능구현
 		return "";
 	}
 
 	// 회원 자발적 탈퇴+
 	@GetMapping("/secession/{id}")
 	public String secession(@PathVariable("id") String id, HttpServletRequest request) throws SQLException {
-		//추후 기능구현
+		// 추후 기능구현
 		return "";
 	}
 
@@ -180,7 +197,7 @@ public class UserController {
 
 	@GetMapping("/logout")
 	public String Logout(HttpServletRequest request) {
-		//추후 기능구현
+		// 추후 기능구현
 		return "Main";
 	}
 }

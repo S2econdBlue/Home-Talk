@@ -20,10 +20,18 @@ export default new Vuex.Store({
     observegudongs: [],
     loginUser: {
       id: null,
-      password: null,
+      pw: null,
+      email: null,
+      age: null,
+      name: null,
+      grade: null,
+      time: null,
     },
   },
   getters: {
+    loginUser(state) {
+      return state.loginUser;
+    },
     allTodosCount(state) {
       return state.todos.length;
     },
@@ -50,7 +58,11 @@ export default new Vuex.Store({
   mutations: {
     //////////////////////  회원 관련 기능  //////////////////////
     SET_USER_DATA(state, userdata) {
+      console.log(userdata);
       state.loginUser = userdata;
+    },
+    CLEAR_USER_DATA(state) {
+      state.loginUser = {};
     },
     //////////////////////   observe start   //////////////////////
     SET_OBSV_SIDO_LIST(state, sidos) {
@@ -115,6 +127,15 @@ export default new Vuex.Store({
     //////////////////////////// Todo List end //////////////////////////////////
   },
   actions: {
+    //////////////////////   User start   //////////////////////
+    loginSuccess({ commit }, userInfo) {
+      console.log(userInfo);
+      commit("SET_USER_DATA", userInfo);
+    },
+    logout({ commit }) {
+      console.log("logout");
+      commit("CLEAR_USER_DATA");
+    },
     //////////////////////   observe start   //////////////////////
     getObserveSidos({ commit }) {
       http

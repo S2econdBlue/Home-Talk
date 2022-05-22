@@ -32,13 +32,15 @@
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
-            <b-button
-              type="button"
-              variant="primary"
-              class="m-1"
-              @click="confirm"
-              >로그인</b-button
-            >
+            <router-link :to="{ name: 'home' }" class="link">
+              <b-button
+                type="button"
+                variant="primary"
+                class="m-1"
+                @click="confirm"
+                >로그인</b-button
+              >
+            </router-link>
             <b-button type="button" variant="success" class="m-1"
               >회원가입</b-button
             >
@@ -51,6 +53,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import http from "@/api/http";
 export default {
   name: "MemberLogin",
@@ -65,6 +68,7 @@ export default {
   },
   computed: {},
   methods: {
+    ...mapActions(["loginSuccess"]),
     // 아이디, 비밀번호 입력하면 db 조회 후 로그인 세팅하기
     confirm() {
       console.log(this.user.userid.trim());
@@ -76,9 +80,13 @@ export default {
     },
     RequestLogin() {
       http
-        .post("/user/", this.user)
+        .post("/user/login", this.user)
         .then((res) => {
-          console.log(res);
+          if (res.data == "") {
+            alert("아이디나 비밀번호가 틀렸습니다.");
+          } else {
+            this.loginSuccess(res.data);
+          }
         })
         .catch();
     },
