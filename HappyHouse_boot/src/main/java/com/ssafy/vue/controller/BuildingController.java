@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.vue.dto.AroundbusinessareaDto;
 import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
+import com.ssafy.vue.dto.HousedealDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
 import com.ssafy.vue.dto.SubwayDto;
@@ -59,13 +60,21 @@ public class BuildingController {
 	@GetMapping("/House")
 	@ApiOperation(value = "동코드에 맞는 아파트 거래 정보를 조회한다", response = List.class)
 	public @ResponseBody List<HouseinfoDto> Apt(@RequestParam("dong") String apt) throws Exception {
+		System.out.println(apt);
 		List<HouseinfoDto> list =  service.selectApt(apt);
+		System.out.println(list);
 		return list;
 	}
 	@GetMapping("/Subway")
-	@ApiOperation(value = "동코드에 맞는 아파트 거래 정보를 조회한다", response = List.class)
+	@ApiOperation(value = "서울시 지하철 위치정보 조회", response = List.class)
 	public @ResponseBody List<SubwayDto> Subway() throws Exception {
 		List<SubwayDto> list =  service.selectSubway();
+		return list;
+	}
+	@GetMapping("/Deal")
+	@ApiOperation(value = "아파트코드별 거래내역 히스토리 조회", response = List.class)
+	public @ResponseBody List<HousedealDto> dealsearch(@RequestParam("code") String code) throws Exception {
+		List<HousedealDto> list =  service.dealsearch(code);
 		return list;
 	}
 }

@@ -1,10 +1,10 @@
 package com.ssafy.vue.service;
 
 import java.util.List;
-
 import com.ssafy.vue.dto.AroundbusinessareaDto;
 import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
+import com.ssafy.vue.dto.HousedealDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
 import com.ssafy.vue.dto.SubwayDto;
@@ -17,4 +17,5 @@ public interface BuildingService {
 	List<AroundbusinessareaDto> around(String dong) throws Exception;
 	List<HouseinfoDto> selectApt(String code) throws Exception;
 	List<SubwayDto> selectSubway() throws Exception;
+	List<HousedealDto> dealsearch(String code) throws Exception;
 }

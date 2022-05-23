@@ -6,11 +6,25 @@ public class HousedealDto {
 	private int dealYear;
 	private int dealMonth;
 	private int dealDay;
+	private int dealperSize;
 	private String dealAmount;
 	private String area;
 	private String floor;
 	private String type;
 	private String rentMoney;
+	private String msize;
+	public String getMsize() {
+		return msize;
+	}
+	public int getDealperSize() {
+		return dealperSize;
+	}
+	public void setDealperSize(int dealperSize) {
+		this.dealperSize = dealperSize;
+	}
+	public void setMsize(String msize) {
+		this.msize = msize;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -74,8 +88,7 @@ public class HousedealDto {
 	@Override
 	public String toString() {
 		return "HousedealDto [no=" + no + ", aptCode=" + aptCode + ", dealYear=" + dealYear + ", dealMonth=" + dealMonth
-				+ ", dealDay=" + dealDay + ", dealAmount=" + dealAmount + ", area=" + area + ", floor=" + floor
-				+ ", type=" + type + ", rentMoney=" + rentMoney + "]";
+				+ ", dealDay=" + dealDay + ", dealperSize=" + dealperSize + ", dealAmount=" + dealAmount + ", area="
+				+ area + ", floor=" + floor + ", type=" + type + ", rentMoney=" + rentMoney + ", msize=" + msize + "]";
 	}
-	
 }
