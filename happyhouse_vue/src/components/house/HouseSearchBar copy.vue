@@ -1,44 +1,44 @@
 <template>
-  <div>
-    <b-row class="mt-4 mb-4 text-center">
-      <b-col class="sm-3">
-        <b-form-select
-          v-model="sidoCode"
-          :options="sidos"
-          @change="gugunList"
-        ></b-form-select>
-      </b-col>
-      <b-col class="sm-3">
-        <b-form-select
-          v-model="gugunCode"
-          :options="guguns"
-          @change="dongList"
-        ></b-form-select>
-      </b-col>
-      <b-col class="sm-3">
-        <b-form-select
-          v-model="dongCode"
-          :options="dongs"
-          @change="getDeal"
-        ></b-form-select>
-      </b-col>
-    </b-row>
-
-    <b-row>
-      <b-col
-        ><b-table
-          hover
-          sticky-header="600px"
-          responsive
-          :items="housedeal"
-          :fields="fields"
-          selectable
-          @row-selected="checkvalue"
-        ></b-table
-      ></b-col>
-
-      <b-col><div id="map"></div></b-col>
-    </b-row>
+  <div id="wrap">
+    <div id="map"></div>
+    <div id="filter">
+      <b-row class="mt-4 mb-4 text-center">
+        <b-col class="sm-3">
+          <b-form-select
+            v-model="sidoCode"
+            :options="sidos"
+            @change="gugunList"
+          ></b-form-select>
+        </b-col>
+        <b-col class="sm-3">
+          <b-form-select
+            v-model="gugunCode"
+            :options="guguns"
+            @change="dongList"
+          ></b-form-select>
+        </b-col>
+        <b-col class="sm-3">
+          <b-form-select
+            v-model="dongCode"
+            :options="dongs"
+            @change="getDeal"
+          ></b-form-select>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col
+          ><b-table
+            hover
+            sticky-header="500px"
+            responsive
+            :items="housedeal"
+            :fields="fields"
+            selectable
+            @row-selected="checkvalue"
+          ></b-table
+        ></b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -58,6 +58,7 @@ export default {
       gugunCode: null,
       dongCode: null,
       housedeal: [],
+      check: false,
     };
   },
   computed: {
@@ -118,7 +119,20 @@ export default {
 
 <style>
 #map {
-  width: 700px;
-  height: 600px;
+  width: 100%;
+  height: 700px;
+}
+#filter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 300px;
+  z-index: 1;
+  background: white;
+}
+#wrap {
+  position: relative;
+  width: 100%;
+  height: 700px;
 }
 </style>

@@ -7,9 +7,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    sidos: [{ value: null, text: "선택하세요" }],
-    guguns: [{ value: null, text: "선택하세요" }],
-    dongs: [{ value: null, text: "선택하세요" }],
+    sidos: [{ value: null, text: "선택" }],
+    guguns: [{ value: null, text: "선택" }],
+    dongs: [{ value: null, text: "선택" }],
     houses: [],
     house: null,
     subway: [],
@@ -95,13 +95,13 @@ export default new Vuex.Store({
       state.subway = subways;
     },
     CLEAR_SIDO_LIST(state) {
-      state.sidos = [{ value: null, text: "선택하세요" }];
+      state.sidos = [{ value: null, text: "선택" }];
     },
     CLEAR_GUGUN_LIST(state) {
-      state.guguns = [{ value: null, text: "선택하세요" }];
+      state.guguns = [{ value: null, text: "선택" }];
     },
     CLEAR_DONG_LIST(state) {
-      state.dongs = [{ value: null, text: "선택하세요" }];
+      state.dongs = [{ value: null, text: "선택" }];
     },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
