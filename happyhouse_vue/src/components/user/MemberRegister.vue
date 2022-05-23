@@ -43,7 +43,7 @@
             </b-form-group>
             <b-form-group label="나이:" label-for="age">
               <b-form-input
-                id="userid"
+                id="age"
                 required
                 placeholder="나이 입력...."
                 @keyup.enter="confirm"
@@ -52,7 +52,7 @@
             </b-form-group>
             <b-form-group label="이메일:" label-for="email">
               <b-form-input
-                id="userid"
+                id="email"
                 required
                 placeholder="이메일 입력...."
                 @keyup.enter="confirm"
@@ -96,18 +96,41 @@ export default {
   },
   methods: {
     registUser() {
-      if (this.id.trim() === "") {
+      if (this.registerUserData.id.trim() == "") {
         this.errorMessage = "아이디를 입력해주세요.";
         this.isError = true;
+        return;
+      } else if (this.registerUserData.pw.trim() == "") {
+        this.errorMessage = "비밀번호를 입력해주세요.";
+        this.isError = true;
+        return;
+      } else if (this.registerUserData.email.trim() == "") {
+        this.errorMessage = "이메일을 입력해주세요.";
+        this.isError = true;
+        return;
+      } else if (this.registerUserData.age.trim() == "") {
+        this.errorMessage = "나이를 입력해주세요.";
+        this.isError = true;
+        return;
+      } else if (this.registerUserData.name.trim() == "") {
+        this.errorMessage = "이름을 입력해주세요.";
+        this.isError = true;
+        return;
       }
+      let sendData = {};
+      sendData.id = this.registerUserData.id;
+      sendData.pw = this.registerUserData.pw;
+      sendData.email = this.registerUserData.email;
+      sendData.name = this.registerUserData.name;
+      sendData.age = Number(this.registerUserData.age);
       http
-        .post("user/regist", this.registerUserData)
+        .post("user/regist", sendData)
         .then((res) => {
-          console.log(res);
-          if (res === "success") {
-            console.log("abcd");
+          if (res.data === "success") {
+            this.$router.push({ name: "success" });
           } else {
             this.isError = true;
+            this.errorMessage = "이미 존재하는 아이디입니다.";
           }
         })
         .catch((err) => {
