@@ -11,6 +11,18 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/chat",
+    name: "chat",
+    component: () => import("@/views/ChatView.vue"),
+    children: [
+      {
+        path: "chatlist/:no",
+        name: "chatList",
+        component: () => import("@/components/chat/chatList.vue"),
+      },
+    ],
+  },
+  {
     path: "/user",
     name: "user",
     component: () => import("@/views/MemberView.vue"),
@@ -24,6 +36,16 @@ const routes = [
         path: "singup",
         name: "signUp",
         component: () => import("@/components/user/MemberRegister.vue"),
+      },
+      {
+        path: "success",
+        name: "success",
+        component: () => import("@/components/user/loginSuccess.vue"),
+      },
+      {
+        path: "info",
+        name: "info",
+        component: () => import("@/components/user/MemberMyPage.vue"),
       },
     ],
   },

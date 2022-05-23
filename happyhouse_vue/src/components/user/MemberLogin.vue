@@ -32,17 +32,17 @@
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
-            <router-link :to="{ name: 'home' }" class="link">
-              <b-button
-                type="button"
-                variant="primary"
-                class="m-1"
-                @click="confirm"
-                >로그인</b-button
-              >
-            </router-link>
-            <b-button type="button" variant="success" class="m-1"
-              >회원가입</b-button
+            <b-button
+              type="button"
+              variant="primary"
+              class="m-1"
+              @click="confirm"
+              >로그인</b-button
+            >
+            <router-link :to="{ name: 'signUp' }"
+              ><b-button type="button" variant="success" class="m-1"
+                >회원가입</b-button
+              ></router-link
             >
           </b-form>
         </b-card>
@@ -71,7 +71,6 @@ export default {
     ...mapActions(["loginSuccess"]),
     // 아이디, 비밀번호 입력하면 db 조회 후 로그인 세팅하기
     confirm() {
-      console.log(this.user.userid.trim());
       if (this.user.userid.trim() == "" || this.user.userpw.trim() == "") {
         this.isError = true;
         return;
@@ -86,6 +85,7 @@ export default {
             alert("아이디나 비밀번호가 틀렸습니다.");
           } else {
             this.loginSuccess(res.data);
+            this.$router.push({ name: "home" });
           }
         })
         .catch();
