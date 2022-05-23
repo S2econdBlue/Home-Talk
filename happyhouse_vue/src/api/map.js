@@ -7,8 +7,8 @@ var subways = [];
 var mapContainer;
 var mapOption;
 function getMarker(items) {
+  console.log(items);
   if (markers.length > 0) {
-    console.log(markers.length);
     markers.forEach((item) => {
       item.setMap(null);
     });

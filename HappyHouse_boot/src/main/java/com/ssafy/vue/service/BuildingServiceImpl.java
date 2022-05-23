@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.vue.dto.AroundbusinessareaDto;
 import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
+import com.ssafy.vue.dto.HousedealDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
 import com.ssafy.vue.dto.SubwayDto;
@@ -51,5 +52,10 @@ public class BuildingServiceImpl implements BuildingService {
 	public List<SubwayDto> selectSubway() throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.selectSubway();
+	}
+
+	@Override
+	public List<HousedealDto> dealsearch(String code) throws Exception {
+		return mapper.dealsearch(code);
 	}
 }

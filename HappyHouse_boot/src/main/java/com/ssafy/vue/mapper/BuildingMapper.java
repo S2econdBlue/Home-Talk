@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.ssafy.vue.dto.AroundbusinessareaDto;
 import com.ssafy.vue.dto.DongcodeDto;
 import com.ssafy.vue.dto.GuguncodeDto;
+import com.ssafy.vue.dto.HousedealDto;
 import com.ssafy.vue.dto.HouseinfoDto;
 import com.ssafy.vue.dto.SidocodeDto;
 import com.ssafy.vue.dto.SubwayDto;
@@ -21,4 +22,5 @@ public interface BuildingMapper {
 	List<AroundbusinessareaDto> around(String dong) throws SQLException;
 	List<HouseinfoDto> selectApt(String code) throws SQLException;
 	List<SubwayDto> selectSubway() throws SQLException;
+	List<HousedealDto> dealsearch(String code) throws SQLException;
 }

@@ -1,9 +1,16 @@
 <template>
-  <b-container class="bv-example-row mt-3 text-center"> HomeView </b-container>
+  <div>
+    <house-search-bar></house-search-bar>
+  </div>
 </template>
 
 <script>
-export default {};
+import HouseSearchBar from "@/components/house/HouseSearchBar copy.vue";
+export default {
+  components: {
+    HouseSearchBar,
+  },
+};
 </script>
 
 <style></style>

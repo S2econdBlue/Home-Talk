@@ -53,6 +53,13 @@
 		select no,line,name,lat,lng
 		from subway;
 	</select>
+	
+	<select id="dealsearch" parameterType="String" resultType="HousedealDto">
+		select aptCode,dealAmount,dealYear,dealMonth,dealDay,area,floor,round(dealAmount/ceil(cast(area AS decimal(5,3))/3.31)*1000,0) as dealperSize,ceil(cast(area AS decimal(5,3))/3.3) as msize 
+		from housedeal 
+		where aptCode=#{code}
+		order by dealAmount;
+	</select>
 
 </mapper>
 	
