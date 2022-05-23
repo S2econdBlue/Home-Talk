@@ -14,7 +14,7 @@ import com.ssafy.vue.handler.ChatWebSocketHandler;
 public class WebSocketConfig implements WebSocketConfigurer {
 
 	// /chat으로 접속하면 echoHandler가 처리
-	private final static String CHAT_ENDPOINT = "/chat";
+	private final static String CHAT_ENDPOINT = "/livechat";
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {

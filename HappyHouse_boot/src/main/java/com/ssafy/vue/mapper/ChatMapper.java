@@ -11,13 +11,17 @@ import com.ssafy.vue.dto.ChatRoomDto;
 public interface ChatMapper {
 	public int GenerateRoom(ChatRoomDto chatRoomDto);
 
-	public int ChangeAlertState(ChatRoomDto chatRoomDto);
-	
+	public int UpdateAlertOn(ChatRoomDto chatRoomDto);
+
+	public int UpdateAlertOff(ChatRoomDto chatRoomDto);
+
 	public int SelectOneRoom(ChatRoomDto chatRoomDto);
-	
+
 	public List<ChatRoomDto> LoadChatRoomList(ChatRoomDto chatRoomDto);
 
 	public List<ChatHistoryDto> GetRoomChatHistory(int room_no);
-	
+
 	public int DeleteRoom(int no);
+
+	public int InsertChatMessage(ChatHistoryDto chatHistoryDto);
 }

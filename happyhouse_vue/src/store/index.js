@@ -62,7 +62,7 @@ export default new Vuex.Store({
   mutations: {
     //////////////////////  회원 관련 기능  //////////////////////
     SET_USER_DATA(state, userdata) {
-      console.log(userdata);
+      console.log("SET_USER_DATA : ", userdata);
       state.loginUser = userdata;
     },
     CLEAR_USER_DATA(state) {
@@ -136,7 +136,7 @@ export default new Vuex.Store({
   actions: {
     //////////////////////   User start   //////////////////////
     loginSuccess({ commit }, userInfo) {
-      console.log(userInfo);
+      console.log("loginSuccess : ", userInfo);
       commit("SET_USER_DATA", userInfo);
     },
     logout({ commit }) {

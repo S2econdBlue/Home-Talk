@@ -11,30 +11,30 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'home' }" class="link"
-              ><b-icon icon="house" font-scale="1.5"></b-icon>
-              메인화면</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'board' }" class="link"
-              ><b-icon icon="journal" font-scale="1.5"></b-icon>
-              게시판</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'chat' }" class="link"
-              ><b-icon icon="inbox-fill" font-scale="1.5"></b-icon>
-              채팅</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'house' }" class="link"
-              ><b-icon icon="house-fill" font-scale="1.5"></b-icon>
-              아파트정보</router-link
-            ></b-nav-item
-          >
+          <b-nav-item href="#">
+            <router-link :to="{ name: 'home' }" class="link">
+              <b-icon icon="house" font-scale="1.5"></b-icon>
+              메인화면
+            </router-link>
+          </b-nav-item>
+          <b-nav-item href="#">
+            <router-link :to="{ name: 'board' }" class="link">
+              <b-icon icon="journal" font-scale="1.5"> </b-icon>
+              매물 등록 게시판
+            </router-link>
+          </b-nav-item>
+          <b-nav-item href="#">
+            <router-link :to="{ name: 'chat' }" class="link">
+              <b-icon icon="inbox-fill" font-scale="1.5"></b-icon>
+              상담 관리
+            </router-link>
+          </b-nav-item>
+          <b-nav-item href="#">
+            <router-link :to="{ name: 'house' }" class="link">
+              <b-icon icon="house-fill" font-scale="1.5"></b-icon>
+              아파트정보
+            </router-link>
+          </b-nav-item>
           <!-- <b-nav-item href="#"
             ><router-link :to="{ name: 'todo' }" class="link"
               ><b-icon icon="calendar-check" font-scale="1.5"></b-icon>

@@ -32,14 +32,14 @@ public class ObserveController {
     @ApiOperation(value = "시도 정보 반환", response = List.class)
 	@GetMapping("/sido")
 	public ResponseEntity<List<String>> selectSido() throws Exception {
-		logger.debug("retrieveBoard - 호출 {}" , observeService.selectSido().toString());
+//		logger.debug("retrieveBoard - 호출 {}" , observeService.selectSido().toString());
 		return new ResponseEntity<List<String>>(observeService.selectSido(), HttpStatus.OK);
 	}
     
     @ApiOperation(value = "구군동 정보 반환", response = List.class)
 	@GetMapping("/gudong/{Sido}")
 	public ResponseEntity<List<String>> selectGuDong(@PathVariable String Sido) throws Exception {
-		logger.debug("retrieveBoard - 호출 {}" , observeService.selectGuDong(Sido).toString());
+//		logger.debug("retrieveBoard - 호출 {}" , observeService.selectGuDong(Sido).toString());
 		return new ResponseEntity<List<String>>(observeService.selectGuDong(Sido), HttpStatus.OK);
 	}
 }
