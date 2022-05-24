@@ -21,8 +21,12 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public int ChangeAlertState(ChatRoomDto chatRoomDto) {
-		return chatMapper.ChangeAlertState(chatRoomDto);
+	public int UpdateAlertOn(ChatRoomDto chatRoomDto) {
+		return chatMapper.UpdateAlertOn(chatRoomDto);
+	}
+
+	public int UpdateAlertOff(ChatRoomDto chatRoomDto) {
+		return chatMapper.UpdateAlertOff(chatRoomDto);
 	}
 
 	@Override
@@ -43,5 +47,10 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public List<ChatHistoryDto> GetRoomChatHistory(int room_no) {
 		return chatMapper.GetRoomChatHistory(room_no);
+	}
+
+	@Override
+	public int InsertChatMessage(ChatHistoryDto chatHistoryDto) {
+		return chatMapper.InsertChatMessage(chatHistoryDto);
 	}
 }

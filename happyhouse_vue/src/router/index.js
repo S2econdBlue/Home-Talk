@@ -16,7 +16,7 @@ const routes = [
     component: () => import("@/views/ChatView.vue"),
     children: [
       {
-        path: "chatlist/:no",
+        path: "chatlist/:no/:receiver",
         name: "chatList",
         component: () => import("@/components/chat/chatList.vue"),
       },
@@ -94,6 +94,7 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior() {},
 });
 
 export default router;

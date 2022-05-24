@@ -60,16 +60,18 @@ public class UserController {
 		UserInfoDto userInfoDto = new UserInfoDto();
 		userInfoDto.setId((String) map.get("id"));
 		userInfoDto.setPw((String) map.get("pw"));
-		userInfoDto.setPw((String) map.get("email"));
-		userInfoDto.setPw((String) map.get("age"));
-		userInfoDto.setPw((String) map.get("name"));
-
-		int rslt = userService.RegisterMember(userInfoDto);
-
-		if (rslt == 1)
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-		else
+		userInfoDto.setEmail((String) map.get("email"));
+		userInfoDto.setAge((Integer) map.get("age"));
+		userInfoDto.setName((String) map.get("name"));
+		try {
+			int rslt = userService.RegisterMember(userInfoDto);
+			if (rslt == 1)
+				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+			else
+				return new ResponseEntity<String>(FAIL, HttpStatus.CREATED);
+		}catch(Exception e) {
 			return new ResponseEntity<String>(FAIL, HttpStatus.CREATED);
+		}
 	}
 
 //	@GetMapping("/userinfo")

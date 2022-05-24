@@ -9,27 +9,52 @@
       <b-col cols="3">
         <b-list-group>
           <!-- 사용자 측면에서 불러오기 -->
-
-          <b-list-group-item button v-for="room in chatroomlist" :key="room.no">
-            <router-link :to="{ name: 'chatList', params: { no: room.no } }">
-              <template v-if="room.seller_id">
-                {{ room.seller_id }}
-              </template>
-              <template v-else>
-                {{ room.user_id }}
-              </template>
-              <template v-if="room.user_id">
-                <b-icon icon="messenger" variant="success"></b-icon>
-              </template>
-              <template v-if="room.seller_id">
-                <b-icon icon="messenger" variant="success"></b-icon>
-              </template>
+          <template v-for="room in chatroomlist">
+            <router-link
+              @click="forceRerender"
+              :key="room.no"
+              :to="{
+                name: 'chatList',
+                params: {
+                  no: room.no,
+                  receiver:
+                    room.user_id == loginUser.id
+                      ? room.seller_id
+                      : room.user_id,
+                },
+              }"
+            >
+              <b-list-group-item
+                button
+                @click="changeIconState(room), forceRerender()"
+              >
+                <template v-if="room.seller_id != loginUser.id">
+                  {{ room.seller_id }}
+                </template>
+                <template v-else>
+                  {{ room.user_id }}
+                </template>
+                <template
+                  v-if="
+                    room.user_id == loginUser.id && room.userside_alert == 1
+                  "
+                >
+                  <b-icon icon="messenger" variant="success"></b-icon>
+                </template>
+                <template
+                  v-else-if="
+                    room.seller_id == loginUser.id && room.sellerside_alert == 1
+                  "
+                >
+                  <b-icon icon="messenger" variant="success"></b-icon>
+                </template>
+              </b-list-group-item>
             </router-link>
-          </b-list-group-item>
+          </template>
         </b-list-group>
       </b-col>
       <!-- 채팅창 -->
-      <b-col cols="8"><router-view /> </b-col>
+      <b-col cols="8"><router-view :key="ComputedComponentKey" /> </b-col>
       <b-col cols="1"></b-col>
     </b-row>
   </b-container>
@@ -40,12 +65,22 @@ import http from "@/api/http.js";
 export default {
   name: "BoardView",
   data() {
-    return { chatroomlist: "" };
+    return { chatroomlist: "", componentKey: 0 };
   },
   computed: {
     ...mapGetters(["loginUser"]),
+    ComputedComponentKey() {
+      return this.componentKey;
+    },
   },
   methods: {
+    forceRerender() {
+      this.componentKey++;
+    },
+    changeIconState(room) {
+      if (room.seller_id == this.loginUser.id) room.sellerside_alert = 0;
+      else room.userside_alert = 0;
+    },
     createRoom() {
       let request = { user_id: this.loginUser.id, seller_id: "seller" };
       console.log(request);
@@ -53,8 +88,6 @@ export default {
         .post("/chat", JSON.stringify(request))
         .then((res) => {
           this.chatroomlist = res.data;
-          console.log(res);
-          console.log(this.chatroomlist);
         })
         .catch((err) => {
           console.log(err);
