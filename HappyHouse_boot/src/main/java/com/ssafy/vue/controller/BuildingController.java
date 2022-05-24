@@ -51,9 +51,9 @@ public class BuildingController {
 	}
 	
 	@GetMapping("/around")
-	@ApiOperation(value = "동코드에 맞는 주변상권 정보를 조회한다", response = List.class)
-	public @ResponseBody List<AroundbusinessareaDto> around(@RequestParam("dong") String dongcode) throws Exception{
-		List<AroundbusinessareaDto> list = service.around(dongcode);
+	@ApiOperation(value = "주변상권 정보를 조회한다", response = List.class)
+	public @ResponseBody List<AroundbusinessareaDto> around() throws Exception{
+		List<AroundbusinessareaDto> list = service.around();
 		return list;
 	}
 	

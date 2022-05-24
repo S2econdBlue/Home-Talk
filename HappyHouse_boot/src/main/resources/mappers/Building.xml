@@ -27,11 +27,10 @@
 		where dongCode like concat(#{gu},'%');
 	</select>
 
-	<select id="around" parameterType="String" resultType="AroundbusinessareaDto">
+	<select id="around" resultType="AroundbusinessareaDto">
 		select no,businessName,businessType,address,let,lng,dongCode
 		from aroundbusinessarea
-		where dongCode like concat(#{dong},'%')
-		limit 100
+		where businessName like "%스타벅스%";
 	</select>
 	
 	<select id="selectApt" parameterType="String"

@@ -1,7 +1,7 @@
 <template>
   <div id="wrap">
     <div id="map"></div>
-    <div id="filter">
+    <div id="filter" v-if="filtercheck">
       <b-row class="mt-1 mb-1 ml-1 mr-1 text-center">
         <b-col class="sm-3">
           시<b-form-select
@@ -28,22 +28,28 @@
           ></b-form-select>
         </b-col>
       </b-row>
-      <b-row class="text-center">
-        <label for="range-2">Example</label>
-        <b-form-input
-          id="range-2"
-          v-model="value"
-          type="range"
-          min="0"
-          max="5"
-          step="0.5"
-        ></b-form-input>
-        <div class="mt-2">Value: {{ value }}</div>
+      <b-row class="text-center mt-5 mb-3">
+        <b-col cols="3"><div>금액</div></b-col>
+        <b-col class="mt-1 mb-1" cols="8"
+          ><Slider v-model="worth.value" v-bind="worth"></Slider
+        ></b-col>
+      </b-row>
+      <b-row class="text-center mt-5 mb-3">
+        <b-col cols="3"><div>기간</div></b-col>
+        <b-col class="mt-1 mb-1" cols="8"
+          ><Slider v-model="term.value" v-bind="term">기간</Slider></b-col
+        >
+      </b-row>
+      <b-row class="text-center mt-5 mb-3">
+        <b-col><b-button variant="outline-primary">조회</b-button></b-col>
+        <b-col><b-button variant="danger">초기화</b-button></b-col>
       </b-row>
     </div>
     <div id="result">
       <div id="value" v-if="check">
-        <b-button variant="primary" @click="resultToggle">X</b-button>
+        <b-button variant="primary float-right" @click="resultToggle"
+          >X</b-button
+        >
         <b-table
           hover
           sticky-header="700px"
@@ -57,6 +63,7 @@
       </div>
 
       <div id="deal" v-if="detail">
+        <b-button variant="primary float-right" @click="dealToggle">X</b-button>
         <b-table
           hover
           sticky-header="700px"
@@ -68,15 +75,46 @@
         ></b-table>
       </div>
     </div>
+    <div class="category">
+      <ul>
+        <li id="coffeeMenu" @click="starcheck">
+          <span class="list coffee"></span>
+          카페
+        </li>
+        <li id="subwayMenu" @click="subwaycheck">
+          <span class="list subway"></span>
+          지하철
+        </li>
+        <li id="allMenu" @click="allcheck">
+          <span class="list all"></span>
+          전체
+        </li>
+        <li id="filterMenu" @click="openfilter">
+          <span class="list filter"></span>
+          필터
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import { getMarker, first } from "@/api/map";
+import Slider from "@vueform/slider/dist/slider.vue2.js";
+import {
+  getMarker,
+  starbucksStore,
+  subwayStore,
+  changeMarker,
+  setCoffeeMarkers,
+  setStoreMarkers,
+} from "@/api/map";
 import http from "@/api/http";
 export default {
   name: "HouseSearchBar",
+  components: {
+    Slider,
+  },
   data() {
     return {
       fields: [
@@ -93,25 +131,62 @@ export default {
       gugunCode: null,
       dongCode: null,
       housedeal: [],
+      filtercheck: false,
       check: false,
       detail: false,
       value: 5,
       dealhistory: [],
+      cafe: [],
+      subways: [],
+      allcolor: false,
+      subcolor: false,
+      cofcolor: false,
+      settingcolor: false,
+      term: {
+        value: [1990, 2022],
+        step: 1,
+        format: {
+          suffix: "년",
+          decimals: 0,
+        },
+        tooltipPosition: "",
+        min: 1990,
+        max: 2022,
+        lazy: true,
+        merge: 2022,
+      },
+      worth: {
+        value: [1000, 500000],
+        step: 500,
+        format: {
+          suffix: "만원",
+          decimals: 0,
+        },
+        tooltipPosition: "",
+        max: 500000,
+        lazy: true,
+      },
     };
   },
   computed: {
     ...mapState(["sidos", "guguns", "dongs"]),
   },
   created() {
+    /* global kakao */ // eslint-disable-line no-unused-vars
     this.CLEAR_SIDO_LIST();
     this.getSido();
-  },
-  mounted() {
-    /* global kakao */ // eslint-disable-line no-unused-vars
     http
       .get(`/Building/Subway`)
       .then(({ data }) => {
-        first(data);
+        subwayStore(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    http
+      .get(`/Building/around`)
+      .then(({ data }) => {
+        starbucksStore(data);
       })
       .catch((error) => {
         console.log(error);
@@ -131,14 +206,15 @@ export default {
       this.dongCode = null;
       this.housedeal = [];
       this.check = false;
+      this.detail = false;
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     getDeal() {
+      console.log(this.term.value);
       if (this.dongCode) {
         this.check = true;
         this.housedeal = [];
         const params = { dong: this.dongCode };
-        console.log(params);
         http
           .get(`/Building/House`, { params })
           .then(({ data }) => {
@@ -161,8 +237,6 @@ export default {
           .get(`/Building/Deal`, { params })
           .then(({ data }) => {
             this.dealhistory = data;
-            console.log(this.dealhistory);
-            this.check = false;
             this.detail = true;
           })
           .catch((error) => {
@@ -175,22 +249,69 @@ export default {
     resultToggle() {
       this.check = !this.check;
     },
+    dealToggle() {
+      this.detail = !this.detail;
+    },
+    starcheck() {
+      if (!this.cofcolor) {
+        changeMarker("coffee");
+        this.cofcolor = true;
+      } else {
+        this.cofcolor = false;
+        setCoffeeMarkers(null);
+        var coffeeMenu = document.getElementById("coffeeMenu");
+        coffeeMenu.className = "";
+      }
+    },
+    subwaycheck() {
+      if (!this.subcolor) {
+        changeMarker("subway");
+        this.subcolor = true;
+      } else {
+        this.subcolor = false;
+        setStoreMarkers(null);
+        var subwayMenu = document.getElementById("subwayMenu");
+        subwayMenu.className = "";
+      }
+    },
+    allcheck() {
+      if (!this.allcolor) {
+        changeMarker("all");
+        this.allcolor = true;
+      } else {
+        this.allcolor = false;
+        this.subcolor = false;
+        this.cofcolor = false;
+        setStoreMarkers(null);
+        setCoffeeMarkers(null);
+        var coffeeMenu = document.getElementById("coffeeMenu");
+        var subwayMenu = document.getElementById("subwayMenu");
+        var allMenu = document.getElementById("allMenu");
+        coffeeMenu.className = "";
+        subwayMenu.className = "";
+        allMenu.className = "";
+      }
+    },
+    openfilter() {
+      this.filtercheck = !this.filtercheck;
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 #map {
   width: 100%;
   height: 100%;
 }
 #filter {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 400px;
+  top: 90px;
+  left: 10px;
+  width: 500px;
   z-index: 1;
   background: white;
+  border-radius: 10px;
 }
 #wrap {
   position: relative;
@@ -223,4 +344,58 @@ export default {
   z-index: 3;
   background: white;
 }
+.category {
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  left: 10px;
+  width: 208px;
+  height: 60px;
+  z-index: 10;
+  border: 1px solid black;
+  font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+  font-size: 12px;
+  text-align: center;
+  background-color: #fff;
+}
+.category li {
+  list-style: none;
+  float: left;
+  width: 50px;
+  height: 70px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+.category .menu_selected {
+  background: rgb(20, 181, 250);
+  color: #fff;
+  border-left: 1px solid #915b2f;
+  border-right: 1px solid #915b2f;
+  margin: 0 -1px;
+}
+.category,
+.category * {
+  margin: 0;
+  padding: 0;
+  color: #000;
+}
+.category .list {
+  display: block;
+  margin: 0 auto 2px;
+  width: 32px;
+  height: 32px;
+}
+.coffee {
+  background: url("@/assets/starbucks.png") no-repeat;
+}
+.subway {
+  background: url("@/assets/subway.png") no-repeat;
+}
+.all {
+  background: url("@/assets/all.png") no-repeat;
+}
+.filter {
+  background: url("@/assets/filter.png") no-repeat;
+}
 </style>
+<style src="@vueform/slider/themes/default.css"></style>
