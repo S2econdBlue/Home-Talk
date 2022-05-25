@@ -23,9 +23,9 @@
 	<!-- 게시글 등록 -->
 	<insert id="insertBoard" parameterType="board">
 		insert into threadboard(
-		title, id, content
+		title, id
 		) values (
-		#{title}, #{id}, #{content}
+		#{title}, #{id}
 		)
 	</insert>
 
@@ -73,5 +73,35 @@
 		from imgboard
 		where original_name = #{original_name}
 	</select>
+	
+	<insert id="insertTradeThread" parameterType="TradeThreadDto">
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			select LAST_INSERT_ID();
+		</selectKey>
+		insert into tradeboard(boardNo, contractOpt, deposit, monthlyFee, commonMaintainFee,loan,detail, roadnameAddress,detailAddress )
+		values(#{boardNo}, #{contractOpt}, #{deposit}, #{monthlyFee},#{commonMaintainFee}, #{loan}, #{detail}, #{roadnameAddress}, #{detailAddress});
+	</insert>
+	
+	<insert id="insertCommonMaintainItem" parameterType="String">
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			select LAST_INSERT_ID();
+		</selectKey>
+		insert into commonmaintainitem(boardNo, item)
+		values 
+		<foreach collection="list" item="item" separator=",">
+			(#{boardNo}, #{item})
+		</foreach>
+	</insert>
+	
+	<insert id="insertEachFeeItem">
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			select LAST_INSERT_ID();
+		</selectKey>
+		insert into eachFeeItem
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{boardNo}, #{item})
+		</foreach>
+	</insert>
 </mapper>
 

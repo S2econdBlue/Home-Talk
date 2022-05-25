@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.vue.dto.Board;
 import com.ssafy.vue.dto.BoardFileDto;
+import com.ssafy.vue.dto.TradeThreadDto;
 
 @Mapper
 public interface BoardMapper {
@@ -27,4 +28,10 @@ public interface BoardMapper {
 	public BoardFileDto selectBoardFileInformation(@Param("no") int no);
 	
 	public String selectBoardFileRealPath(String original_name);
+	
+	public int insertTradeThread(TradeThreadDto tradeThreadDto);
+	
+	public int insertCommonMaintainItem(List<String> commonMaintainItem);
+	
+	public int insertEachFeeItem(List<String> EachFeeItem);
 }
