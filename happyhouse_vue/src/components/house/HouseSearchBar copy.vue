@@ -2,10 +2,7 @@
   <div id="wrap">
     <div id="map"></div>
     <div id="board">
-      <b-row class="mt-1 mb-1 ml-1 mr-1 text-center dark"
-        ><b-col cols="3">현위치 </b-col>
-        <b-col cols="9">{{ useraddress }}</b-col>
-      </b-row>
+      <b-row class="mt-1 mb-1 ml-1 mr-1 text-center dark"> </b-row>
 
       <div>
         <b-tabs content-class="mt-3">
@@ -41,7 +38,7 @@
                   </b-col>
                 </b-row>
                 <b-row class="text-center mt-5 mb-3">
-                  <b-col cols="3"><div>가격</div></b-col>
+                  <b-col cols="3"><div>가격(만)</div></b-col>
                   <b-col class="mt-1 mb-1 center" cols="8"
                     ><Slider v-model="worth.value" v-bind="worth"></Slider
                   ></b-col>
@@ -77,8 +74,9 @@
               </div>
               <div id="value" v-if="check">
                 <b-table
+                  class="text-center"
                   hover
-                  sticky-header="720px"
+                  sticky-header="710px"
                   responsive
                   :items="housedeal"
                   :fields="fields"
@@ -99,6 +97,7 @@
                   :items="dealhistory"
                   selectable
                   select-mode="single"
+                  class="text-center"
                 ></b-table>
               </div></div
           ></b-tab>
@@ -121,6 +120,9 @@
                 <b-button href="#" variant="primary">Go somewhere</b-button>
               </b-card>
             </div></b-tab
+          >
+          <b-tab :title="useraddress" disabled
+            ><p>I'm a disabled tab!</p></b-tab
           >
         </b-tabs>
       </div>
@@ -212,7 +214,7 @@ export default {
         value: [0, 500000],
         step: 500,
         format: {
-          suffix: "만원",
+          thousand: ",",
           decimals: 0,
         },
         tooltipPosition: "",
@@ -260,7 +262,7 @@ export default {
 
     geo((rst) => {
       console.log(rst);
-      this.useraddress = rst;
+      this.useraddress = "접속위치: " + rst;
     });
   },
   methods: {
@@ -291,6 +293,8 @@ export default {
           maxval: this.worth.value[1],
           termlow: this.term.value[0],
           termhigh: this.term.value[1],
+          tradelow: this.trade.value[0],
+          tradehigh: this.trade.value[1],
         };
         console.log(params);
         http

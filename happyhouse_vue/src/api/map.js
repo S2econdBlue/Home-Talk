@@ -2,6 +2,7 @@
 import subway from "@/assets/subway.png";
 import house from "@/assets/house.png";
 import coffee from "@/assets/starbucks.png";
+import ssafy from "@/assets/ssafy.png";
 var map;
 var markers = [];
 var subways = [];
@@ -10,6 +11,7 @@ var mapContainer;
 var mapOption;
 var starbuckmarker = [];
 var subwaysmarker = [];
+var geocoder = new kakao.maps.services.Geocoder();
 function getMarker(items) {
   if (markers.length > 0) {
     markers.forEach((item) => {
@@ -43,7 +45,7 @@ function first() {
   mapContainer = document.getElementById("map");
   // 지도를 표시할 div
   mapOption = {
-    center: new kakao.maps.LatLng(37.554648, 126.972559), // 지도의 중심좌표
+    center: new kakao.maps.LatLng(37.5012743, 127.039585), // 지도의 중심좌표
     level: 4, // 지도의 확대 레벨
   };
   // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -52,6 +54,15 @@ function first() {
   createSubwayMarkers(); // 편의점 마커를 생성하고 편의점 마커 배열에 추가합니다
   setStoreMarkers(null);
   setCoffeeMarkers(null);
+  var imageSrc = ssafy;
+  var imageSize = new kakao.maps.Size(150, 100);
+  var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+  var marker = new kakao.maps.Marker({
+    map: map, // 마커를 표시할 지도
+    position: new kakao.maps.LatLng(37.5012743, 127.039585), // 마커를 표시할 위치
+    image: markerImage, // 마커 이미지
+  });
+  marker.setMap(map);
 }
 function subwayStore(item) {
   subways = item;
@@ -106,24 +117,12 @@ function changeMarker(type) {
   var coffeeMenu = document.getElementById("coffeeMenu");
   var subwayMenu = document.getElementById("subwayMenu");
   var allMenu = document.getElementById("allMenu");
-  // 커피숍 카테고리가 클릭됐을 때
   if (type === "coffee") {
-    // 커피숍 카테고리를 선택된 스타일로 변경하고
     coffeeMenu.className = "menu_selected";
-
-    // 편의점과 주차장 카테고리는 선택되지 않은 스타일로 바꿉니다
-
-    // 커피숍 마커들만 지도에 표시하도록 설정합니다
     setCoffeeMarkers(map);
   } else if (type === "subway") {
-    // 편의점 카테고리가 클릭됐을 때
-
-    // 편의점 카테고리를 선택된 스타일로 변경하고
     subwayMenu.className = "menu_selected";
     allMenu.className = "";
-
-    // 편의점 마커들만 지도에 표시하도록 설정합니다
-
     setStoreMarkers(map);
   } else if (type === "all") {
     allMenu.className = "menu_selected";
@@ -134,7 +133,6 @@ function changeMarker(type) {
   }
 }
 function geo(cb) {
-  var geocoder = new kakao.maps.services.Geocoder();
   if (navigator.geolocation) {
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function (position) {

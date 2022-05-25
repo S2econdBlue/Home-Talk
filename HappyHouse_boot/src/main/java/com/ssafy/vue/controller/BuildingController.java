@@ -67,11 +67,15 @@ public class BuildingController {
 		int maxval = Integer.parseInt(map.get("maxval"));
 		int termlow = Integer.parseInt(map.get("termlow"));
 		int termhigh = Integer.parseInt(map.get("termhigh"));
+		int tradehigh = Integer.parseInt(map.get("tradehigh"));
+		int tradelow = Integer.parseInt(map.get("tradelow"));
+		System.out.println(tradehigh+" "+tradelow);
 		List<HouseinfoDto> list =  service.selectApt(code,termlow,termhigh);
 		for(int i=0;i<list.size();i++) {
 			String chk = list.get(i).getDealAmount().trim().replaceAll(",", "");
+			int year = list.get(i).getDealYear();
 			int val = Integer.parseInt(chk);
-			if(val<minval || val>maxval) {
+			if(val<minval || val>maxval || year<tradelow || year>tradehigh) {
 				list.remove(i);
 				i--;
 			}

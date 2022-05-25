@@ -11,7 +11,13 @@ public class HouseinfoDto {
 	private String lng;
 	private String img;
 	private String dealAmount;
-	
+	private int dealYear;
+	public int getDealYear() {
+		return dealYear;
+	}
+	public void setDealYear(int dealYear) {
+		this.dealYear = dealYear;
+	}
 	public String getDealAmount() {
 		return dealAmount;
 	}
