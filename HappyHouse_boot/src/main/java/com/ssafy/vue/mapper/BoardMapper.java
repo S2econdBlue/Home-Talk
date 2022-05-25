@@ -21,17 +21,23 @@ public interface BoardMapper {
 
 	public int deleteBoard(int articleno);
 
-	public void insertBoardFileList(List<BoardFileDto> list) throws Exception;
+	public int insertBoardFileList(List<BoardFileDto> list) throws Exception;
 
 	public List<BoardFileDto> selectBoardFileList(int board_no);
 
 	public BoardFileDto selectBoardFileInformation(@Param("no") int no);
-	
+
 	public String selectBoardFileRealPath(String original_name);
-	
+
 	public int insertTradeThread(TradeThreadDto tradeThreadDto);
-	
+
 	public int insertCommonMaintainItem(List<String> commonMaintainItem);
-	
+
 	public int insertEachFeeItem(List<String> EachFeeItem);
+
+	public TradeThreadDto selectTradeThread(@Param("boardNo") int boardNo);
+
+	public List<String> selectCommonMaintainItem(@Param("boardNo") int boardNo);
+
+	public List<String> selectEachFeeItem(@Param("boardNo") int boardNo);
 }

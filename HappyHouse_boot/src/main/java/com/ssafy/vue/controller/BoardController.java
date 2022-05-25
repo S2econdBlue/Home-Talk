@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -72,12 +73,23 @@ public class BoardController {
 		return new ResponseEntity<Board>(board, HttpStatus.OK);
 	}
 
-//	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
-//	@PostMapping("image")
-//	public ResponseEntity<String> insertImage(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+	@GetMapping("trade/{articleno}")
+	public ResponseEntity<TradeThreadDto> detailTradeBoard(@PathVariable int articleno) {
+		logger.debug("detailBoard - 호출");
+		TradeThreadDto tradeThreadDto = boardService.selectTradeThread(articleno);
+		tradeThreadDto.setCommonMaintainItem(boardService.selectCommonMaintainItem(articleno));
+		tradeThreadDto.setEachFeeItem(boardService.selectEachFeeItem(articleno));
+		
+		return new ResponseEntity<TradeThreadDto>(tradeThreadDto, HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
+	@PostMapping("insertImage")
+	public ResponseEntity<String> insertImage(MultipartHttpServletRequest multipartHttpServletRequest)
+			throws Exception {
 //		multipartHttpServletRequest = 업로드할 파일에 대한 정보를 가지고 있음
-//		System.out.println("multipartHttpServletRequest : " + multipartHttpServletRequest.getFileNames());
-//
+		System.out.println("multipartHttpServletRequest : " + multipartHttpServletRequest.getFileNames());
+
 //		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 //		String name;
 //		while (iterator.hasNext()) {
@@ -96,16 +108,15 @@ public class BoardController {
 //				System.out.println("file content type : " + multipartFile.getContentType());
 //			}
 //		}
-//		// 보드 삽입
-//		// 데이터가 존재하면 트레이드에 삽입 auto increment추가
-//
-//		// 데이터 존재하면
-//		logger.debug("insertThreadImage - 호출 {}", board.toString());
-//		if (boardService.writeBoard(board, multipartHttpServletRequest)) {
-//			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-//		}
-//		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
-//	}
+		// 보드 삽입
+		// 데이터가 존재하면 트레이드에 삽입 auto increment추가
+
+		// 데이터 존재하면
+		if (boardService.writeBoard(multipartHttpServletRequest) > 0) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+	}
 
 	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
 	@PostMapping("insertThread")
@@ -116,7 +127,7 @@ public class BoardController {
 			Object obj = set.getValue();
 			System.out.println("key :" + key + ", obj :" + obj);
 		}
-		
+
 		// 메인 게시글을 등록 후
 		// 매매 게시글 등록 후
 		// 공용 항목, 개별 항목 등록
@@ -144,16 +155,15 @@ public class BoardController {
 
 			if (rslt == 1) {
 				// 3. commonMaintainItem, EachFeeItem 삽입
-				if( ((List<String>)  map.get ("commonMaintainItem")).size() > 0 )
+				if (((List<String>) map.get("commonMaintainItem")).size() > 0)
 					rslt = boardService.insertCommonMaintainItem((List<String>) map.get("commonMaintainItem"));
-				if(rslt != 0 && ((List<String>)  map.get ("eachFeeItem")).size() > 0 )
-				boardService.insertEachFeeItem((List<String>) map.get("eachFeeItem"));
+				if (rslt != 0 && ((List<String>) map.get("eachFeeItem")).size() > 0)
+					boardService.insertEachFeeItem((List<String>) map.get("eachFeeItem"));
 				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 			}
 		}
-			return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
-		
-		
+		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+
 	}
 
 	@ApiOperation(value = "글번호에 해당하는 게시글의 정보를 수정한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)

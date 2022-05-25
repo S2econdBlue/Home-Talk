@@ -1,6 +1,5 @@
 package com.ssafy.vue.service;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.ssafy.vue.controller.BoardController;
 import com.ssafy.vue.dto.Board;
 import com.ssafy.vue.dto.BoardFileDto;
 import com.ssafy.vue.dto.TradeThreadDto;
@@ -43,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public boolean writeBoard(Board board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+	public int writeBoard(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
 
 //		logger.debug("multipartHttpServletRequest : {}",multipartHttpServletRequest);
 //		if (ObjectUtils.isEmpty(multipartHttpServletRequest) == false) {
@@ -69,13 +65,11 @@ public class BoardServiceImpl implements BoardService {
 //				}
 //			}
 //		}
-		// 게시글이 제대로 등록되었는지 확인
-		boolean returnV = boardMapper.insertBoard(board) == 1;
 		List<BoardFileDto> list = fileUtils.parseFileInfo(multipartHttpServletRequest);
-		if (CollectionUtils.isEmpty(list) == false && returnV) {
-			boardMapper.insertBoardFileList(list);
-		}
-		return returnV;
+		if (CollectionUtils.isEmpty(list) == false) {
+			return boardMapper.insertBoardFileList(list);
+		}	
+		return 0;
 	}
 
 	@Override
@@ -125,4 +119,19 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.insertTradeThread(tradeThreadDto);
 	}
 
+	@Override
+	public List<String> selectCommonMaintainItem(int boardNo) {
+		return boardMapper.selectCommonMaintainItem(boardNo);
+	}
+	
+	@Override
+	public List<String> selectEachFeeItem(int boardNo) {
+		return boardMapper.selectEachFeeItem(boardNo);
+	}
+	
+	@Override
+	public TradeThreadDto selectTradeThread(int boardNo) {
+		return boardMapper.selectTradeThread(boardNo);
+	}
+	
 }

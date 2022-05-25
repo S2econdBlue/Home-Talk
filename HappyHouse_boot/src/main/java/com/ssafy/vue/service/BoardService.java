@@ -2,6 +2,7 @@ package com.ssafy.vue.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ssafy.vue.dto.Board;
@@ -15,7 +16,7 @@ public interface BoardService {
 
 	public int insertBoard(Board board);
 
-	public boolean writeBoard(Board board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception;
+	public int writeBoard(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception;
 
 	public boolean updateBoard(Board board);
 
@@ -32,4 +33,10 @@ public interface BoardService {
 	public int insertCommonMaintainItem(List<String> commonMaintainItem);
 
 	public int insertEachFeeItem(List<String> EachFeeItem);
+	
+	public TradeThreadDto selectTradeThread(@Param("boardNo") int boardNo);
+
+	public List<String> selectCommonMaintainItem(@Param("boardNo") int no);
+
+	public List<String> selectEachFeeItem(@Param("boardNo") int no);
 }
