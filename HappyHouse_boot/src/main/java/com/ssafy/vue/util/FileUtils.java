@@ -24,8 +24,16 @@ public class FileUtils {
 		List<BoardFileDto> fileList = new ArrayList<>();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
 		ZonedDateTime current = ZonedDateTime.now();
+		File abfile = new File(".");
+		String rootPath = abfile.getAbsolutePath();
+		rootPath = rootPath.substring(0, rootPath.length()-1);
+		
 		String path = "src/main/resources/static/images/" + current.format(format);
-		File file = new File(path);
+		rootPath += path;
+		
+		System.out.println("in FileUtils, rootPath :"+rootPath);
+		
+		File file = new File(rootPath);
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
@@ -58,10 +66,10 @@ public class FileUtils {
 					BoardFileDto boardFile = new BoardFileDto();
 					boardFile.setSize(multipartFile.getSize());
 					boardFile.setOriginal_name(multipartFile.getOriginalFilename());
-					boardFile.setSave_path(path + "/" + newFileName);
+					boardFile.setSave_path(rootPath + "/" + newFileName);
 					fileList.add(boardFile);
 
-					file = new File(path + "/" + newFileName);
+					file = new File(rootPath + "/" + newFileName);
 					multipartFile.transferTo(file);
 				}
 			}

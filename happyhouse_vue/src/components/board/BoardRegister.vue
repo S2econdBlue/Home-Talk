@@ -284,11 +284,9 @@
             />
           </b-row>
           <b-row>
-            <router-link :to="{ name: 'board' }">
-              <b-button class="w-100 my-3" variant="primary" @click="sendData">
-                매물등록
-              </b-button>
-            </router-link>
+            <b-button class="w-100 my-3" variant="primary" @click="sendData">
+              매물등록
+            </b-button>
           </b-row>
         </b-col>
       </b-row>
@@ -483,31 +481,30 @@ export default {
           for (let i = 0; i < this.files.length; i++) {
             Data.append("imgs", this.files[i]);
           }
+
+          if (this.files.length > 0) {
+            axios
+              .post("board/insertImage", Data, {
+                baseURL: "http://localhost/vue",
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         })
         .catch((err) => {
           console.log(err);
         });
 
       //등록할 이미지가 존재할 때
-      if (this.files.length > 0) {
-        await axios
-          .post("board/insertImage", Data, {
-            baseURL: "http://localhost/vue",
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
 
-      for (let value of Data.values()) {
-        console.log(value);
-      }
+      this.$router.push({ name: "board" });
     },
   },
   mounted() {
