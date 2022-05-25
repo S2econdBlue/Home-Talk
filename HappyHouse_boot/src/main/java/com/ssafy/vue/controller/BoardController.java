@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -50,7 +52,17 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@GetMapping("root")
+	public @ResponseBody HashMap<Object, Object> report(@RequestParam HashMap<Object, Object> param,
+															HttpServletRequest request) {
+		File file = new File(".");
+		String rootPath = file.getAbsolutePath();
+        System.out.println("현재 프로젝트의 경로 : "+rootPath );
 
+		return param;
+	}
+	
 	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
 	@GetMapping
 	public ResponseEntity<List<Board>> retrieveBoard() throws Exception {
@@ -207,14 +219,20 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping("image/{original_name}")
-	public ResponseEntity<byte[]> imgLoad(@PathVariable String original_name, HttpServletRequest request)
+	@GetMapping("image/{board_no}/{original_name}")
+	public ResponseEntity<byte[]> imgLoad(@PathVariable int board_no, @PathVariable String original_name, HttpServletRequest request)
 			throws Exception {
 //		String absolutePath = request.getSession().getServletContext().getRealPath("/");
+		
 		String absolutePath = "C:\\SSAFY\\관통\\final\\HappyHouse_boot";
-		String save_path = boardService.selectBoardFileRealPath(original_name);
-		System.out.println(absolutePath + save_path);
-		InputStream imageStream = new FileInputStream(absolutePath + "\\" + save_path);
+		
+		BoardFileDto boardFileDto = new BoardFileDto();
+		boardFileDto.setBoard_no(board_no);
+		boardFileDto.setOriginal_name(original_name);
+		
+		String save_path = boardService.selectBoardFileRealPath(boardFileDto);
+		System.out.println("save_path : "+save_path);
+		InputStream imageStream = new FileInputStream(save_path);
 		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
 		imageStream.close();
 		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);

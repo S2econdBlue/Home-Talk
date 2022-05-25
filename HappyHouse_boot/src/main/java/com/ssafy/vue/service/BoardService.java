@@ -27,7 +27,7 @@ public interface BoardService {
 
 	BoardFileDto selectBoardFileInformation(int no);
 
-	public String selectBoardFileRealPath(String original_name);
+	public String selectBoardFileRealPath(BoardFileDto boardFileDto);
 
 	public int insertTradeThread(TradeThreadDto tradeThreadDto);
 

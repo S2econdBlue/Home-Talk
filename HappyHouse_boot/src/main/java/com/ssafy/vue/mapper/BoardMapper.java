@@ -29,7 +29,7 @@ public interface BoardMapper {
 
 	public BoardFileDto selectBoardFileInformation(@Param("no") int no);
 
-	public String selectBoardFileRealPath(String original_name);
+	public String selectBoardFileRealPath(BoardFileDto boardFileDto);
 
 	public int insertTradeThread(TradeThreadDto tradeThreadDto);
 

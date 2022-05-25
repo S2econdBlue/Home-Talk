@@ -26,7 +26,8 @@
             :interval="4000"
             controls
             indicators
-            img-width="1024"
+            img-width="1024px"
+            img-height="500px"
             background="#ababab"
             style="text-shadow: 1px 1px 2px #333"
             @sliding-start="onSlideStart"
@@ -35,11 +36,14 @@
             <template v-for="(file, index) in article.fileList">
               <b-carousel-slide
                 :key="index"
-                :img-src="`${download_url}/board/image/${file.original_name}`"
+                :img-src="`${download_url}/board/image/${$route.params.articleno}/${file.original_name}`"
                 class="img-fluid"
               ></b-carousel-slide>
             </template>
           </b-carousel>
+        </b-row>
+        <b-row>
+          <div class="w-100"></div>
         </b-row>
       </b-col>
       <b-col cols="4"></b-col>
@@ -82,8 +86,17 @@ export default {
     //매매 정보를 포함하고 있다면
     http
       .get(`/board/trade/${this.$route.params.articleno}`)
-      .then((res) => {
-        console.log(res);
+      .then(({ data }) => {
+        this.trade = data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    http
+      .get(`/board/root`)
+      .then(({ data }) => {
+        this.trade = data;
       })
       .catch((err) => {
         console.log(err);

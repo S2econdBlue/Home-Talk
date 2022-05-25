@@ -101,8 +101,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public String selectBoardFileRealPath(String original_name) {
-		return boardMapper.selectBoardFileRealPath(original_name);
+	public String selectBoardFileRealPath(BoardFileDto boardFileDto) {
+		return boardMapper.selectBoardFileRealPath(boardFileDto);
 	}
 
 	@Override
