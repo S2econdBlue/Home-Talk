@@ -1,5 +1,7 @@
 package com.ssafy.vue.dto;
 
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -21,6 +23,8 @@ public class Board {
 	private String opt;
 	@ApiModelProperty(value = "판매아파트주소")
 	private String address;
+	@ApiModelProperty(value = "게시글 파일 목록")
+	private List<BoardFileDto> fileList;
 
 	public int getNo() {
 		return no;
@@ -86,10 +90,18 @@ public class Board {
 		this.address = address;
 	}
 
+	public List<BoardFileDto> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<BoardFileDto> fileList) {
+		this.fileList = fileList;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [no=" + no + ", id=" + id + ", title=" + title + ", content=" + content + ", hit=" + hit
-				+ ", time=" + time + ", opt=" + opt + ", address=" + address + "]";
+				+ ", time=" + time + ", opt=" + opt + ", address=" + address + ", fileList=" + fileList + "]";
 	}
 
 }

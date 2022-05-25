@@ -1,7 +1,7 @@
 <template>
   <b-row class="mb-1">
     <b-col style="text-align: left">
-      <b-form @submit="onSubmit" @reset="onReset">
+      <b-form @submit="onSubmit" @reset="onReset" enctype="multipart/form-data">
         <b-form-group
           id="userid-group"
           label="작성자:"
@@ -15,7 +15,8 @@
             type="text"
             required
             placeholder="작성자 입력..."
-          ></b-form-input>
+          >
+          </b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -30,7 +31,8 @@
             type="text"
             required
             placeholder="제목 입력..."
-          ></b-form-input>
+          >
+          </b-form-input>
         </b-form-group>
 
         <b-form-group id="content-group" label="내용:" label-for="content">
@@ -40,16 +42,27 @@
             placeholder="내용 입력..."
             rows="10"
             max-rows="15"
-          ></b-form-textarea>
+          >
+          </b-form-textarea>
         </b-form-group>
-
+        <b-form-file
+          browse-text="업로드"
+          multiple
+          v-model="files"
+          :state="Boolean(files)"
+          accept=".jpg, .png, .gif"
+          placeholder="파일을 선택하거나 여기로 드래그하세요."
+          drop-placeholder="Drop file here..."
+        >
+        </b-form-file>
         <b-button
           type="submit"
           variant="primary"
           class="m-1"
           v-if="this.type === 'register'"
-          >글작성</b-button
         >
+          글작성
+        </b-button>
         <b-button type="submit" variant="primary" class="m-1" v-else
           >글수정</b-button
         >
@@ -61,11 +74,13 @@
 
 <script>
 import http from "@/api/http";
-
+import axios from "axios";
 export default {
   name: "BoardInputItem",
+  components: {},
   data() {
     return {
+      files: [],
       article: {
         no: 0,
         id: "",
@@ -118,12 +133,21 @@ export default {
       this.article.content = "";
       this.$router.push({ name: "boardList" });
     },
+
     registArticle() {
-      http
-        .post(`/board`, {
-          id: this.article.id,
-          title: this.article.title,
-          content: this.article.content,
+      const Data = new FormData();
+      Data.append("id", this.article.id);
+      Data.append("title", this.article.title);
+      Data.append("content", this.article.content);
+      for (let i = 0; i < this.files.length; i++) {
+        Data.append("imgs", this.files[i]);
+      }
+      axios
+        .post(`/board`, Data, {
+          baseURL: "http://localhost/vue",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         })
         .then(({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
@@ -158,5 +182,5 @@ export default {
   },
 };
 </script>
-
+<style src="@vueform/slider/themes/default.css"></style>
 <style></style>
