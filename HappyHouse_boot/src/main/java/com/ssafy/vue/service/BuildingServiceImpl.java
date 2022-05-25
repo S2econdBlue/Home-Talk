@@ -44,8 +44,8 @@ public class BuildingServiceImpl implements BuildingService {
 	}
 
 	@Override
-	public List<HouseinfoDto> selectApt(String code) throws Exception {
-		return mapper.selectApt(code);
+	public List<HouseinfoDto> selectApt(int code,int termlow,int termhigh) throws Exception {
+		return mapper.selectApt(code,termlow,termhigh);
 	}
 
 	@Override

@@ -33,7 +33,7 @@
 		where businessName like "%스타벅스%";
 	</select>
 	
-	<select id="selectApt" parameterType="String"
+	<select id="selectApt" parameterType="integer"
 		resultType="HouseinfoDto">
 		select h.aptCode, h.aptName, h.buildyear, h.dongCode,
 		h.dongName, h.jibun, h.lat, h.lng,
@@ -44,7 +44,7 @@
 		on left(h.dongcode,2) = left(si.sidocode,2)
 		left join guguncode gu
 		on left(h.dongcode,5) = left(gu.guguncode,5)
-		where dongCode = #{code}
+		where dongCode = #{code} and buildyear between #{termlow} and #{termhigh}
 		order by aptName;
 	</select>
 	

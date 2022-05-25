@@ -29,12 +29,7 @@
               상담 관리
             </router-link>
           </b-nav-item>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'house' }" class="link">
-              <b-icon icon="house-fill" font-scale="1.5"></b-icon>
-              아파트정보
-            </router-link>
-          </b-nav-item>
+
           <!-- <b-nav-item href="#"
             ><router-link :to="{ name: 'todo' }" class="link"
               ><b-icon icon="calendar-check" font-scale="1.5"></b-icon>
@@ -96,9 +91,7 @@ export default {
   computed: {
     ...mapGetters(["loginUser"]),
   },
-  created() {
-    console.log(this.loginUser);
-  },
+  created() {},
   methods: {
     ...mapActions(["logout"]),
   },
