@@ -101,26 +101,36 @@
                 ></b-table>
               </div></div
           ></b-tab>
-          <b-tab title="매물"
-            ><div>
+          <b-tab title="매물">
+            <div>
               <b-card
-                title="Card Title"
-                img-src="https://picsum.photos/600/300/?image=25"
-                img-alt="Image"
-                img-top
-                tag="article"
-                style="max-width: 100%"
-                class="mb-2"
+                no-body
+                class="overflow-hidden"
+                style="max-width: 500px"
+                v-for="(article, index) in houseboards"
+                :key="index"
               >
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
-
-                <b-button href="#" variant="primary">Go somewhere</b-button>
+                <b-row no-gutters>
+                  <b-col md="6">
+                    <b-card-img
+                      :src="apt"
+                      alt="Image"
+                      class="rounded-0"
+                    ></b-card-img>
+                  </b-col>
+                  <b-col md="6">
+                    <b-card-body :title="article.title">
+                      <b-card-text>
+                        <b-row>{{ article.detail }}</b-row>
+                        <b-row>{{ article.deposit }}</b-row>
+                        <b-row>{{ article.monthlyFee }}</b-row>
+                      </b-card-text>
+                    </b-card-body>
+                  </b-col>
+                </b-row>
               </b-card>
-            </div></b-tab
-          >
+            </div>
+          </b-tab>
           <b-tab :title="useraddress" disabled
             ><p>I'm a disabled tab!</p></b-tab
           >
@@ -154,6 +164,7 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 import Slider from "@vueform/slider/dist/slider.vue2.js";
+import apt from "@/assets/apt.png";
 import {
   getMarker,
   starbucksStore,
@@ -192,10 +203,11 @@ export default {
       dealhistory: [],
       cafe: [],
       subways: [],
+      houseboards: [],
       allcolor: false,
       subcolor: false,
       cofcolor: false,
-      useraddress: [],
+      useraddress: "",
       settingcolor: false,
       term: {
         value: [1990, 2022],
@@ -205,7 +217,7 @@ export default {
           decimals: 0,
         },
         tooltipPosition: "",
-        min: 1980,
+        min: 1990,
         max: 2022,
         lazy: true,
         merge: 2010,
@@ -234,6 +246,7 @@ export default {
         max: 2022,
         lazy: true,
       },
+      apt,
     };
   },
   computed: {
@@ -259,7 +272,14 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-
+    http
+      .get(`/board/allselect`)
+      .then(({ data }) => {
+        this.houseboards = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     geo((rst) => {
       console.log(rst);
       this.useraddress = "접속위치: " + rst;
@@ -384,10 +404,9 @@ export default {
     clear() {
       this.check = false;
       this.detail = false;
-      this.worth.value[0] = 0;
-      this.worth.value[1] = 500000;
-      this.term.value[0] = 1990;
-      this.term.value[1] = 2022;
+      this.worth.value = [0, 500000];
+      this.term.value = [1990, 2022];
+      this.trade.value = [1990, 2022];
     },
   },
 };
@@ -427,7 +446,7 @@ export default {
 #deal {
   position: relative;
   width: 100%;
-  height: 700px;
+  height: 710px;
   z-index: 2;
   background: white;
 }
