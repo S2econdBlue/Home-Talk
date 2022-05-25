@@ -1,11 +1,6 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row>
-      <b-col>
-        <!-- <b-alert show><h3>글보기</h3></b-alert> -->
-      </b-col>
-    </b-row>
-    <b-row class="mb-1">
+    <!-- <b-row class="mb-1">
       <b-col class="text-left">
         <b-button variant="outline-primary" @click="listArticle">목록</b-button>
       </b-col>
@@ -21,93 +16,33 @@
           >글삭제</b-button
         >
       </b-col>
-    </b-row>
-    <b-row class="mb-1">
-      <b-col>
-        <b-card
-          :header-html="`<h3>
-          ${article.title} [${article.hit}]</h3><div><h6>${article.id}</div><div>${article.time}</h6></div>`"
-          class="mb-2"
-          border-variant="dark"
-          no-body
-        >
-          <b-card-body class="text-left">
-            <b-carousel
-              id="carousel-1"
-              v-model="slide"
-              :interval="4000"
-              controls
-              indicators
-              background="#ababab"
-              img-width="1024"
-              img-height="480"
-              style="text-shadow: 1px 1px 2px #333"
-              @sliding-start="onSlideStart"
-              @sliding-end="onSlideEnd"
-            >
-              <!-- Text slides with image -->
+    </b-row> -->
+    <b-row>
+      <b-col cols="8">
+        <b-row>
+          <b-carousel
+            id="carousel-1"
+            v-model="slide"
+            :interval="4000"
+            controls
+            indicators
+            img-width="1024"
+            background="#ababab"
+            style="text-shadow: 1px 1px 2px #333"
+            @sliding-start="onSlideStart"
+            @sliding-end="onSlideEnd"
+          >
+            <template v-for="(file, index) in article.fileList">
               <b-carousel-slide
-                caption="First slide"
-                text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-                img-src="https://picsum.photos/1024/480/?image=52"
+                :key="index"
+                :img-src="`${download_url}/board/image/${file.original_name}`"
+                class="img-fluid"
               ></b-carousel-slide>
-
-              <!-- Slides with custom text -->
-              <b-carousel-slide
-                img-src="https://picsum.photos/1024/480/?image=54"
-              >
-                <h1>Hello world!</h1>
-              </b-carousel-slide>
-
-              <!-- Slides with image only -->
-              <b-carousel-slide
-                img-src="https://picsum.photos/1024/480/?image=58"
-              ></b-carousel-slide>
-
-              <!-- Slides with img slot -->
-              <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-              <b-carousel-slide>
-                <template #img>
-                  <img
-                    class="d-block img-fluid w-100"
-                    width="1024"
-                    height="480"
-                    src="https://picsum.photos/1024/480/?image=55"
-                    alt="image slot"
-                  />
-                </template>
-              </b-carousel-slide>
-
-              <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-              <b-carousel-slide
-                caption="Blank Image"
-                img-blank
-                img-alt="Blank image"
-              >
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse eros felis, tincidunt a tincidunt eget, convallis
-                  vel est. Ut pellentesque ut lacus vel interdum.
-                </p>
-              </b-carousel-slide>
-            </b-carousel>
-            <p class="mt-4">
-              Slide #: {{ slide }}<br />
-              Sliding: {{ sliding }}
-            </p>
-            <div v-html="message"></div>
-          </b-card-body>
-        </b-card>
+            </template>
+          </b-carousel>
+        </b-row>
       </b-col>
-    </b-row>
-    <b-row v-for="(file, index) in article.fileList" :key="index">
-      <a :href="`${download_url}board/download/${file.no}`">
-        {{ file.original_name }} ( {{ file.size }} kb)
-        <img
-          :src="`${download_url}/board/image/${file.original_name}`"
-          alt=""
-        />
-      </a>
+      <b-col cols="4"></b-col>
     </b-row>
   </b-container>
 </template>
@@ -122,6 +57,8 @@ export default {
     return {
       download_url: "",
       article: {},
+      trade: {},
+      files: {},
       slide: 0,
       sliding: null,
     };
@@ -135,9 +72,22 @@ export default {
   },
   created() {
     this.download_url = BASE_URL();
+
+    //게시글 정보
     http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
       this.article = data;
+      console.log(data);
     });
+
+    //매매 정보를 포함하고 있다면
+    http
+      .get(`/board/trade/${this.$route.params.articleno}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   methods: {
     onSlideStart() {

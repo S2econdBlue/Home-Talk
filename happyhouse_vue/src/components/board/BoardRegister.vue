@@ -284,9 +284,11 @@
             />
           </b-row>
           <b-row>
-            <b-button class="w-100 my-3" variant="primary" @click="sendData">
-              매물등록
-            </b-button>
+            <router-link :to="{ name: 'board' }">
+              <b-button class="w-100 my-3" variant="primary" @click="sendData">
+                매물등록
+              </b-button>
+            </router-link>
           </b-row>
         </b-col>
       </b-row>
@@ -415,64 +417,41 @@ export default {
       this.calendarValue = this.crntDate();
     },
     async sendData() {
-      // if (this.loginUser.id == undefined) {
-      //   alert("로그인된 사용자만 이용할 수 있습니다.");
-      //   return;
-      // } else if (this.loginUser.grade == 1) {
-      //   alert("전문회원만 이용할 수 있습니다.");
-      //   return;
-      // } else if (this.title == "") {
-      //   alert("제목을 입력해주세요.");
-      //   return;
-      // } else if (this.selectedContract.length == 0) {
-      //   alert("계약형태를 선택해주세요.");
-      //   return;
-      // } else if (this.deposit < 0) {
-      //   alert("보증금을 제대로 입력해주세요.");
-      //   return;
-      // } else if (this.monthlyFee < 0) {
-      //   alert("월세를 제대로 입력해주세요.");
-      //   return;
-      // } else if (this.commonMaintainFee < 0) {
-      //   alert("공용 관리비를 제대로 입력해주세요.");
-      //   return;
-      // } else if (this.selectedLoan.length == 0) {
-      //   alert("융자여부를 선택해주세요.");
-      //   return;
-      // } else if (this.calendarValue == "미선택") {
-      //   alert("날짜를 선택해주세요.");
-      //   return;
-      // } else if (this.address.trim() == "") {
-      //   alert("주소를 입력해주세요.");
-      //   return;
-      // } else if (this.extraAddress.trim() == "") {
-      //   alert("상세 주소를 입력해주세요.");
-      //   return;
-      // }
-
+      if (this.loginUser.id == undefined) {
+        alert("로그인된 사용자만 이용할 수 있습니다.");
+        return;
+      } else if (this.loginUser.grade == 1) {
+        alert("전문회원만 이용할 수 있습니다.");
+        return;
+      } else if (this.title == "") {
+        alert("제목을 입력해주세요.");
+        return;
+      } else if (this.selectedContract.length == 0) {
+        alert("계약형태를 선택해주세요.");
+        return;
+      } else if (this.deposit < 0) {
+        alert("보증금을 제대로 입력해주세요.");
+        return;
+      } else if (this.monthlyFee < 0) {
+        alert("월세를 제대로 입력해주세요.");
+        return;
+      } else if (this.commonMaintainFee < 0) {
+        alert("공용 관리비를 제대로 입력해주세요.");
+        return;
+      } else if (this.selectedLoan.length == 0) {
+        alert("융자여부를 선택해주세요.");
+        return;
+      } else if (this.calendarValue == "미선택") {
+        alert("날짜를 선택해주세요.");
+        return;
+      } else if (this.address.trim() == "") {
+        alert("주소를 입력해주세요.");
+        return;
+      } else if (this.extraAddress.trim() == "") {
+        alert("상세 주소를 입력해주세요.");
+        return;
+      }
       let Data = new FormData();
-      Data.append("id", this.loginUser.id);
-      Data.append("title", this.title);
-      Data.append("contractOpt", Number(this.selectedContract));
-      Data.append("deposit", Number(this.deposit));
-      Data.append("monthlyFee", Number(this.monthlyFee));
-      Data.append("commonMaintainFee", Number(this.commonMaintainFee));
-      Data.append("loan", this.selectedLoan);
-      Data.append("date", this.calendarValue);
-      Data.append("detail", this.detailText);
-      Data.append("roadnameAddress", this.address);
-      Data.append("detailAddress", this.extraAddress);
-      for (let i = 0; i < this.maintainTag.length; i++) {
-        Data.append("commonMaintainItem", this.maintainTag[i]);
-      }
-      for (let i = 0; i < this.eachFeeTag.length; i++) {
-        Data.append("eachFeeItem", this.eachFeeTag[i]);
-        console.log(this.eachFeeTag[i]);
-      }
-      for (let key of Data.keys()) {
-        console.log(key, ": ", Data.get(key));
-      }
-
       await axios
         .post(
           "board/insertThread",
@@ -509,23 +488,26 @@ export default {
           console.log(err);
         });
 
-      // await axios
-      //   .post("board/thread", Data, {
-      //     baseURL: "http://localhost/vue",
-      //     headers: {
-      //       "Content-type": "application/json",
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // for (let value of Data.values()) {
-      //   console.log(value);
-      // }
+      //등록할 이미지가 존재할 때
+      if (this.files.length > 0) {
+        await axios
+          .post("board/insertImage", Data, {
+            baseURL: "http://localhost/vue",
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
+      for (let value of Data.values()) {
+        console.log(value);
+      }
     },
   },
   mounted() {

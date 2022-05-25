@@ -46,9 +46,9 @@
 	</delete>
 	
 	<insert id="insertBoardFileList" parameterType="BoardFileDto">
-	<selectKey keyProperty="board_id" resultType="int" order="BEFORE">
-		select LAST_INSERT_ID();
-	</selectKey>
+		<selectKey keyProperty="board_id" resultType="int" order="BEFORE">
+			select LAST_INSERT_ID();
+		</selectKey>
 		insert into imgboard (board_no, original_name, save_path, size)
 		values 
 		<foreach collection="list" item="item" separator=",">
@@ -82,6 +82,12 @@
 		values(#{boardNo}, #{contractOpt}, #{deposit}, #{monthlyFee},#{commonMaintainFee}, #{loan}, #{detail}, #{roadnameAddress}, #{detailAddress});
 	</insert>
 	
+	<select id="selectTradeThread" parameterType="int" resultType="TradeThreadDto">
+		select contractOpt, deposit, monthlyFee, commonMaintainFee, loan, date, detail, roadnameAddress, detailAddress
+		from tradeboard
+		where boardNo = #{boardNo}
+	</select>
+	
 	<insert id="insertCommonMaintainItem" parameterType="String">
 		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
 			select LAST_INSERT_ID();
@@ -93,6 +99,12 @@
 		</foreach>
 	</insert>
 	
+	<select id="selectCommonMaintainItem" parameterType="int" resultType="String">
+		select item
+		from commonmaintainitem
+		where boardNo = #{boardNo}
+	</select>
+	
 	<insert id="insertEachFeeItem">
 		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
 			select LAST_INSERT_ID();
@@ -103,5 +115,10 @@
 			(#{boardNo}, #{item})
 		</foreach>
 	</insert>
+	<select id="selectEachFeeItem" parameterType="int" resultType="String">
+			select item
+		from eachfeeitem
+		where boardNo = #{boardNo}
+	</select>
 </mapper>
 
