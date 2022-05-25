@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -177,24 +178,17 @@ public class UserController {
 	}
 
 	// 회원 자발적 탈퇴+
-	@GetMapping("/secession/{id}")
+	@DeleteMapping("/secession/{id}")
 	public String secession(@PathVariable("id") String id, HttpServletRequest request) throws SQLException {
 		// 추후 기능구현
 		return "";
 	}
 
 	// 관리자에 의한 삭제
-	@GetMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void DeleteUser(@PathVariable("id") String id, HttpServletResponse response)
 			throws SQLException, IOException {
-		logger.debug("id : {}", id);
-		response.setContentType("application/json;charset=utf-8");
-		int rslt = userService.DeleteUser(id);
-		if (rslt == 1) {
-			response.getWriter().write("삭제 성공");
-		} else {
-			response.getWriter().write("삭제 실패");
-		}
+//		추후 작성
 	}
 
 	@GetMapping("/logout")

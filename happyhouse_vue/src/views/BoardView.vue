@@ -1,7 +1,7 @@
 <template>
   <b-container class="bv-example-row mt-3 text-center">
     <h3 class="underline-hotpink">
-      <b-icon icon="journals"></b-icon> Board Service
+      <b-icon icon="journals"></b-icon> 매물 등록 게시판(전문회원 전용)
     </h3>
     <router-view></router-view>
   </b-container>

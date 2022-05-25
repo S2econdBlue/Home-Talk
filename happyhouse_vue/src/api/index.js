@@ -22,4 +22,7 @@ function houseInstance() {
   return instance;
 }
 
-export { apiInstance, houseInstance };
+function BASE_URL() {
+  return "http://localhost/vue/";
+}
+export { BASE_URL, apiInstance, houseInstance };
