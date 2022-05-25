@@ -1,5 +1,6 @@
 package com.ssafy.vue.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.ssafy.vue.dto.SubwayDto;
 import com.ssafy.vue.service.BuildingService;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 
 @RestController
@@ -59,9 +61,21 @@ public class BuildingController {
 	
 	@GetMapping("/House")
 	@ApiOperation(value = "동코드에 맞는 아파트 거래 정보를 조회한다", response = List.class)
-	public @ResponseBody List<HouseinfoDto> Apt(@RequestParam("dong") String apt) throws Exception {
-		System.out.println(apt);
-		List<HouseinfoDto> list =  service.selectApt(apt);
+	public @ResponseBody List<HouseinfoDto> Apt(@RequestParam HashMap<String, String> map ) throws Exception {
+		int code = Integer.parseInt(map.get("dong"));
+		int minval = Integer.parseInt(map.get("minval"));
+		int maxval = Integer.parseInt(map.get("maxval"));
+		int termlow = Integer.parseInt(map.get("termlow"));
+		int termhigh = Integer.parseInt(map.get("termhigh"));
+		List<HouseinfoDto> list =  service.selectApt(code,termlow,termhigh);
+		for(int i=0;i<list.size();i++) {
+			String chk = list.get(i).getDealAmount().trim().replaceAll(",", "");
+			int val = Integer.parseInt(chk);
+			if(val<minval || val>maxval) {
+				list.remove(i);
+				i--;
+			}
+		}
 		System.out.println(list);
 		return list;
 	}

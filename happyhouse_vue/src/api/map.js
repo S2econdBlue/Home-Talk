@@ -133,6 +133,26 @@ function changeMarker(type) {
     setStoreMarkers(map);
   }
 }
+function geo(cb) {
+  var geocoder = new kakao.maps.services.Geocoder();
+  if (navigator.geolocation) {
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var lat = position.coords.latitude, // 위도
+        lon = position.coords.longitude; // 경도
+      let coord = new kakao.maps.LatLng(lat, lon);
+      geocoder.coord2RegionCode(
+        coord.getLng(),
+        coord.getLat(),
+        function (result, status) {
+          if (status === kakao.maps.services.Status.OK) {
+            cb(result[0].address_name);
+          }
+        }
+      );
+    });
+  }
+}
 export {
   getMarker,
   starbucksStore,
@@ -140,4 +160,5 @@ export {
   changeMarker,
   setCoffeeMarkers,
   setStoreMarkers,
+  geo,
 };

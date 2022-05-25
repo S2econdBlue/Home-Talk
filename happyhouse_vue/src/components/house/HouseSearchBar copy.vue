@@ -1,80 +1,131 @@
 <template>
   <div id="wrap">
     <div id="map"></div>
-    <div id="filter" v-if="filtercheck">
-      <b-row class="mt-1 mb-1 ml-1 mr-1 text-center">
-        <b-col class="sm-3">
-          시<b-form-select
-            v-model="sidoCode"
-            :options="sidos"
-            @change="gugunList"
-            size="sm"
-          ></b-form-select>
-        </b-col>
-        <b-col class="sm-3">
-          구<b-form-select
-            v-model="gugunCode"
-            :options="guguns"
-            @change="dongList"
-            size="sm"
-          ></b-form-select>
-        </b-col>
-        <b-col class="sm-3">
-          동<b-form-select
-            v-model="dongCode"
-            :options="dongs"
-            @change="getDeal"
-            size="sm"
-          ></b-form-select>
-        </b-col>
+    <div id="board">
+      <b-row class="mt-1 mb-1 ml-1 mr-1 text-center dark"
+        ><b-col cols="3">현위치 </b-col>
+        <b-col cols="9">{{ useraddress }}</b-col>
       </b-row>
-      <b-row class="text-center mt-5 mb-3">
-        <b-col cols="3"><div>금액</div></b-col>
-        <b-col class="mt-1 mb-1" cols="8"
-          ><Slider v-model="worth.value" v-bind="worth"></Slider
-        ></b-col>
-      </b-row>
-      <b-row class="text-center mt-5 mb-3">
-        <b-col cols="3"><div>기간</div></b-col>
-        <b-col class="mt-1 mb-1" cols="8"
-          ><Slider v-model="term.value" v-bind="term">기간</Slider></b-col
-        >
-      </b-row>
-      <b-row class="text-center mt-5 mb-3">
-        <b-col><b-button variant="outline-primary">조회</b-button></b-col>
-        <b-col><b-button variant="danger">초기화</b-button></b-col>
-      </b-row>
-    </div>
-    <div id="result">
-      <div id="value" v-if="check">
-        <b-button variant="primary float-right" @click="resultToggle"
-          >X</b-button
-        >
-        <b-table
-          hover
-          sticky-header="700px"
-          responsive
-          :items="housedeal"
-          :fields="fields"
-          selectable
-          select-mode="single"
-          @row-selected="checkvalue"
-        ></b-table>
-      </div>
 
-      <div id="deal" v-if="detail">
-        <b-button variant="primary float-right" @click="dealToggle">X</b-button>
-        <b-table
-          hover
-          sticky-header="700px"
-          responsive
-          :fields="field2"
-          :items="dealhistory"
-          selectable
-          select-mode="single"
-        ></b-table>
+      <div>
+        <b-tabs content-class="mt-3">
+          <b-tab title="시세" active
+            ><div>
+              <b-button block variant="primary" @click="openfilter"
+                >필터설정</b-button
+              >
+              <div id="filter" v-if="filtercheck">
+                <b-row class="mt-1 mb-1 ml-1 mr-1 text-center mx-auto">
+                  <b-col class="sm-3">
+                    시<b-form-select
+                      v-model="sidoCode"
+                      :options="sidos"
+                      @change="gugunList"
+                      size="sm"
+                    ></b-form-select>
+                  </b-col>
+                  <b-col class="sm-3">
+                    구<b-form-select
+                      v-model="gugunCode"
+                      :options="guguns"
+                      @change="dongList"
+                      size="sm"
+                    ></b-form-select>
+                  </b-col>
+                  <b-col class="sm-3">
+                    동<b-form-select
+                      v-model="dongCode"
+                      :options="dongs"
+                      size="sm"
+                    ></b-form-select>
+                  </b-col>
+                </b-row>
+                <b-row class="text-center mt-5 mb-3">
+                  <b-col cols="3"><div>가격</div></b-col>
+                  <b-col class="mt-1 mb-1 center" cols="8"
+                    ><Slider v-model="worth.value" v-bind="worth"></Slider
+                  ></b-col>
+                </b-row>
+                <b-row class="text-center mt-5 mb-3">
+                  <b-col cols="3"><div>건축년도</div></b-col>
+                  <b-col class="mt-1 mb-1" cols="8"
+                    ><Slider v-model="term.value" v-bind="term"
+                      >기간</Slider
+                    ></b-col
+                  >
+                </b-row>
+                <b-row class="text-center mt-5 mb-3">
+                  <b-col cols="3"><div>거래년도</div></b-col>
+                  <b-col class="mt-1 mb-1" cols="8"
+                    ><Slider v-model="trade.value" v-bind="trade"
+                      >기간</Slider
+                    ></b-col
+                  >
+                </b-row>
+                <b-row class="text-center mt-5 mb-3">
+                  <b-col
+                    ><b-button variant="outline-primary" @click="getDeal"
+                      >조회</b-button
+                    ></b-col
+                  >
+                  <b-col
+                    ><b-button variant="danger" @click="clear"
+                      >초기화</b-button
+                    ></b-col
+                  >
+                </b-row>
+              </div>
+              <div id="value" v-if="check">
+                <b-table
+                  hover
+                  sticky-header="720px"
+                  responsive
+                  :items="housedeal"
+                  :fields="fields"
+                  selectable
+                  select-mode="single"
+                  @row-selected="checkvalue"
+                ></b-table>
+              </div>
+              <div id="deal" v-if="detail">
+                <b-button variant="primary float-right" @click="dealToggle"
+                  >X</b-button
+                >
+                <b-table
+                  hover
+                  sticky-header="710px"
+                  responsive
+                  :fields="field2"
+                  :items="dealhistory"
+                  selectable
+                  select-mode="single"
+                ></b-table>
+              </div></div
+          ></b-tab>
+          <b-tab title="매물"
+            ><div>
+              <b-card
+                title="Card Title"
+                img-src="https://picsum.photos/600/300/?image=25"
+                img-alt="Image"
+                img-top
+                tag="article"
+                style="max-width: 100%"
+                class="mb-2"
+              >
+                <b-card-text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </b-card-text>
+
+                <b-button href="#" variant="primary">Go somewhere</b-button>
+              </b-card>
+            </div></b-tab
+          >
+        </b-tabs>
       </div>
     </div>
+
     <div class="category">
       <ul>
         <li id="coffeeMenu" @click="starcheck">
@@ -95,13 +146,6 @@
         </li>
       </ul>
     </div>
-    <div>
-      <b-row
-        ><b-col
-          ><span>현재접속위치 {{ useraddress }}</span></b-col
-        ></b-row
-      >
-    </div>
   </div>
 </template>
 
@@ -115,6 +159,7 @@ import {
   changeMarker,
   setCoffeeMarkers,
   setStoreMarkers,
+  geo,
 } from "@/api/map";
 import http from "@/api/http";
 export default {
@@ -158,13 +203,13 @@ export default {
           decimals: 0,
         },
         tooltipPosition: "",
-        min: 1990,
+        min: 1980,
         max: 2022,
         lazy: true,
-        merge: 2022,
+        merge: 2010,
       },
       worth: {
-        value: [1000, 500000],
+        value: [0, 500000],
         step: 500,
         format: {
           suffix: "만원",
@@ -172,6 +217,19 @@ export default {
         },
         tooltipPosition: "",
         max: 500000,
+        lazy: true,
+      },
+      trade: {
+        value: [1990, 2022],
+        step: 1,
+        format: {
+          suffix: "년",
+          decimals: 0,
+        },
+        tooltipPosition: "",
+        merge: 2010,
+        min: 1990,
+        max: 2022,
         lazy: true,
       },
     };
@@ -199,28 +257,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-    var geocoder = new kakao.maps.services.Geocoder();
-    if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var lat = position.coords.latitude, // 위도
-          lon = position.coords.longitude; // 경도
-        let coord = new kakao.maps.LatLng(lat, lon);
-        let check = [];
-        geocoder.coord2RegionCode(
-          coord.getLng(),
-          coord.getLat(),
-          function (result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-              check = result;
-            }
-          }
-        );
-        console.log(check);
-      });
-    }
 
-    console.log(this.useraddress);
+    geo((rst) => {
+      console.log(rst);
+      this.useraddress = rst;
+    });
   },
   methods: {
     ...mapActions(["getSido", "getGugun", "getDong"]),
@@ -240,19 +281,29 @@ export default {
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     getDeal() {
-      console.log(this.term.value);
       if (this.dongCode) {
         this.check = true;
         this.housedeal = [];
-        const params = { dong: this.dongCode };
+        const params = {
+          dong: this.dongCode,
+          minval: this.worth.value[0],
+          maxval: this.worth.value[1],
+          termlow: this.term.value[0],
+          termhigh: this.term.value[1],
+        };
+        console.log(params);
         http
           .get(`/Building/House`, { params })
           .then(({ data }) => {
             this.housedeal = data;
             this.detail = false;
+            this.filtercheck = false;
             if (data.length > 0) {
               getMarker(data);
-            } else alert("거래내역이 없습니다");
+            } else {
+              alert("거래내역이 없습니다");
+              this.filtercheck = true;
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -325,6 +376,14 @@ export default {
     openfilter() {
       this.filtercheck = !this.filtercheck;
     },
+    clear() {
+      this.check = false;
+      this.detail = false;
+      this.worth.value[0] = 0;
+      this.worth.value[1] = 500000;
+      this.term.value[0] = 1990;
+      this.term.value[1] = 2022;
+    },
   },
 };
 </script>
@@ -335,44 +394,47 @@ export default {
   height: 100%;
 }
 #filter {
-  position: absolute;
-  top: 90px;
-  left: 10px;
-  width: 500px;
+  width: 90%;
   z-index: 1;
   background: white;
   border-radius: 10px;
+  border: 1px solid black;
+  margin: 0 auto;
 }
 #wrap {
   position: relative;
   width: 100%;
-  height: 700px;
+  height: 850px;
 }
 #result {
-  position: absolute;
+  position: relative;
   top: 0px;
   right: 0px;
   width: 400px;
   height: 100%;
-  z-index: 1;
 }
 #value {
   position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 400px;
-  height: 100%;
-  z-index: 2;
+  width: 100%;
+  height: 700px;
   background: white;
 }
 #deal {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  z-index: 2;
+  background: white;
+}
+#board {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 400px;
+  width: 500px;
   height: 100%;
-  z-index: 3;
+  z-index: 1;
   background: white;
+  border: 1px solid black;
 }
 .category {
   position: absolute;

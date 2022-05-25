@@ -20,7 +20,7 @@ public interface BuildingMapper {
 	List<GuguncodeDto> selectGu(String si) throws SQLException;
 	List<SidocodeDto> selectSi() throws SQLException;
 	List<AroundbusinessareaDto> around() throws SQLException;
-	List<HouseinfoDto> selectApt(String code) throws SQLException;
+	List<HouseinfoDto> selectApt(int code,int termlow,int termhigh) throws SQLException;
 	List<SubwayDto> selectSubway() throws SQLException;
 	List<HousedealDto> dealsearch(String code) throws SQLException;
 }
