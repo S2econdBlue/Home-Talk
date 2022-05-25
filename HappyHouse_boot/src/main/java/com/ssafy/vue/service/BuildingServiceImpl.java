@@ -34,8 +34,8 @@ public class BuildingServiceImpl implements BuildingService {
 	}
 	
 	@Override
-	public List<AroundbusinessareaDto> around(String dong) throws Exception {
-		return mapper.around(dong);
+	public List<AroundbusinessareaDto> around() throws Exception {
+		return mapper.around();
 	}
 
 	@Override

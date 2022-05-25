@@ -14,7 +14,7 @@ public interface BuildingService {
 	List<DongcodeDto> selectDong(String gu) throws Exception;
 	List<GuguncodeDto> selectGu(String si) throws Exception;
 	List<SidocodeDto> selectSi() throws Exception;
-	List<AroundbusinessareaDto> around(String dong) throws Exception;
+	List<AroundbusinessareaDto> around() throws Exception;
 	List<HouseinfoDto> selectApt(String code) throws Exception;
 	List<SubwayDto> selectSubway() throws Exception;
 	List<HousedealDto> dealsearch(String code) throws Exception;
