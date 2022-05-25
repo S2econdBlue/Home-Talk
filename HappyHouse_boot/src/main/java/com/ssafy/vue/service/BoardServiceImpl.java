@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ssafy.vue.controller.BoardController;
 import com.ssafy.vue.dto.Board;
 import com.ssafy.vue.dto.BoardFileDto;
+import com.ssafy.vue.dto.TradeThreadDto;
 import com.ssafy.vue.mapper.BoardMapper;
 import com.ssafy.vue.util.FileUtils;
 
@@ -34,6 +35,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> retrieveBoard() {
 		System.out.println(boardMapper.selectBoard());
 		return boardMapper.selectBoard();
+	}
+
+	@Override
+	public int insertBoard(Board board) {
+		return boardMapper.insertBoard(board);
 	}
 
 	@Override
@@ -63,6 +69,7 @@ public class BoardServiceImpl implements BoardService {
 //				}
 //			}
 //		}
+		// 게시글이 제대로 등록되었는지 확인
 		boolean returnV = boardMapper.insertBoard(board) == 1;
 		List<BoardFileDto> list = fileUtils.parseFileInfo(multipartHttpServletRequest);
 		if (CollectionUtils.isEmpty(list) == false && returnV) {
@@ -102,4 +109,20 @@ public class BoardServiceImpl implements BoardService {
 	public String selectBoardFileRealPath(String original_name) {
 		return boardMapper.selectBoardFileRealPath(original_name);
 	}
+
+	@Override
+	public int insertCommonMaintainItem(List<String> commonMaintainItem) {
+		return boardMapper.insertCommonMaintainItem(commonMaintainItem);
+	}
+
+	@Override
+	public int insertEachFeeItem(List<String> EachFeeItem) {
+		return boardMapper.insertEachFeeItem(EachFeeItem);
+	}
+
+	@Override
+	public int insertTradeThread(TradeThreadDto tradeThreadDto) {
+		return boardMapper.insertTradeThread(tradeThreadDto);
+	}
+
 }

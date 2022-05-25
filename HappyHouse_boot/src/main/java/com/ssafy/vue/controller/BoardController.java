@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,11 +29,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ssafy.vue.dto.Board;
 import com.ssafy.vue.dto.BoardFileDto;
+import com.ssafy.vue.dto.TradeThreadDto;
 import com.ssafy.vue.service.BoardService;
 
 import io.swagger.annotations.ApiOperation;
@@ -68,13 +72,12 @@ public class BoardController {
 		return new ResponseEntity<Board>(board, HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
-	@PostMapping
-	public ResponseEntity<String> insertThreadImage(Board board, MultipartHttpServletRequest multipartHttpServletRequest)
-			throws Exception {
+//	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
+//	@PostMapping("image")
+//	public ResponseEntity<String> insertImage(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
 //		multipartHttpServletRequest = 업로드할 파일에 대한 정보를 가지고 있음
-		System.out.println("multipartHttpServletRequest : " + multipartHttpServletRequest.getFileNames());
-
+//		System.out.println("multipartHttpServletRequest : " + multipartHttpServletRequest.getFileNames());
+//
 //		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 //		String name;
 //		while (iterator.hasNext()) {
@@ -93,12 +96,64 @@ public class BoardController {
 //				System.out.println("file content type : " + multipartFile.getContentType());
 //			}
 //		}
+//		// 보드 삽입
+//		// 데이터가 존재하면 트레이드에 삽입 auto increment추가
+//
+//		// 데이터 존재하면
+//		logger.debug("insertThreadImage - 호출 {}", board.toString());
+//		if (boardService.writeBoard(board, multipartHttpServletRequest)) {
+//			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+//		}
+//		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+//	}
 
-		logger.debug("insertThreadImage - 호출 {}", board.toString());
-		if (boardService.writeBoard(board, multipartHttpServletRequest)) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
+	@PostMapping("insertThread")
+	public ResponseEntity<String> insertThread(@RequestBody HashMap<String, Object> map) throws Exception {
+
+		for (Entry<String, Object> set : map.entrySet()) {
+			String key = set.getKey();
+			Object obj = set.getValue();
+			System.out.println("key :" + key + ", obj :" + obj);
 		}
-		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+		
+		// 메인 게시글을 등록 후
+		// 매매 게시글 등록 후
+		// 공용 항목, 개별 항목 등록
+		Board board = new Board();
+		board.setId((String) map.get("id"));
+		board.setTitle((String) map.get("title"));
+
+		// 1.threadboard에 기본 데이터 삽입
+		int rslt = boardService.insertBoard(board);
+
+		if (rslt == 1) {
+			// 2.tradeboard에 매매 데이터 삽입
+			TradeThreadDto tradeThreadDto = new TradeThreadDto();
+			tradeThreadDto.setCommonMaintainFee((Integer) map.get("commonMaintainFee"));
+			tradeThreadDto.setContracOpt((Integer) map.get("contractOpt"));
+			tradeThreadDto.setDeposit((Integer) map.get("deposit"));
+			tradeThreadDto.setMonthlyFee((Integer) map.get("monthlyFee"));
+			tradeThreadDto.setCommonMaintainFee((Integer) map.get("commonMaintainFee"));
+			tradeThreadDto.setLoan((Integer) map.get("loan"));
+			tradeThreadDto.setDetail((String) map.get("detail"));
+			tradeThreadDto.setRoadnameAddress((String) map.get("roadnameAddress"));
+			tradeThreadDto.setDetailAddress((String) map.get("detailAddress"));
+
+			rslt = boardService.insertTradeThread(tradeThreadDto);
+
+			if (rslt == 1) {
+				// 3. commonMaintainItem, EachFeeItem 삽입
+				if( ((List<String>)  map.get ("commonMaintainItem")).size() > 0 )
+					rslt = boardService.insertCommonMaintainItem((List<String>) map.get("commonMaintainItem"));
+				if(rslt != 0 && ((List<String>)  map.get ("eachFeeItem")).size() > 0 )
+				boardService.insertEachFeeItem((List<String>) map.get("eachFeeItem"));
+				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+			}
+		}
+			return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+		
+		
 	}
 
 	@ApiOperation(value = "글번호에 해당하는 게시글의 정보를 수정한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
@@ -145,15 +200,16 @@ public class BoardController {
 	}
 
 	@GetMapping("image/{original_name}")
-	public ResponseEntity<byte[]> imgLoad(@PathVariable String original_name, HttpServletRequest request) throws Exception{
+	public ResponseEntity<byte[]> imgLoad(@PathVariable String original_name, HttpServletRequest request)
+			throws Exception {
 //		String absolutePath = request.getSession().getServletContext().getRealPath("/");
 		String absolutePath = "C:\\SSAFY\\관통\\final\\HappyHouse_boot";
 		String save_path = boardService.selectBoardFileRealPath(original_name);
-		System.out.println(absolutePath+save_path);
-		InputStream imageStream = new FileInputStream(absolutePath+"\\"+save_path);
+		System.out.println(absolutePath + save_path);
+		InputStream imageStream = new FileInputStream(absolutePath + "\\" + save_path);
 		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
 		imageStream.close();
 		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
-		
+
 	}
 }

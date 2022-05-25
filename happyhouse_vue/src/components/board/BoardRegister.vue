@@ -14,13 +14,19 @@
               </b-alert>
             </b-col>
           </b-row>
+          <b-row class="mb-2">
+            <b-col class="text-left">
+              <strong>*항목은 필수로 입력해야합니다.</strong>
+            </b-col>
+          </b-row>
           <b-row>
             <b-form-file
+              button-variant="outline-primary"
               browse-text="찾기.."
               multiple
               accept=".jpg, .png, .gif"
-              v-model="uploadImg"
-              :state="Boolean(uploadImg)"
+              v-model="files"
+              :state="Boolean(files)"
               placeholder="드래그 혹은 클릭으로 실제 매물 사진을 업로드해주세요."
               drop-placeholder="여기에 드래그해주세요."
             >
@@ -30,7 +36,7 @@
             <b-form-textarea
               id="textarea"
               v-model="title"
-              placeholder="제목을 작성해주세요."
+              placeholder="* 제목을 작성해주세요."
               rows="1"
               max-rows="1"
               size="sm"
@@ -57,12 +63,14 @@
               </h5>
             </b-col>
           </b-row>
-          <b-row style="font-size: 15px">
+          <b-row style="font-size: 15px" align-v="center">
             <b-col>
               <b-row align-h="between">
-                <b-col cols="4"><strong>계약형태</strong></b-col>
+                <b-col cols="4"><strong>* 계약형태</strong></b-col>
                 <b-col>
                   <b-form-radio-group
+                    required
+                    button-variant="outline-primary"
                     id="btn-radios-1"
                     v-model="selectedContract"
                     :options="options1"
@@ -73,25 +81,27 @@
               </b-row>
             </b-col>
             <b-col>
-              <b-row>
-                <b-col><strong>가격정보</strong></b-col>
+              <b-row align-h="between" align-v="center">
+                <b-col><strong>* 가격정보</strong></b-col>
                 <b-col cols="9">
-                  <b-row class="pb-5">
+                  <b-row class="pb-5" align-v="center">
                     <b-col cols="4">보증금</b-col>
                     <b-col cols="5">
                       <b-form-input
                         :id="`type-number`"
                         type="number"
+                        v-model="deposit"
                       ></b-form-input>
                     </b-col>
                     <b-col>만원</b-col>
                   </b-row>
-                  <b-row>
+                  <b-row align-v="center">
                     <b-col cols="4">월세</b-col>
                     <b-col cols="5">
                       <b-form-input
                         :id="`type-number`"
                         type="number"
+                        v-model="monthlyFee"
                       ></b-form-input>
                     </b-col>
                     <b-col>만원</b-col>
@@ -103,22 +113,23 @@
 
           <hr class="m-4" />
 
-          <b-row>
+          <b-row style="font-size: 15px">
             <b-col>
-              <b-row>
-                <b-col cols="4">공용 관리비</b-col>
+              <b-row align-v="center">
+                <b-col cols="4"><strong>* 공용 관리비</strong></b-col>
                 <b-col cols="5">
                   <b-form-input
                     :id="`type-number`"
                     type="number"
+                    v-model="commonMaintainFee"
                   ></b-form-input>
                 </b-col>
                 <b-col>만원</b-col>
               </b-row>
             </b-col>
             <b-col>
-              <b-row>
-                <b-col cols="4">공용 관리비 항목</b-col>
+              <b-row align-v="center">
+                <b-col cols="4"><strong>공용 관리비 항목</strong></b-col>
                 <b-col>
                   <b-form-tags
                     input-id="tags-remove-on-delete"
@@ -135,12 +146,13 @@
             </b-col>
           </b-row>
           <hr class="m-4" />
-          <b-row>
+          <b-row style="font-size: 15px">
             <b-col>
-              <b-row>
-                <b-col cols="4">융자여부</b-col>
+              <b-row align-v="center">
+                <b-col cols="4"><strong>* 융자여부</strong></b-col>
                 <b-col>
                   <b-form-radio-group
+                    button-variant="outline-primary"
                     id="btn-radios-1"
                     v-model="selectedLoan"
                     :options="options2"
@@ -151,15 +163,15 @@
               </b-row>
             </b-col>
             <b-col>
-              <b-row>
-                <b-col cols="4">개별 사용료 항목</b-col>
+              <b-row align-v="center">
+                <b-col cols="4"><strong>개별 사용료 항목</strong></b-col>
                 <b-col>
                   <b-form-tags
                     input-id="tags-remove-on-delete"
                     :input-attrs="{
                       'aria-describedby': 'tags-remove-on-delete-help',
                     }"
-                    v-model="eachUsageTag"
+                    v-model="eachFeeTag"
                     separator=" "
                     placeholder="각각 입력 후 엔터"
                     remove-on-delete
@@ -169,12 +181,12 @@
             </b-col>
           </b-row>
           <hr class="m-4" />
-          <b-row>
+          <b-row style="font-size: 15px" align-v="center">
             <b-col>
-              <b-row>
-                <b-col cols="4">입주가능일</b-col>
+              <b-row align-v="center">
+                <b-col cols="4"><strong>* 입주가능일</strong></b-col>
                 <b-col>
-                  <b-button>즉시입주</b-button>
+                  <b-button @click="liveNow">즉시입주</b-button>
                 </b-col>
                 <b-col>
                   <b-button v-b-toggle.collapse-1 variant="primary">
@@ -183,7 +195,14 @@
                 </b-col>
               </b-row>
             </b-col>
-            <b-col></b-col>
+            <b-col>
+              <b-row>
+                <b-col cols="1" />
+                <b-col class="text-left">
+                  <strong>선택날짜 : </strong> {{ calendarValue | filterDate }}
+                </b-col>
+              </b-row>
+            </b-col>
           </b-row>
           <b-row>
             <b-col cols="7">
@@ -205,7 +224,6 @@
                 </div>
               </b-collapse>
             </b-col>
-            <b-col> </b-col>
           </b-row>
           <hr class="m-4" />
           <b-row class="pt-4">
@@ -230,14 +248,14 @@
             <b-col class="text-left">
               <!-- 왼쪽으로 붙이기 -->
               <h5>
-                <strong>위치</strong>
+                <strong>* 위치</strong>
                 <hr style="border: 1.5px solid black" />
               </h5>
             </b-col>
           </b-row>
           <b-row>
             <b-button
-              @click="sample5_execDaumPostcode()"
+              @click="sample5_execDaumPostcode(cb)"
               value="주소로 검색"
               variant="primary"
             >
@@ -252,18 +270,23 @@
               type="text"
               id="sample5_address"
               disabled
-              placeholder="도로명주소 입력"
+              placeholder="* 도로명주소 입력"
+              v-model="address"
+              trim
             />
           </b-row>
           <b-row>
             <b-form-input
               type="text"
-              id="sample5_address"
-              placeholder="상세주소 입력"
+              placeholder="* 상세주소 입력"
+              v-model="extraAddress"
+              trim
             />
           </b-row>
           <b-row>
-            <b-button class="w-100 my-3" variant="primary">매물등록</b-button>
+            <b-button class="w-100 my-3" variant="primary" @click="sendData">
+              매물등록
+            </b-button>
           </b-row>
         </b-col>
       </b-row>
@@ -272,33 +295,55 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   name: "BoardWrite",
   components: {},
+  filters: {
+    filterDate(date) {
+      let divide = date.split("-");
+      if (divide.length == 1) return date;
+      else {
+        return divide[0] + "년 " + Number(divide[1]) + "월 " + divide[2] + "일";
+      }
+    },
+  },
   data() {
     return {
+      options1: [
+        { text: "매매", value: 0 },
+        { text: "전세", value: 1 },
+        { text: "월세", value: 2 },
+      ],
+      options2: [
+        { text: "융자없음", value: 0 },
+        { text: "융자있음", value: 1 },
+      ],
+      options3: [
+        { text: "중개", value: 1 },
+        { text: "직거래", value: 0 },
+      ],
+
       title: "",
-      uploadImg: [],
+      files: [],
 
       selectedContract: [],
-      options1: [
-        { text: "매매", value: "sell" },
-        { text: "전세", value: "longTerm" },
-        { text: "월세", value: "monthly " },
-      ],
-      maintainTag: [],
       selectedLoan: [],
-      options2: [
-        { text: "융자있음", value: 1 },
-        { text: "융자없음", value: 0 },
-      ],
-      eachUsageTag: [],
+      selectedTrade: [],
+
+      maintainTag: [],
+      eachFeeTag: [],
       calendar: false,
       choose: "relative",
       leftPx: "25px",
       topPx: "0px",
 
-      calendarValue: "",
+      deposit: 0,
+      monthlyFee: 0,
+      commonMaintainFee: 0,
+
+      calendarValue: "미선택",
       context: null,
 
       detailText: "",
@@ -312,23 +357,16 @@ export default {
       mapContainer: "",
       mapOption: "",
       geocoder: "",
-      selectedTrade: [],
-      options3: [
-        { text: "중개", value: 1 },
-        { text: "직거래", value: 0 },
-      ],
     };
   },
   methods: {
-    toggleCalendar() {
-      this.displayToggle == "none"
-        ? (this.displayToggle = "inline")
-        : (this.displayToggle = "none");
-    },
     onContext(ctx) {
       this.context = ctx;
     },
-    sample5_execDaumPostcode() {
+    cb(addr) {
+      this.address = addr;
+    },
+    sample5_execDaumPostcode(cb) {
       let geocoder = this.geocoder;
       // let mapContainer = this.mapContainer;
       let map = this.map;
@@ -340,6 +378,8 @@ export default {
 
           // 주소 정보를 해당 필드에 넣는다.
           document.getElementById("sample5_address").value = addr;
+
+          cb(addr);
           // 주소로 상세 정보를 검색
           geocoder.addressSearch(data.address, function (results, status) {
             // 정상적으로 검색이 완료됐으면
@@ -362,8 +402,6 @@ export default {
     },
     crntDate() {
       let crntYYYYMMDD = new Date(Date.now());
-
-      console.log(crntYYYYMMDD);
       return (
         crntYYYYMMDD.getFullYear() +
         "년 " +
@@ -373,7 +411,122 @@ export default {
         "일"
       );
     },
-    postThread() {},
+    liveNow() {
+      this.calendarValue = this.crntDate();
+    },
+    async sendData() {
+      // if (this.loginUser.id == undefined) {
+      //   alert("로그인된 사용자만 이용할 수 있습니다.");
+      //   return;
+      // } else if (this.loginUser.grade == 1) {
+      //   alert("전문회원만 이용할 수 있습니다.");
+      //   return;
+      // } else if (this.title == "") {
+      //   alert("제목을 입력해주세요.");
+      //   return;
+      // } else if (this.selectedContract.length == 0) {
+      //   alert("계약형태를 선택해주세요.");
+      //   return;
+      // } else if (this.deposit < 0) {
+      //   alert("보증금을 제대로 입력해주세요.");
+      //   return;
+      // } else if (this.monthlyFee < 0) {
+      //   alert("월세를 제대로 입력해주세요.");
+      //   return;
+      // } else if (this.commonMaintainFee < 0) {
+      //   alert("공용 관리비를 제대로 입력해주세요.");
+      //   return;
+      // } else if (this.selectedLoan.length == 0) {
+      //   alert("융자여부를 선택해주세요.");
+      //   return;
+      // } else if (this.calendarValue == "미선택") {
+      //   alert("날짜를 선택해주세요.");
+      //   return;
+      // } else if (this.address.trim() == "") {
+      //   alert("주소를 입력해주세요.");
+      //   return;
+      // } else if (this.extraAddress.trim() == "") {
+      //   alert("상세 주소를 입력해주세요.");
+      //   return;
+      // }
+
+      let Data = new FormData();
+      Data.append("id", this.loginUser.id);
+      Data.append("title", this.title);
+      Data.append("contractOpt", Number(this.selectedContract));
+      Data.append("deposit", Number(this.deposit));
+      Data.append("monthlyFee", Number(this.monthlyFee));
+      Data.append("commonMaintainFee", Number(this.commonMaintainFee));
+      Data.append("loan", this.selectedLoan);
+      Data.append("date", this.calendarValue);
+      Data.append("detail", this.detailText);
+      Data.append("roadnameAddress", this.address);
+      Data.append("detailAddress", this.extraAddress);
+      for (let i = 0; i < this.maintainTag.length; i++) {
+        Data.append("commonMaintainItem", this.maintainTag[i]);
+      }
+      for (let i = 0; i < this.eachFeeTag.length; i++) {
+        Data.append("eachFeeItem", this.eachFeeTag[i]);
+        console.log(this.eachFeeTag[i]);
+      }
+      for (let key of Data.keys()) {
+        console.log(key, ": ", Data.get(key));
+      }
+
+      await axios
+        .post(
+          "board/insertThread",
+          {
+            id: this.loginUser.id,
+            title: this.title,
+            contractOpt: Number(this.selectedContract),
+            deposit: Number(this.deposit),
+            monthlyFee: Number(this.monthlyFee),
+            commonMaintainFee: Number(this.commonMaintainFee),
+            loan: this.selectedLoan,
+            date: this.calendarValue,
+            detail: this.detailText,
+            roadnameAddress: this.address,
+            detailAddress: this.extraAddress,
+            commonMaintainItem: this.maintainTag,
+            eachFeeItem: this.eachFeeTag,
+          },
+          {
+            baseURL: "http://localhost/vue",
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          Data = new FormData();
+          for (let i = 0; i < this.files.length; i++) {
+            Data.append("imgs", this.files[i]);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // await axios
+      //   .post("board/thread", Data, {
+      //     baseURL: "http://localhost/vue",
+      //     headers: {
+      //       "Content-type": "application/json",
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // for (let value of Data.values()) {
+      //   console.log(value);
+      // }
+    },
   },
   mounted() {
     // --------------------------------지도 설정 ------------------------------------------
@@ -393,6 +546,9 @@ export default {
     });
 
     // --------------------------------지도 설정 끝 ------------------------------------------
+  },
+  computed: {
+    ...mapGetters(["loginUser"]),
   },
 };
 </script>

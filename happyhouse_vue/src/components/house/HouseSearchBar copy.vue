@@ -266,6 +266,7 @@ export default {
   methods: {
     ...mapActions(["getSido", "getGugun", "getDong"]),
     ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_DONG_LIST"]),
+
     gugunList() {
       this.CLEAR_GUGUN_LIST();
       this.gugunCode = null;
