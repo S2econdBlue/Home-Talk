@@ -19,18 +19,4 @@ export default {
 };
 </script>
 
-<style>
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-}
-
-a.router-link-exact-active {
-  color: #ffffff;
-}
-</style>
+<style></style>
