@@ -9,15 +9,21 @@
 	<select id="findpw" parameterType="UserInfoDto" resultType="int">
 		select count(*)
 		from userinfo
-		where id = #{id} and email = #{email} and age = #{age} and name = #{name}
+		where id = #{id} and email = #{email} and name = #{name}
 	</select>
+	<update id="setPw" parameterType="UserInfoDto" >
+		update userinfo
+		set pw = #{pw}
+		where id = #{id}
+	</update>
+	
 	<select id="IdCheck" parameterType="String" resultType="int">
 		select
 		count(id)
 		from userinfo
 		where id = #{id}
 	</select>
-
+	
 	<select id="ListAllUser" resultType="UserInfoDto">
 		select id, pw, email, age,
 		name, date_format(time, '%y.%m.%d') as time, grade

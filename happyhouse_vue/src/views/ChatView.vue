@@ -108,7 +108,7 @@ export default {
       await http
         .get(`/chat/${this.loginUser.id}/${this.loginUser.grade}`)
         .then((res) => {
-          console.log(res.data);
+          console.log("LoadChatRoomList : ", res.data);
           this.chatroomlist = res.data;
         })
         .catch((err) => {

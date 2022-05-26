@@ -63,7 +63,7 @@
           </template>
           <!-- 실시간으로 추가되는 메세지들 -->
           <template v-for="chat in computedChatList">
-            <b-row :key="chat.crypto">
+            <b-row :key="chat.crypto" :id="chat.crypto">
               <!-- 송신자가 본인일 경우 -->
               <template v-if="chat.sender == loginUser.id">
                 <b-col>
@@ -118,39 +118,45 @@
         </b-col>
       </b-row>
     </b-jumbotron>
-    <b-row align-v="end">
-      <b-col>
-        <b-form-group>
-          <b-row>
-            <b-col cols="10">
-              <b-form-input
-                id="input-default"
-                @keyup.enter="sendMessage"
-                v-model="crntInputMessage"
-                placeholder="메세지를 입력해주세요."
-              />
-            </b-col>
-            <b-col>
-              <a name="target"></a>
-              <b-button
-                pill
-                block
-                variant="success"
-                @click="sendMessage"
-                ref="button"
-              >
-                Button
-              </b-button>
-            </b-col>
-          </b-row>
-        </b-form-group>
-      </b-col>
-    </b-row>
+    <template
+      v-if="
+        this.$route.params.receiver != 'admin' || this.loginUser.id == 'admin'
+      "
+    >
+      <b-row align-v="end">
+        <b-col>
+          <b-form-group>
+            <b-row>
+              <b-col cols="10">
+                <b-form-input
+                  id="input-default"
+                  @keyup.enter="sendMessage"
+                  v-model="crntInputMessage"
+                  placeholder="메세지를 입력해주세요."
+                />
+              </b-col>
+              <b-col>
+                <a name="target"></a>
+                <b-button
+                  pill
+                  block
+                  variant="success"
+                  @click="sendMessage"
+                  ref="button"
+                >
+                  전송
+                </b-button>
+              </b-col>
+            </b-row>
+          </b-form-group>
+        </b-col>
+      </b-row>
+    </template>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import http from "@/api/http.js";
 export default {
   name: "chatList",
@@ -174,11 +180,23 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["getChatHistory"]),
     moveToDown() {
       console.log(Object.keys(this.chatHistory).length);
 
       window.location.href =
         "#" + String(Object.keys(this.chatHistory).length - 1);
+    },
+    realTimeChatMoveToDown() {
+      if (this.computedChatList[this.computedChatList.length - 2] == undefined)
+        return;
+      window.location.href =
+        "#" +
+        String(this.computedChatList[this.computedChatList.length - 1].crypto);
+      console.log(
+        "realTimeChatMoveToDown ",
+        String(this.computedChatList[this.computedChatList.length - 1].crypto)
+      );
     },
     DayDevider(index) {
       if (index - 1 < 0) {
@@ -238,6 +256,7 @@ export default {
       await http
         .get(`/chat/${this.room_no}`)
         .then((res) => {
+          this.getChatHistory = res.data;
           this.chatHistory = res.data;
           console.log("loadChatHistory");
         })
@@ -293,12 +312,15 @@ export default {
   },
   async created() {
     await this.loadChatHistory();
-    this.openWebSocket();
-    this.UpdateAlertOff();
+    await this.openWebSocket();
+    await this.UpdateAlertOff();
     await this.moveToDown();
   },
   destroyed() {
     this.closeWebSocket();
+  },
+  updated() {
+    this.realTimeChatMoveToDown();
   },
 };
 </script>

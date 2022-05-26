@@ -223,21 +223,15 @@ public class BoardController {
 	@GetMapping("image/{board_no}/{original_name}")
 	public ResponseEntity<byte[]> imgLoad(@PathVariable int board_no, @PathVariable String original_name,
 			HttpServletRequest request) throws Exception {
-//		String absolutePath = request.getSession().getServletContext().getRealPath("/");
-
-		String absolutePath = "C:\\SSAFY\\관통\\final\\HappyHouse_boot";
-
 		BoardFileDto boardFileDto = new BoardFileDto();
 		boardFileDto.setBoard_no(board_no);
 		boardFileDto.setOriginal_name(original_name);
 
 		String save_path = boardService.selectBoardFileRealPath(boardFileDto);
-		System.out.println("save_path : " + save_path);
 		InputStream imageStream = new FileInputStream(save_path);
 		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
 		imageStream.close();
 		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
-
 	}
 
 	@GetMapping("/allselect")
