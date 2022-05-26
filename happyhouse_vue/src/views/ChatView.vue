@@ -135,7 +135,12 @@ export default {
   },
 
   created() {
-    this.LoadChatRoomList();
+    if (!this.loginUser.id) {
+      alert("로그인이 필요합니다.");
+      this.$router.push({ name: "signIn" });
+    } else {
+      this.LoadChatRoomList();
+    }
   },
 };
 </script>

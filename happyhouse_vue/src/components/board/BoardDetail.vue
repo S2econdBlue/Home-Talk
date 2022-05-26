@@ -442,8 +442,14 @@ export default {
       console.log(request);
       http
         .post("/chat", JSON.stringify(request))
-        .then((res) => {
-          this.chatroomlist = res.data;
+        .then(({ data }) => {
+          if (data == "success") {
+            console.log("중개업자와 채팅 연결: ", data);
+            alert("상담 요청을 전송했습니다.\n채팅방으로 이동합니다.");
+          } else {
+            alert("채팅방으로 이동합니다.");
+          }
+          this.$router.push({ name: "chat" });
         })
         .catch((err) => {
           console.log(err);

@@ -2,7 +2,7 @@
   <b-tr>
     <b-td>{{ no }}</b-td>
     <b-th class="text-left">
-      <router-link :to="{ name: 'boardDetail', params: { articleno: no } }">{{
+      <router-link :to="{ name: 'detail', params: { articleno: no } }">{{
         title
       }}</router-link>
     </b-th>

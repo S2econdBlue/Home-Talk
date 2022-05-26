@@ -30,7 +30,7 @@
 		resultType="UserInfoDto">
 		select id, pw, email, age, name, date_format(time, '%y.%m.%d') as time, grade
 		from userinfo
-		where id = #{id} and pw = #{pw}
+		where id = #{id} and pw = #{pw} and delete_yn = 0
 	</select>
 
 	<update id="UpdateUser" parameterType="UserInfoDto" >
@@ -46,7 +46,8 @@
 	</update>
 	
 	<delete id="DeleteUser" parameterType="String">
-	delete from userinfo
-	where id = #{id}
+		update userinfo
+		set delete_yn = 1
+		where id = #{id};
 	</delete>
 </mapper>

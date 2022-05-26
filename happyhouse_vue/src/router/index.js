@@ -47,6 +47,11 @@ const routes = [
         name: "info",
         component: () => import("@/components/user/MemberMyPage.vue"),
       },
+      {
+        path: "modify",
+        name: "modify",
+        component: () => import("@/components/user/MemberModify.vue"),
+      },
     ],
   },
   {
@@ -54,7 +59,11 @@ const routes = [
     name: "house",
     component: () => import("@/views/HouseView.vue"),
   },
-
+  {
+    path: "/detail/:articleno",
+    name: "detail",
+    component: () => import("@/views/BoardDetail.vue"),
+  },
   {
     path: "/board",
     name: "board",

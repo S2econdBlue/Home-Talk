@@ -36,6 +36,12 @@
             </b-row>
             <b-row>
               <b-col cols="2"></b-col>
+              <b-col cols="2" align-self="end">나이</b-col>
+              <b-col cols="4" align-self="start">{{ loginUser.age }}</b-col>
+              <b-col cols="2"></b-col>
+            </b-row>
+            <b-row>
+              <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">가입일</b-col>
               <b-col cols="4" align-self="start">{{ loginUser.time }}</b-col>
               <b-col cols="2"></b-col>
@@ -52,7 +58,9 @@
           <b-button variant="primary" href="#" class="mr-1" @click="mvModify">
             정보수정
           </b-button>
-          <b-button variant="danger" href="#">회원탈퇴</b-button>
+          <b-button variant="danger" href="#" @click="Withdrawal"
+            >회원탈퇴</b-button
+          >
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -61,7 +69,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import http from "@/api/http";
 export default {
   name: "MemberMyPage",
   components: {},
@@ -75,11 +84,20 @@ export default {
         : "관리자";
     },
   },
-  methods:{
-    mvModify(){
-      this.$router.push({name :  })
+  methods: {
+    ...mapActions(["logout"]),
+    mvModify() {
+      this.$router.push({ name: "modify" });
     },
-  }
+    Withdrawal() {
+      if (confirm("탈퇴하시겠습니까?")) {
+        http.delete(`user/${this.loginUser.id}`).then(() => {
+          this.logout();
+          this.$router.push({ name: "board" });
+        });
+      }
+    },
+  },
 };
 </script>
 

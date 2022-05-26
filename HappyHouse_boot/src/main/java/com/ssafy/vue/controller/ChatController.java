@@ -46,6 +46,7 @@ public class ChatController {
 
 		// 이미 방이 개설되었는지 확인
 		int rslt = chatService.SelectOneRoom(chatRoomDto);
+		System.out.println(rslt);
 		if (rslt == 0) {
 			chatService.GenerateRoom(chatRoomDto);
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

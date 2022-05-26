@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,7 +71,7 @@ public class UserController {
 				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 			else
 				return new ResponseEntity<String>(FAIL, HttpStatus.CREATED);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return new ResponseEntity<String>(FAIL, HttpStatus.CREATED);
 		}
 	}
@@ -139,29 +140,25 @@ public class UserController {
 //		}
 //	}
 
-//	@RequestMapping(value = "/UpdateUsers", method = RequestMethod.POST, produces = "application/json; charset=utf8")
-//	public void UpdateUsers(@RequestBody HashMap<String, Object> map, HttpServletResponse response) throws Exception {
-//		response.setContentType("application/json;charset=utf-8");
-//		System.out.println("접속 ok");
-//		UserInfoDto userInfoDto = new UserInfoDto();
-//
-//		userInfoDto.setId((String) map.get("id"));
-//		userInfoDto.setPw((String) map.get("pw"));
-//		userInfoDto.setEmail((String) map.get("email"));
-//		userInfoDto.setName((String) map.get("name"));
-//		userInfoDto.setAge((Integer) map.get("age"));
-//		userInfoDto.setGrade((Integer) map.get("grade"));
-//		userInfoDto.toString();
-//
-//		logger.debug("userInfoDto : {}", userInfoDto);
-//		int rslt = userService.UpdateUser(userInfoDto);
-//
-//		if (rslt == 1) {
-//			response.getWriter().write("1");
-//		} else {
-//			response.getWriter().write("0");
-//		}
-//	}
+	@PutMapping("{id}")
+	public ResponseEntity<String> UpdateUser(@RequestBody HashMap<String, Object> map) throws Exception {
+		System.out.println(map.toString());
+		System.out.println("접속 ok");
+		
+		UserInfoDto userInfoDto = new UserInfoDto();
+
+		userInfoDto.setPw((String) map.get("pw"));
+		userInfoDto.setId((String) map.get("id"));
+		userInfoDto.setEmail((String) map.get("email"));
+		userInfoDto.setAge((Integer) map.get("age"));
+
+		logger.debug("userInfoDto : {}", userInfoDto);
+		int rslt = userService.UpdateUser(userInfoDto);
+		if(rslt == 1)
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		else
+			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+	}
 
 	// 비동기로 데이터 전송
 //	@PostMapping("/getuser")
@@ -178,10 +175,13 @@ public class UserController {
 	}
 
 	// 회원 자발적 탈퇴+
-	@DeleteMapping("/secession/{id}")
-	public String secession(@PathVariable("id") String id, HttpServletRequest request) throws SQLException {
-		// 추후 기능구현
-		return "";
+	@DeleteMapping("{id}")
+	public ResponseEntity<String> withdrawl(@PathVariable String id) throws SQLException {
+		int rslt = userService.DeleteUser(id);
+		if (rslt == 1)
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		else
+			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
 
 	// 관리자에 의한 삭제
