@@ -73,7 +73,7 @@
           <b-col>
             <b-row align-h="between" align-v="center">
               <b-col><strong>가격정보</strong></b-col>
-              <b-col cols="9">
+              <b-col cols="8">
                 <template
                   v-if="
                     this.trade.contractOpt == 2 || this.trade.contractOpt == 1
@@ -93,7 +93,7 @@
 
                 <template v-else>
                   <b-row align-v="center">
-                    <b-col cols="4">매매가</b-col>
+                    <b-col cols="5">매매가</b-col>
                     <b-col class="text-right">{{ trade.deposit }} 만원</b-col>
                   </b-row>
                 </template>
@@ -107,7 +107,7 @@
         <b-row style="font-size: 15px" align-v="center">
           <b-col>
             <b-row align-v="center">
-              <b-col cols="4"><strong>공용 관리비</strong></b-col>
+              <b-col cols="5"><strong>공용 관리비</strong></b-col>
               <b-col cols="5"> </b-col>
               <b-col>{{ trade.commonMaintainFee }} 만원</b-col>
             </b-row>
