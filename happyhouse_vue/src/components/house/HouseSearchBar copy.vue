@@ -8,13 +8,23 @@
         <b-tabs content-class="mt-3">
           <b-tab title="시세" active
             ><div>
-              <b-button block variant="primary" @click="openfilter"
-                >필터설정</b-button
+              <b-row
+                ><b-col class="mx-auto">
+                  <b-button block variant="primary" @click="openfilter"
+                    >필터설정</b-button
+                  ></b-col
+                ><b-col class="mx-auto">
+                  <b-button block variant="danger" @click="clear"
+                    >초기화</b-button
+                  ></b-col
+                ></b-row
               >
+
               <div id="filter" v-if="filtercheck">
                 <b-row class="mt-1 mb-1 ml-1 mr-1 text-center mx-auto">
                   <b-col class="sm-3">
                     시<b-form-select
+                      id="Sival"
                       v-model="sidoCode"
                       :options="sidos"
                       @change="gugunList"
@@ -34,19 +44,27 @@
                       v-model="dongCode"
                       :options="dongs"
                       size="sm"
+                      @change="getDeal"
                     ></b-form-select>
                   </b-col>
                 </b-row>
                 <b-row class="text-center mt-5 mb-3">
                   <b-col cols="3"><div>가격(만)</div></b-col>
                   <b-col class="mt-1 mb-1 center" cols="8"
-                    ><Slider v-model="worth.value" v-bind="worth"></Slider
+                    ><Slider
+                      v-model="worth.value"
+                      v-bind="worth"
+                      @change="changeSlider"
+                    ></Slider
                   ></b-col>
                 </b-row>
                 <b-row class="text-center mt-5 mb-3">
                   <b-col cols="3"><div>건축년도</div></b-col>
                   <b-col class="mt-1 mb-1" cols="8"
-                    ><Slider v-model="term.value" v-bind="term"
+                    ><Slider
+                      v-model="term.value"
+                      v-bind="term"
+                      @change="changeSlider"
                       >기간</Slider
                     ></b-col
                   >
@@ -54,20 +72,11 @@
                 <b-row class="text-center mt-5 mb-3">
                   <b-col cols="3"><div>거래년도</div></b-col>
                   <b-col class="mt-1 mb-1" cols="8"
-                    ><Slider v-model="trade.value" v-bind="trade"
+                    ><Slider
+                      v-model="trade.value"
+                      v-bind="trade"
+                      @change="changeSlider"
                       >기간</Slider
-                    ></b-col
-                  >
-                </b-row>
-                <b-row class="text-center mt-5 mb-3">
-                  <b-col
-                    ><b-button variant="outline-primary" @click="getDeal"
-                      >조회</b-button
-                    ></b-col
-                  >
-                  <b-col
-                    ><b-button variant="danger" @click="clear"
-                      >초기화</b-button
                     ></b-col
                   >
                 </b-row>
@@ -123,10 +132,11 @@
                     <b-card-body :title="article.title">
                       <b-card-text>
                         <b-row>{{ article.detail | oneLineDetail }}</b-row>
-                        <b-row
+                        <b-row v-if="article.monthlyFee > 0"
                           >보증금 : {{ article.deposit }} / 월세 :
                           {{ article.monthlyFee }}</b-row
                         >
+                        <b-row v-else> 매매가 : {{ article.deposit }}</b-row>
                         <b-row>{{ article.roadnameAddress }}</b-row>
                         <b-row
                           ><b-button
@@ -289,13 +299,11 @@ export default {
       .get(`/board/allselect`)
       .then(({ data }) => {
         this.houseboards = data;
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);
       });
     geo((rst) => {
-      console.log(rst);
       this.useraddress = "접속위치: " + rst;
     });
   },
@@ -330,18 +338,15 @@ export default {
           tradelow: this.trade.value[0],
           tradehigh: this.trade.value[1],
         };
-        console.log(params);
         http
           .get(`/Building/House`, { params })
           .then(({ data }) => {
             this.housedeal = data;
             this.detail = false;
-            this.filtercheck = false;
             if (data.length > 0) {
               getMarker(data);
             } else {
               alert("거래내역이 없습니다");
-              this.filtercheck = true;
             }
           })
           .catch((error) => {
@@ -428,6 +433,9 @@ export default {
         params: { articleno: article.no },
       });
     },
+    changeSlider() {
+      this.getDeal();
+    },
   },
 };
 </script>
@@ -446,12 +454,9 @@ export default {
   height: 100%;
 }
 #filter {
-  width: 90%;
+  width: 100%;
   z-index: 1;
   background: white;
-  border-radius: 10px;
-  border: 1px solid black;
-  margin: 0 auto;
 }
 #wrap {
   position: relative;

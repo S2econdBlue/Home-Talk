@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="screen">
     <house-search-bar></house-search-bar>
   </div>
 </template>
@@ -13,4 +13,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#screen {
+  overflow: hidden;
+}
+</style>

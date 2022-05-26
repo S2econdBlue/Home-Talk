@@ -72,6 +72,7 @@ public class BuildingController {
 		System.out.println(tradehigh+" "+tradelow);
 		List<HouseinfoDto> list =  service.selectApt(code,termlow,termhigh);
 		for(int i=0;i<list.size();i++) {
+			if(list.get(i)==null) continue;
 			String chk = list.get(i).getDealAmount().trim().replaceAll(",", "");
 			int year = list.get(i).getDealYear();
 			int val = Integer.parseInt(chk);
