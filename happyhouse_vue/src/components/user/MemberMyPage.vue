@@ -88,7 +88,7 @@ export default {
       if (confirm("탈퇴하시겠습니까?")) {
         http.delete(`user/${this.loginUser.id}`).then(() => {
           this.logout();
-          this.$router.push({ name: "board" });
+          this.$router.push({ name: "home" });
         });
       }
     },

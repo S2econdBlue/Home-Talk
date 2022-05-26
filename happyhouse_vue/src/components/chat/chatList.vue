@@ -319,9 +319,6 @@ export default {
   destroyed() {
     this.closeWebSocket();
   },
-  updated() {
-    this.realTimeChatMoveToDown();
-  },
 };
 </script>
 
