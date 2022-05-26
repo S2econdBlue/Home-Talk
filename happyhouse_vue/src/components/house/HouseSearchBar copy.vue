@@ -44,7 +44,7 @@
                       v-model="dongCode"
                       :options="dongs"
                       size="sm"
-                      @change="getDeal"
+                      @change="getDeal(0)"
                     ></b-form-select>
                   </b-col>
                 </b-row>
@@ -54,7 +54,7 @@
                     ><Slider
                       v-model="worth.value"
                       v-bind="worth"
-                      @change="changeSlider"
+                      @change="changeWorth"
                     ></Slider
                   ></b-col>
                 </b-row>
@@ -64,7 +64,7 @@
                     ><Slider
                       v-model="term.value"
                       v-bind="term"
-                      @change="changeSlider"
+                      @change="changeTerm"
                       >기간</Slider
                     ></b-col
                   >
@@ -75,7 +75,7 @@
                     ><Slider
                       v-model="trade.value"
                       v-bind="trade"
-                      @change="changeSlider"
+                      @change="changeTrade"
                       >기간</Slider
                     ></b-col
                   >
@@ -251,8 +251,8 @@ export default {
           decimals: 0,
         },
         tooltipPosition: "",
-        max: 500000,
         lazy: true,
+        max: 500000,
       },
       trade: {
         value: [1990, 2022],
@@ -329,8 +329,21 @@ export default {
       this.detail = false;
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
-    getDeal() {
+    async getDeal(type, val) {
       if (this.dongCode) {
+        if (type == 1) {
+          //돈
+          this.worth.value[0] = val[0];
+          this.worth.value[1] = val[1];
+        } else if (type == 2) {
+          //시간
+          this.term.value[0] = val[0];
+          this.term.value[1] = val[1];
+        } else if (type == 3) {
+          //시간
+          this.trade.value[0] = val[0];
+          this.trade.value[1] = val[1];
+        }
         this.check = true;
         this.housedeal = [];
         const params = {
@@ -342,13 +355,15 @@ export default {
           tradelow: this.trade.value[0],
           tradehigh: this.trade.value[1],
         };
+        console.log(params);
         http
           .get(`/Building/House`, { params })
           .then(({ data }) => {
-            this.housedeal = data;
             this.detail = false;
+
             if (data.length > 0) {
               getMarker(data);
+              this.housedeal = data;
             } else {
               alert("거래내역이 없습니다");
             }
@@ -438,8 +453,20 @@ export default {
         params: { articleno: article.no },
       });
     },
-    changeSlider() {
-      this.getDeal();
+    // geo((rst) => {
+    //   this.useraddress = "접속위치: " + rst;
+    // });
+    changeWorth(data) {
+      console.log(data);
+      this.getDeal(1, data);
+    },
+    changeTrade(data) {
+      console.log(data);
+      this.getDeal(3, data);
+    },
+    changeTerm(data) {
+      console.log(data);
+      this.getDeal(2, data);
     },
     linkClass(data) {
       if (data == 1) {

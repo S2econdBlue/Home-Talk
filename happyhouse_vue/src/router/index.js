@@ -55,11 +55,6 @@ const routes = [
     ],
   },
   {
-    path: "/house",
-    name: "house",
-    component: () => import("@/views/HouseView.vue"),
-  },
-  {
     path: "/detail/:articleno",
     name: "detail",
     component: () => import("@/views/BoardDetail.vue"),
