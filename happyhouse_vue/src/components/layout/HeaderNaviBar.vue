@@ -22,14 +22,14 @@
           </b-navbar-nav>
         </b-col>
         <b-col cols="2"></b-col>
-        <b-col cols="1">
+        <b-col cols="1" class="nav justify-content-start bg-light">
           <b-navbar-brand href="#">
             <router-link to="/">
               <b-img :src="image" thumbnail fluid style="width: 100px"> </b-img>
             </router-link>
           </b-navbar-brand>
         </b-col>
-        <b-col cols="2"></b-col>
+        <b-col></b-col>
         <b-col cols="3">
           <b-row align-h="end" align-v="center">
             <template v-if="this.loginUser.id">
@@ -47,12 +47,12 @@
               </b-col>
             </template>
             <template v-else>
-              <b-col>
+              <b-col class="float-right">
                 <router-link :to="{ name: 'signUp' }" class="link">
                   회원가입
                 </router-link>
               </b-col>
-              <b-col>
+              <b-col class="float-right">
                 <router-link :to="{ name: 'signIn' }" class="link">
                   로그인
                 </router-link>
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import image from "@/assets/R.png";
+import image from "@/assets/logo.jpg";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "HeaderNaviBar",

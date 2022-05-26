@@ -86,8 +86,8 @@
                 ></b-table>
               </div>
               <div id="deal" v-if="detail">
-                <b-button variant="primary float-right" @click="dealToggle"
-                  >X</b-button
+                <b-button block variant="primary" @click="dealToggle"
+                  >뒤로가기</b-button
                 >
                 <b-table
                   hover
@@ -113,7 +113,7 @@
                 <b-row no-gutters>
                   <b-col md="6">
                     <b-card-img
-                      :src="`http://localhost/vue/board/image/${article.articleno}/${article.original_name}`"
+                      :src="`http://localhost/vue/board/image/${article.no}/${article.name}`"
                       img-height="50"
                       alt="Image"
                       class="rounded-0 mx-auto"
@@ -161,10 +161,6 @@
         <li id="allMenu" @click="allcheck">
           <span class="list all"></span>
           전체
-        </li>
-        <li id="filterMenu" @click="openfilter">
-          <span class="list filter"></span>
-          필터
         </li>
       </ul>
     </div>
@@ -491,7 +487,7 @@ export default {
   overflow: hidden;
   top: 10px;
   left: 10px;
-  width: 208px;
+  width: 158px;
   height: 60px;
   z-index: 10;
   border: 1px solid black;
@@ -506,6 +502,8 @@ export default {
   width: 50px;
   height: 70px;
   padding-top: 5px;
+  padding-left: 1px;
+  margin: 0 auto;
   cursor: pointer;
 }
 .category .menu_selected {

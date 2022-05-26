@@ -240,6 +240,13 @@ public class BoardController {
 	}
 	@GetMapping("/allselect")
 	public ResponseEntity<List<BoardAllDto>> selectall() throws Exception{
-		return new ResponseEntity<List<BoardAllDto>>(boardService.selectall(), HttpStatus.OK);
+		List<BoardAllDto> list = boardService.selectall();
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getNoo()==null) {
+				list.remove(i);
+				i--;
+			}
+		}
+		return new ResponseEntity<List<BoardAllDto>>(list, HttpStatus.OK);
 	}
 }

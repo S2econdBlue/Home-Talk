@@ -1,16 +1,23 @@
 package com.ssafy.vue.dto;
 
 public class BoardAllDto {
-	private int no;
+	private String no;
 	private String id;
 	private String time;
 	private String title;
-	private int deposit;
+	private String deposit;
 	private int monthlyFee;
 	private String detail; 
 	private String roadnameAddress;
 	private String save_path;
 	private String name;
+	private String noo;
+	public String getNoo() {
+		return noo;
+	}
+	public void setNoo(String noo) {
+		this.noo = noo;
+	}
 	public String getName() {
 		return name;
 	}
@@ -22,12 +29,6 @@ public class BoardAllDto {
 	}
 	public void setSave_path(String save_path) {
 		this.save_path = save_path;
-	}
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
 	}
 	public String getId() {
 		return id;
@@ -47,10 +48,16 @@ public class BoardAllDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getDeposit() {
+	public String getNo() {
+		return no;
+	}
+	public void setNo(String no) {
+		this.no = no;
+	}
+	public String getDeposit() {
 		return deposit;
 	}
-	public void setDeposit(int deposit) {
+	public void setDeposit(String deposit) {
 		this.deposit = deposit;
 	}
 	public int getMonthlyFee() {

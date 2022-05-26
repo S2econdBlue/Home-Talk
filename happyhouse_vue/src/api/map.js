@@ -116,16 +116,13 @@ function setStoreMarkers(data) {
 function changeMarker(type) {
   var coffeeMenu = document.getElementById("coffeeMenu");
   var subwayMenu = document.getElementById("subwayMenu");
-  var allMenu = document.getElementById("allMenu");
   if (type === "coffee") {
     coffeeMenu.className = "menu_selected";
     setCoffeeMarkers(map);
   } else if (type === "subway") {
     subwayMenu.className = "menu_selected";
-    allMenu.className = "";
     setStoreMarkers(map);
   } else if (type === "all") {
-    allMenu.className = "menu_selected";
     subwayMenu.className = "menu_selected";
     coffeeMenu.className = "menu_selected";
     setCoffeeMarkers(map);
