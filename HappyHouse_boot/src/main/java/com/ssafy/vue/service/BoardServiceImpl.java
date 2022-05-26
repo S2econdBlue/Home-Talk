@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ssafy.vue.dto.Board;
+import com.ssafy.vue.dto.BoardAllDto;
 import com.ssafy.vue.dto.BoardFileDto;
 import com.ssafy.vue.dto.TradeThreadDto;
 import com.ssafy.vue.mapper.BoardMapper;
@@ -132,6 +133,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public TradeThreadDto selectTradeThread(int boardNo) {
 		return boardMapper.selectTradeThread(boardNo);
+	}
+
+	@Override
+	public List<BoardAllDto> selectall() throws Exception {
+		// TODO Auto-generated method stub
+		return boardMapper.selectall();
 	}
 	
 }

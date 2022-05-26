@@ -8,11 +8,6 @@
         <house-search-bar></house-search-bar>
       </b-col>
     </b-row>
-    <!-- <b-row>
-      <b-col cols="12">
-        <map-around />
-      </b-col>
-    </b-row> -->
   </b-container>
 </template>
 <script>

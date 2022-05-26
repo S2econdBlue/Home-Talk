@@ -1,11 +1,13 @@
 package com.ssafy.vue.mapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.vue.dto.Board;
+import com.ssafy.vue.dto.BoardAllDto;
 import com.ssafy.vue.dto.BoardFileDto;
 import com.ssafy.vue.dto.TradeThreadDto;
 
@@ -40,4 +42,6 @@ public interface BoardMapper {
 	public List<String> selectCommonMaintainItem(@Param("boardNo") int boardNo);
 
 	public List<String> selectEachFeeItem(@Param("boardNo") int boardNo);
+	
+	public List<BoardAllDto> selectall() throws SQLException;
 }

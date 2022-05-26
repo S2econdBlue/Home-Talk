@@ -2,12 +2,10 @@ package com.ssafy.vue.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -36,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ssafy.vue.dto.Board;
+import com.ssafy.vue.dto.BoardAllDto;
 import com.ssafy.vue.dto.BoardFileDto;
 import com.ssafy.vue.dto.TradeThreadDto;
 import com.ssafy.vue.service.BoardService;
@@ -238,5 +237,9 @@ public class BoardController {
 		imageStream.close();
 		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
 
+	}
+	@GetMapping("/allselect")
+	public ResponseEntity<List<BoardAllDto>> selectall() throws Exception{
+		return new ResponseEntity<List<BoardAllDto>>(boardService.selectall(), HttpStatus.OK);
 	}
 }

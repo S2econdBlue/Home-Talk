@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ssafy.vue.dto.Board;
+import com.ssafy.vue.dto.BoardAllDto;
 import com.ssafy.vue.dto.BoardFileDto;
 import com.ssafy.vue.dto.TradeThreadDto;
 
@@ -39,4 +40,5 @@ public interface BoardService {
 	public List<String> selectCommonMaintainItem(@Param("boardNo") int no);
 
 	public List<String> selectEachFeeItem(@Param("boardNo") int no);
+	public List<BoardAllDto> selectall() throws Exception;
 }
