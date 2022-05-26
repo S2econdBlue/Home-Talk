@@ -1,11 +1,6 @@
 <template>
   <b-container class="mt-4" v-if="loginUser.id">
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show><h3>내정보</h3></b-alert>
-      </b-col>
-    </b-row>
-    <b-row>
       <b-col></b-col>
       <b-col cols="8">
         <b-jumbotron>

@@ -1,12 +1,14 @@
 <template>
   <div id="navbarr">
     <b-navbar toggleable="lg" type="light" variant="info">
-      <b-navbar-brand href="#"
-        ><img
-          :src="image"
-          class="d-inline-block align-top"
-          style="width: 50px; height: 50px; border-radius: 10px"
-        />
+      <b-navbar-brand href="#">
+        <router-link :to="{ name: 'home' }">
+          <img
+            :src="image"
+            class="d-inline-block align-top"
+            style="width: 50px; height: 50px; border-radius: 10px"
+          />
+        </router-link>
       </b-navbar-brand>
 
       <b-collapse id="nav-collapse" is-nav>
@@ -41,14 +43,30 @@
         <b-navbar-nav class="ml-auto">
           <template v-if="!this.loginUser.id">
             <b-nav-item right>
-              <router-link :to="{ name: 'signIn' }"> 로그인 </router-link>
+              <router-link
+                :to="{ name: 'signIn' }"
+                style="text-decoration: none; color: black"
+              >
+                로그인
+              </router-link>
             </b-nav-item>
             <b-nav-item right>
-              <router-link :to="{ name: 'signUp' }"> 회원가입 </router-link>
+              <router-link
+                :to="{ name: 'signUp' }"
+                style="text-decoration: none; color: black"
+              >
+                회원가입
+              </router-link>
             </b-nav-item>
           </template>
 
           <template v-if="this.loginUser.id">
+            <b-nav-item right>
+              <div style="text-decoration: none; color: black; cursor: default">
+                {{ this.loginUser.name }}님
+              </div>
+            </b-nav-item>
+
             <b-nav-item right>
               <router-link
                 @click.native="logout"
