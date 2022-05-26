@@ -7,24 +7,7 @@
           <b-card class="w-100">
             <b-row><br /></b-row>
             <b-row>
-              <b-col>
-                <b-row>
-                  <b-col>
-                    <b-icon icon="people-fill" />
-                  </b-col>
-                </b-row>
-                <b-row>
-                  <b-col>전체</b-col>
-                </b-row>
-              </b-col>
-              <b-col>
-                <b-row>
-                  <b-col> {{}} </b-col>
-                </b-row>
-                <b-row>
-                  <b-col>안읽음</b-col>
-                </b-row>
-              </b-col>
+              <b-col> <b-icon icon="people-fill" /> 채팅 연결</b-col>
             </b-row>
             <b-row><br /></b-row>
           </b-card>

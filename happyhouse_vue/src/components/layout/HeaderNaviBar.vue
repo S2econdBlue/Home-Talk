@@ -51,20 +51,12 @@
               </b-col>
             </template>
             <template v-else>
-<<<<<<< HEAD
-              <b-col class="float-right">
-=======
               <b-col cols="5">
->>>>>>> 7bd4973a8fc00df0e5a54110ef8806467293a07a
                 <router-link :to="{ name: 'signUp' }" class="link">
                   회원가입
                 </router-link>
               </b-col>
-<<<<<<< HEAD
-              <b-col class="float-right">
-=======
               <b-col cols="4">
->>>>>>> 7bd4973a8fc00df0e5a54110ef8806467293a07a
                 <router-link :to="{ name: 'signIn' }" class="link">
                   로그인
                 </router-link>
