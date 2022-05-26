@@ -5,11 +5,24 @@ public class BoardAllDto {
 	private String id;
 	private String time;
 	private String title;
-	private String content;
 	private int deposit;
 	private int monthlyFee;
 	private String detail; 
 	private String roadnameAddress;
+	private String save_path;
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSave_path() {
+		return save_path;
+	}
+	public void setSave_path(String save_path) {
+		this.save_path = save_path;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -33,12 +46,6 @@ public class BoardAllDto {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
 	}
 	public int getDeposit() {
 		return deposit;
@@ -66,8 +73,9 @@ public class BoardAllDto {
 	}
 	@Override
 	public String toString() {
-		return "BoardAllDto [no=" + no + ", id=" + id + ", time=" + time + ", title=" + title + ", content=" + content
-				+ ", deposit=" + deposit + ", monthlyFee=" + monthlyFee + ", detail=" + detail + ", roadnameAddress="
-				+ roadnameAddress + "]";
+		return "BoardAllDto [no=" + no + ", id=" + id + ", time=" + time + ", title=" + title + ", deposit=" + deposit
+				+ ", monthlyFee=" + monthlyFee + ", detail=" + detail + ", roadnameAddress=" + roadnameAddress
+				+ ", save_path=" + save_path + ", name=" + name + "]";
 	}
+	
 }

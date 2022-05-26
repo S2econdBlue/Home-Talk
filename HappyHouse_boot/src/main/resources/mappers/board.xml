@@ -14,7 +14,7 @@
 	
 	<!-- 판매게시글 전체 조회 -->
 	<select id="selectall" resultType="BoardAllDto">
-		select t.content,t.id,t.no,t.time,t.title,h.deposit,h.roadnameAddress,h.detail,h.monthlyFee
+		select t.no,t.id,t.time,t.title,h.deposit,h.roadnameAddress,h.detail,h.monthlyFee,(select min(no) from imgboard where t.no=board_no) noo,(select original_name from imgboard where noo=no ) name, (select save_path from imgboard where noo=no ) path
 		from threadboard t
 		join tradeboard h
 		on t.no=h.boardNo;

@@ -102,10 +102,10 @@
               </div></div
           ></b-tab>
           <b-tab title="매물">
-            <div>
+            <div id="cardBoard">
               <b-card
                 no-body
-                class="overflow-hidden"
+                class="overflow-auto center"
                 style="max-width: 500px"
                 v-for="(article, index) in houseboards"
                 :key="index"
@@ -113,9 +113,10 @@
                 <b-row no-gutters>
                   <b-col md="6">
                     <b-card-img
-                      :src="apt"
+                      :src="`http://localhost/vue/board/image/${article.articleno}/${article.original_name}`"
+                      img-height="50"
                       alt="Image"
-                      class="rounded-0"
+                      class="rounded-0 mx-auto"
                     ></b-card-img>
                   </b-col>
                   <b-col md="6">
@@ -127,6 +128,14 @@
                           {{ article.monthlyFee }}</b-row
                         >
                         <b-row>{{ article.roadnameAddress }}</b-row>
+                        <b-row
+                          ><b-button
+                            block
+                            variant="primary"
+                            @click="viewArticle(article)"
+                            >상세보기</b-button
+                          ></b-row
+                        >
                       </b-card-text>
                     </b-card-body>
                   </b-col>
@@ -134,9 +143,7 @@
               </b-card>
             </div>
           </b-tab>
-          <b-tab :title="useraddress" disabled
-            ><p>I'm a disabled tab!</p></b-tab
-          >
+          <b-tab :title="useraddress" disabled></b-tab>
         </b-tabs>
       </div>
     </div>
@@ -203,6 +210,7 @@ export default {
       check: false,
       detail: false,
       value: 5,
+      path: "",
       dealhistory: [],
       cafe: [],
       subways: [],
@@ -279,6 +287,7 @@ export default {
       .get(`/board/allselect`)
       .then(({ data }) => {
         this.houseboards = data;
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -411,11 +420,25 @@ export default {
       this.term.value = [1990, 2022];
       this.trade.value = [1990, 2022];
     },
+    viewArticle(article) {
+      this.$router.push({
+        name: "boardDetail",
+        params: { articleno: article.no },
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
+::-webkit-scrollbar {
+  display: none;
+}
+#cardBoard {
+  height: 700px;
+  width: 500px;
+  overflow-y: auto;
+}
 #map {
   width: 100%;
   height: 100%;
