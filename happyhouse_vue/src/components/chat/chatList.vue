@@ -3,7 +3,7 @@
     <b-jumbotron
       border-variant="dark"
       class="overflow-auto"
-      style="height: 500px"
+      style="height: 640px"
     >
       <b-row>
         <b-col>
@@ -11,28 +11,37 @@
           <template v-for="(chat, index) in computedChatHistory">
             {{ DayDevider(index) }}
             <!-- 내 아이디인 경우 -->
-            <b-row :key="chat.no">
+            <b-row :key="chat.no" :id="index">
               <template v-if="chat.id == loginUser.id">
                 <b-col>
                   <b-row align-h="end">
-                    <b-col cols="4">
-                      <b-card
-                        :header="DateFormatter(chat.date) + ' ' + loginUser.id"
-                        class="text-center"
-                      >
-                        <b-card-text>
-                          {{ chat.message }}
-                        </b-card-text>
-                      </b-card>
+                    <b-col cols="7">
+                      <b-row>
+                        <b-col class="text-right">{{ loginUser.id }}</b-col>
+                      </b-row>
+                      <b-row align-h="end">
+                        <b-col class="text-right">
+                          {{ DateFormatter(chat.date) }}
+                        </b-col>
+                        <b-col>
+                          <div
+                            style="background-color: white; border-radius: 10px"
+                          >
+                            {{ chat.message }}
+                          </div>
+                        </b-col>
+                      </b-row>
                     </b-col>
                   </b-row>
                 </b-col>
               </template>
+
               <template v-else>
                 <b-col>
                   <b-row>
                     <b-col cols="4">
                       <b-card
+                        :id="index"
                         :header="DateFormatter(chat.date) + ' ' + chat.id"
                         class="text-center"
                       >
@@ -88,36 +97,35 @@
           </template>
         </b-col>
       </b-row>
-
-      <b-row align-v="end">
-        <b-col>
-          <b-form-group>
-            <b-row>
-              <b-col cols="10">
-                <b-form-input
-                  id="input-default"
-                  @keyup.enter="sendMessage"
-                  v-model="crntInputMessage"
-                  placeholder="메세지를 입력해주세요."
-                />
-              </b-col>
-              <b-col>
-                <a name="target"></a>
-                <b-button
-                  pill
-                  block
-                  variant="success"
-                  @click="sendMessage"
-                  ref="button"
-                >
-                  Button
-                </b-button>
-              </b-col>
-            </b-row>
-          </b-form-group>
-        </b-col>
-      </b-row>
     </b-jumbotron>
+    <b-row align-v="end">
+      <b-col>
+        <b-form-group>
+          <b-row>
+            <b-col cols="10">
+              <b-form-input
+                id="input-default"
+                @keyup.enter="sendMessage"
+                v-model="crntInputMessage"
+                placeholder="메세지를 입력해주세요."
+              />
+            </b-col>
+            <b-col>
+              <a name="target"></a>
+              <b-button
+                pill
+                block
+                variant="success"
+                @click="sendMessage"
+                ref="button"
+              >
+                Button
+              </b-button>
+            </b-col>
+          </b-row>
+        </b-form-group>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -147,6 +155,12 @@ export default {
     },
   },
   methods: {
+    moveToDown() {
+      console.log(Object.keys(this.chatHistory).length);
+
+      window.location.href =
+        "#" + String(Object.keys(this.chatHistory).length - 1);
+    },
     DayDevider(index) {
       if (index - 1 < 0) {
         let first = this.chatHistory[0].date.split(" ");
@@ -170,7 +184,6 @@ export default {
           "일"
         );
       }
-      return "";
     },
     DateFormatter(date) {
       if (date == undefined) {
@@ -200,9 +213,6 @@ export default {
         });
     },
 
-    moveToDown() {
-      window.location.href = "#target";
-    },
     async loadChatHistory() {
       this.room_no = this.$route.params.no;
       this.receiver = this.$route.params.receiver;
@@ -210,15 +220,11 @@ export default {
         .get(`/chat/${this.room_no}`)
         .then((res) => {
           this.chatHistory = res.data;
+          console.log("loadChatHistory");
         })
         .catch((err) => {
           console.log("loadChatHistory err : ", err);
         });
-
-      //axios 통신이 종료된 후 스크롤 하단 a태그로 움직임
-      this.$nextTick(function () {
-        this.moveToDown();
-      });
     },
 
     //메세지 전송
@@ -244,11 +250,11 @@ export default {
     },
     //소켓 통신 연결
     //0 : onopen, 1 : 데이터 송수신, 2 : onclose
-    openWebSocket() {
+    async openWebSocket() {
       this.webSocket = new WebSocket(`ws://localhost/vue/livechat`);
 
       this.webSocket.onopen = (event) => {
-        console.log("open : ", event);
+        console.log("openWebSocket open : ", event);
         this.webSocket.send(
           JSON.stringify({ setSession: 1, id: this.loginUser.id })
         );
@@ -259,10 +265,6 @@ export default {
         const chatMessageDto = JSON.parse(event.data);
         console.log("onmessage : ", chatMessageDto);
         this.realtimeChat.push(chatMessageDto);
-
-        this.$nextTick(function () {
-          this.moveToDown();
-        });
       };
 
       this.webSocket.onclose = (event) => {
@@ -270,10 +272,11 @@ export default {
       };
     },
   },
-  created() {
-    this.loadChatHistory();
+  async created() {
+    await this.loadChatHistory();
     this.openWebSocket();
     this.UpdateAlertOff();
+    await this.moveToDown();
   },
   destroyed() {
     this.closeWebSocket();

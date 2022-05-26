@@ -1,61 +1,95 @@
 <template>
-  <b-container fluid class="bv-example-row mt-3 text-center">
-    <b-button @click="createRoom">부동산 업자에게 상담 요청</b-button>
-    <h3 class="underline-hotpink">
-      <b-icon icon="inbox-fill"></b-icon> Chatting Service
-    </h3>
-    <b-row>
+  <b-container class="bv-example-row mt-3 text-center">
+    <b-row class="pt-3">
       <!-- 채팅 리스트 -->
       <b-col cols="3">
-        <b-list-group>
-          <!-- 사용자 측면에서 불러오기 -->
-          <template v-for="room in chatroomlist">
-            <router-link
-              @click="forceRerender"
-              :key="room.no"
-              :to="{
-                name: 'chatList',
-                params: {
-                  no: room.no,
-                  receiver:
-                    room.user_id == loginUser.id
-                      ? room.seller_id
-                      : room.user_id,
-                },
-              }"
-            >
-              <b-list-group-item
-                button
-                @click="changeIconState(room), forceRerender()"
+        <b-row>
+          <b-card class="w-100">
+            <b-row><br /></b-row>
+            <b-row>
+              <b-col>
+                <b-row>
+                  <b-col>
+                    <b-icon icon="people-fill" />
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>전체</b-col>
+                </b-row>
+              </b-col>
+              <b-col>
+                <b-row>
+                  <b-col> {{}} </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>안읽음</b-col>
+                </b-row>
+              </b-col>
+            </b-row>
+            <b-row><br /></b-row>
+          </b-card>
+        </b-row>
+        <b-row>
+          <b-list-group class="w-100">
+            <!-- 사용자 측면에서 불러오기 -->
+            <template v-for="room in chatroomlist">
+              <router-link
+                :key="room.no"
+                :to="{
+                  name: 'chatList',
+                  params: {
+                    no: room.no,
+                    receiver:
+                      room.user_id == loginUser.id
+                        ? room.seller_id
+                        : room.user_id,
+                  },
+                }"
               >
-                <template v-if="room.seller_id != loginUser.id">
-                  {{ room.seller_id }}
-                </template>
-                <template v-else>
-                  {{ room.user_id }}
-                </template>
-                <template
-                  v-if="
-                    room.user_id == loginUser.id && room.userside_alert == 1
-                  "
+                <b-list-group-item
+                  button
+                  @click="changeIconState(room), forceRerender()"
                 >
-                  <b-icon icon="messenger" variant="success"></b-icon>
-                </template>
-                <template
-                  v-else-if="
-                    room.seller_id == loginUser.id && room.sellerside_alert == 1
-                  "
-                >
-                  <b-icon icon="messenger" variant="success"></b-icon>
-                </template>
-              </b-list-group-item>
-            </router-link>
-          </template>
-        </b-list-group>
+                  <template v-if="room.seller_id != loginUser.id">
+                    {{ room.seller_id }}
+                  </template>
+                  <template v-else>
+                    {{ room.user_id }}
+                  </template>
+                  <template
+                    v-if="
+                      room.user_id == loginUser.id && room.userside_alert == 1
+                    "
+                  >
+                    <b-icon icon="messenger" variant="success"></b-icon>
+                  </template>
+                  <template
+                    v-else-if="
+                      room.seller_id == loginUser.id &&
+                      room.sellerside_alert == 1
+                    "
+                  >
+                    <b-icon icon="messenger" variant="success"></b-icon>
+                  </template>
+                </b-list-group-item>
+              </router-link>
+            </template>
+            <b-button @click="createRoom">
+              debugging [부동산 업자에게 상담 요청]
+            </b-button>
+          </b-list-group>
+        </b-row>
       </b-col>
       <!-- 채팅창 -->
-      <b-col cols="8"><router-view :key="ComputedComponentKey" /> </b-col>
-      <b-col cols="1"></b-col>
+      <b-col cols="8">
+        <b-jumbotron style="height: 800px">
+          <b-row>
+            <b-col>
+              <router-view :key="ComputedComponentKey" />
+            </b-col>
+          </b-row>
+        </b-jumbotron>
+      </b-col>
     </b-row>
   </b-container>
 </template>
