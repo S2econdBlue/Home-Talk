@@ -3,7 +3,7 @@
     <b-jumbotron
       border-variant="dark"
       class="overflow-auto"
-      style="height: 640px"
+      style="height: 640px; background: #0099ef"
     >
       <b-row>
         <b-col>
@@ -17,15 +17,21 @@
                   <b-row align-h="end">
                     <b-col cols="7">
                       <b-row>
-                        <b-col class="text-right">{{ loginUser.id }}</b-col>
+                        <b-col class="text-right" style="color: white">{{
+                          loginUser.id
+                        }}</b-col>
                       </b-row>
                       <b-row align-h="end">
-                        <b-col class="text-right">
+                        <b-col class="text-right" style="color: white">
                           {{ DateFormatter(chat.date) }}
                         </b-col>
                         <b-col>
                           <div
-                            style="background-color: white; border-radius: 10px"
+                            style="
+                              background-color: #ffbe49;
+                              border-radius: 10px;
+                              color: black;
+                            "
                           >
                             {{ chat.message }}
                           </div>
@@ -41,17 +47,23 @@
                   <b-row>
                     <b-col cols="7">
                       <b-row>
-                        <b-col class="text-left">{{ chat.id }}</b-col>
+                        <b-col class="text-left" style="color: white">{{
+                          chat.id
+                        }}</b-col>
                       </b-row>
                       <b-row>
                         <b-col>
                           <div
-                            style="background-color: white; border-radius: 10px"
+                            style="
+                              background-color: #ffbe49;
+                              border-radius: 10px;
+                              color: black;
+                            "
                           >
                             {{ chat.message }}
                           </div>
                         </b-col>
-                        <b-col class="text-left">
+                        <b-col class="text-left" style="color: white">
                           {{ DateFormatter(chat.date) }}
                         </b-col>
                       </b-row>
@@ -70,15 +82,21 @@
                   <b-row align-h="end">
                     <b-col cols="7">
                       <b-row>
-                        <b-col class="text-right">{{ loginUser.id }}</b-col>
+                        <b-col class="text-right" style="color: white">{{
+                          loginUser.id
+                        }}</b-col>
                       </b-row>
                       <b-row align-h="end">
-                        <b-col class="text-right">
+                        <b-col class="text-right" style="color: white">
                           {{ DateFormatter(chat.date) }}
                         </b-col>
                         <b-col>
                           <div
-                            style="background-color: white; border-radius: 10px"
+                            style="
+                              background-color: #ffbe49;
+                              border-radius: 10px;
+                              color: black;
+                            "
                           >
                             {{ chat.message }}
                           </div>
@@ -94,17 +112,24 @@
                   <b-row>
                     <b-col cols="7">
                       <b-row>
-                        <b-col class="text-left">{{ chat.sender }}</b-col>
+                        <b-col class="text-left" style="color: white">{{
+                          chat.sender
+                        }}</b-col>
                       </b-row>
                       <b-row>
                         <b-col>
                           <div
-                            style="background-color: white; border-radius: 10px"
+                            style="
+                              background-color: #ffbe49;
+                              border-radius: 10px;
+                              color: black;
+                              border-radius: 10px;
+                            "
                           >
                             {{ chat.message }}
                           </div>
                         </b-col>
-                        <b-col class="text-left">
+                        <b-col class="text-left" style="color: white">
                           {{ DateFormatter(chat.date) }}
                         </b-col>
                       </b-row>
@@ -325,4 +350,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+template * {
+  color: white;
+}
+</style>

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HouseSearchBar from "@/components/house/HouseSearchBar copy.vue";
+import HouseSearchBar from "@/components/house/HouseMap.vue";
 export default {
   components: {
     HouseSearchBar,

@@ -70,11 +70,13 @@
       <!-- 채팅창 -->
       <b-col cols="8">
         <b-jumbotron style="height: 800px">
-          <b-row>
-            <b-col>
-              <router-view :key="ComputedComponentKey" />
-            </b-col>
-          </b-row>
+          <div id="chartt">
+            <b-row>
+              <b-col>
+                <router-view :key="ComputedComponentKey" />
+              </b-col>
+            </b-row>
+          </div>
         </b-jumbotron>
       </b-col>
     </b-row>
