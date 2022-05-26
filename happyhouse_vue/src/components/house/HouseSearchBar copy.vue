@@ -429,7 +429,7 @@ export default {
     },
     viewArticle(article) {
       this.$router.push({
-        name: "boardDetail",
+        name: "detail",
         params: { articleno: article.no },
       });
     },
