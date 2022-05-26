@@ -34,11 +34,13 @@
           <b-row align-h="end" align-v="center">
             <template v-if="this.loginUser.id">
               <b-col cols="5">
-                <!-- <router-link :to="{ name: 'info' }" class="link"> -->
-                <div style="text-align: center; color: white; cursor: default">
-                  {{ this.loginUser.id }}님
-                </div>
-                <!-- </router-link> -->
+                <router-link :to="{ name: 'info' }" class="link">
+                  <div
+                    style="text-align: center; color: white; cursor: default"
+                  >
+                    {{ this.loginUser.id }}님
+                  </div>
+                </router-link>
               </b-col>
               <b-col cols="4">
                 <router-link
