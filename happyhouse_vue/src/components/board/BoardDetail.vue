@@ -18,35 +18,240 @@
       </b-col>
     </b-row> -->
     <b-row>
-      <b-col cols="8">
+      <b-col cols="7">
         <b-row>
-          <b-carousel
-            id="carousel-1"
-            v-model="slide"
-            :interval="4000"
-            controls
-            indicators
-            img-width="1024px"
-            img-height="500px"
-            background="#ababab"
-            style="text-shadow: 1px 1px 2px #333"
-            @sliding-start="onSlideStart"
-            @sliding-end="onSlideEnd"
-          >
-            <template v-for="(file, index) in article.fileList">
-              <b-carousel-slide
-                :key="index"
-                :img-src="`${download_url}/board/image/${$route.params.articleno}/${file.original_name}`"
-                class="img-fluid"
-              ></b-carousel-slide>
-            </template>
-          </b-carousel>
+          <div style="max-height: 500px; max-width: 690px">
+            <b-carousel
+              id="carousel-1"
+              v-model="slide"
+              :interval="4000"
+              controls
+              indicators
+              img-width="1024px"
+              img-height="500px"
+              background="#ababab"
+              style="text-shadow: 1px 1px 2px #333"
+              @sliding-start="onSlideStart"
+              @sliding-end="onSlideEnd"
+            >
+              <template v-for="(file, index) in article.fileList">
+                <b-carousel-slide
+                  :key="index"
+                  :img-src="`${download_url}/board/image/${$route.params.articleno}/${file.original_name}`"
+                  class="img-fluid"
+                ></b-carousel-slide>
+              </template>
+            </b-carousel>
+          </div>
+        </b-row>
+        <b-row class="pb-2">
+          <b-card class="text-center w-100">
+            <b-row class="b-between">
+              <b-col class="text-left">{{ article.title }}</b-col>
+              <b-col class="text-right" cols="4" style="font-size: 14px">
+                작성일 {{ article.time }}
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-row>
+        <b-row class="pt-5">
+          <b-col class="text-left">
+            <!-- 왼쪽으로 붙이기 -->
+            <h5>
+              <strong>거래정보</strong>
+              <hr style="border: 1px solid black" />
+            </h5>
+          </b-col>
+        </b-row>
+        <b-row style="font-size: 15px" align-v="center">
+          <b-col>
+            <b-row align-h="between">
+              <b-col cols="4"><strong>계약형태</strong></b-col>
+              <b-col> {{ computedContract }} </b-col>
+            </b-row>
+          </b-col>
+          <b-col>
+            <b-row align-h="between" align-v="center">
+              <b-col><strong>가격정보</strong></b-col>
+              <b-col cols="9">
+                <b-row class="pb-5" align-v="center">
+                  <b-col cols="4">보증금</b-col>
+                  <b-col cols="4"> </b-col>
+                  <b-col>{{ trade.deposit }} 만원</b-col>
+                </b-row>
+                <b-row align-v="center">
+                  <b-col cols="4">월세</b-col>
+                  <b-col cols="4"> </b-col>
+                  <b-col>{{ trade.monthlyFee }} 만원</b-col>
+                </b-row>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+
+        <hr class="m-4" />
+
+        <b-row style="font-size: 15px" align-v="center">
+          <b-col>
+            <b-row align-v="center">
+              <b-col cols="4"><strong>공용 관리비</strong></b-col>
+              <b-col cols="5"> </b-col>
+              <b-col>{{ trade.commonMaintainFee }} 만원</b-col>
+            </b-row>
+          </b-col>
+          <b-col>
+            <b-row align-v="center">
+              <b-col cols="4"><strong>공용 관리비 항목</strong></b-col>
+              <b-col>
+                <template v-if="computedCommonItemLength == 0"> 없음 </template>
+                <template>
+                  <span
+                    v-for="(item, index) in trade.commonMaintainItem"
+                    :key="index"
+                  >
+                    {{ item }}
+                  </span>
+                </template>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+
+        <hr class="m-4" />
+
+        <b-row style="font-size: 15px" align-v="center">
+          <b-col>
+            <b-row>
+              <b-col cols="4"><strong>융자여부</strong></b-col>
+              <b-col class="text-right"> {{ computedLoan }} </b-col>
+            </b-row>
+          </b-col>
+          <b-col>
+            <b-row align-v="center">
+              <b-col cols="4"><strong>개별 사용료 항목</strong></b-col>
+              <b-col>
+                <template v-if="computedEachFeeItemLength == 0">
+                  없음
+                </template>
+                <template>
+                  <span v-for="(item, index) in trade.eachFeeItem" :key="index">
+                    {{ item }}
+                  </span>
+                </template>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+
+        <hr class="m-4" />
+
+        <b-row style="font-size: 15px" align-v="center">
+          <b-col>
+            <b-row align-v="center">
+              <b-col cols="4"><strong>입주가능일</strong></b-col>
+              <b-col> </b-col>
+              <b-col>{{ trade.date }} </b-col>
+            </b-row>
+          </b-col>
+          <b-col>
+            <b-row> </b-row>
+          </b-col>
         </b-row>
         <b-row>
-          <div class="w-100"></div>
+          <b-col cols="7">
+            <b-collapse id="collapse-1" class="mt-2">
+              <div></div>
+            </b-collapse>
+          </b-col>
+        </b-row>
+
+        <hr class="m-4" />
+
+        <b-row class="pt-4">
+          <b-col class="text-left">
+            <!-- 왼쪽으로 붙이기 -->
+            <h5>
+              <strong>상세설명</strong>
+              <hr style="border: 1px solid black" />
+            </h5>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-card class="text-left w-100">
+            {{ computedDetail }}
+          </b-card>
+        </b-row>
+        <b-row class="pt-5 b-between" align-v="center">
+          <b-col class="text-left">
+            <!-- 왼쪽으로 붙이기 -->
+            <h5>
+              <strong>위치</strong>
+            </h5>
+          </b-col>
+          <b-col>
+            <b-row>
+              <b-col class="text-right">{{ computedRoadnameAddress }}</b-col>
+            </b-row>
+            <b-row>
+              <b-col class="text-right">
+                {{ computedDetailAddress }}
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+        <b-row>
+          <div id="map" style="width: 100%; height: 300px" class="my-4"></div>
         </b-row>
       </b-col>
-      <b-col cols="4"></b-col>
+      <b-col cols="4" class="ml-4">
+        <b-row>
+          <b-card class="w-100">
+            <b-list-group flush class="w-100">
+              <b-list-group-item variant="primary">중개매물</b-list-group-item>
+              <b-list-group-item variant="dark">
+                매물번호 {{ this.$route.params.articleno }}
+              </b-list-group-item>
+            </b-list-group>
+            <b-card-body>
+              <b-card-title>
+                <b-row class="text-left">
+                  <b-col cols="4">
+                    <b-button variant="outline-primary">월세</b-button>
+                  </b-col>
+                  <b-col>
+                    <h1>{{ trade.deposit }} / {{ trade.monthlyFee }}</h1>
+                  </b-col>
+                </b-row>
+              </b-card-title>
+              <b-card-sub-title class="mb-2 text-left">
+                {{ computedRoadnameAddress }}
+              </b-card-sub-title>
+            </b-card-body>
+          </b-card>
+        </b-row>
+        <b-row>
+          <b-card class="w-100"> 즐겨찾기☆ </b-card>
+        </b-row>
+        <b-row>
+          <b-card class="w-100">
+            <b-row align-v="center">
+              <b-col cols="3">
+                <b-avatar
+                  variant="primary"
+                  :text="this.article.id[0]"
+                  size="3.5rem"
+                ></b-avatar>
+              </b-col>
+              <b-col class="text-left"> {{ this.article.id }}</b-col>
+            </b-row>
+          </b-card>
+        </b-row>
+        <b-row>
+          <b-card class="w-100">
+            <b-button variant="outline-primary"> 채팅상담 요청 </b-button>
+          </b-card>
+        </b-row>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -60,18 +265,62 @@ export default {
   data() {
     return {
       download_url: "",
-      article: {},
-      trade: {},
+      article: { time: "" },
+      trade: { date: "" },
       files: {},
       slide: 0,
       sliding: null,
+
+      map: "",
+      marker: "",
+      mapContainer: "",
+      mapOption: "",
+      geocoder: "",
     };
   },
   computed: {
-    message() {
-      if (this.article.content)
-        return this.article.content.split("\n").join("<br>");
-      return "";
+    computedRoadnameAddress() {
+      if (this.trade.roadnameAddress == undefined) return "";
+      return this.trade.roadnameAddress;
+    },
+    computedDetailAddress() {
+      if (this.trade.detailAddress == undefined) return "";
+      return this.trade.detailAddress.split("\r\n").join("<br />");
+    },
+    computedDetail() {
+      if (this.trade.detail == undefined) return "";
+      return this.trade.detail;
+    },
+    computedCommonItemLength() {
+      if (this.trade.commonMaintainItem == undefined) return "";
+      return this.trade.commonMaintainItem.length;
+    },
+    computedEachFeeItemLength() {
+      if (this.trade.eachFeeItem == undefined) return "";
+      return this.trade.eachFeeItem.length;
+    },
+    computedContract() {
+      return this.trade.contractOpt == 0
+        ? "매매"
+        : this.trade.contractOpt == 1
+        ? "전세"
+        : "월세";
+    },
+
+    computedLoan() {
+      return this.trade.loan == 0 ? "융자금 없음" : "융자금 있음";
+    },
+  },
+  filters: {
+    dateYYYYMMDD(fullDate) {
+      if (fullDate == undefined) return "";
+      // let a = fullDate.split(" ");
+      // let b = a[0].split("-");
+      // return b[0] + "." + b[1] + "." + b[2];
+      return fullDate.split(" ")[0].split("-").join(".");
+    },
+    zeroToSzero(data) {
+      if (data == 0) return "0";
     },
   },
   created() {
@@ -80,27 +329,9 @@ export default {
     //게시글 정보
     http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
       this.article = data;
-      console.log(data);
+      this.article.time = this.article.time.split(" ")[0].split("-").join(".");
+      console.log("this.article :", data);
     });
-
-    //매매 정보를 포함하고 있다면
-    http
-      .get(`/board/trade/${this.$route.params.articleno}`)
-      .then(({ data }) => {
-        this.trade = data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    http
-      .get(`/board/root`)
-      .then(({ data }) => {
-        this.trade = data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   },
   methods: {
     onSlideStart() {
@@ -127,12 +358,76 @@ export default {
         });
       }
     },
+
+    async loadTrade() {
+      //매매 정보를 포함하고 있다면
+      await http
+        .get(`/board/trade/${this.$route.params.articleno}`)
+        .then(({ data }) => {
+          this.trade = data;
+          this.trade.date = this.trade.date.split(" ")[0].split("-").join(".");
+          console.log("this.trade : ", data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async abcd() {
+      console.log("abcd1");
+      let geocoder = this.geocoder;
+      // let mapContainer = this.mapContainer;
+      let map = this.map;
+      let marker = this.marker;
+      console.log("this.trade.detailaddress :", this.trade.detailaddress);
+      // 주소로 상세 정보를 검색
+      await geocoder.addressSearch(
+        this.trade.roadnameAddress,
+        function (results, status) {
+          // 정상적으로 검색이 완료됐으면
+          if (status === window.daum.maps.services.Status.OK) {
+            var result = results[0]; //첫번째 결과의 값을 활용
+
+            // 해당 주소에 대한 좌표를 받아서
+            var coords = new window.daum.maps.LatLng(result.y, result.x);
+            // 지도를 보여준다.
+            // mapContainer.style.display = "block";
+            map.relayout();
+            // 지도 중심을 변경한다.
+            map.setCenter(coords);
+            // 마커를 결과값으로 받은 위치로 옮긴다.
+            marker.setPosition(coords);
+          }
+        }
+      );
+      console.log("abcd2");
+    },
+    def() {
+      console.log("def1");
+      // --------------------------------지도 설정 ------------------------------------------
+      this.mapContainer = document.getElementById("map");
+      this.mapContainer.style.display = "block";
+      var mapOption = {
+        center: new window.daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+        level: 5, // 지도의 확대 레벨
+      };
+      this.map = new window.daum.maps.Map(this.mapContainer, mapOption);
+      //주소-좌표 변환 객체를 생성
+      this.geocoder = new window.daum.maps.services.Geocoder();
+      //마커를 미리 생성
+      this.marker = new window.daum.maps.Marker({
+        position: new window.daum.maps.LatLng(37.537187, 127.005476),
+        map: this.map,
+      });
+      console.log("def2");
+    },
   },
-  // filters: {
-  //   dateFormat(regtime) {
-  //     return moment(new Date(regtime)).format("YY.MM.DD hh:mm:ss");
-  //   },
-  // },
+  async mounted() {
+    await this.loadTrade();
+    await this.def();
+    await this.abcd();
+  },
+
+  // --------------------------------지도 설정 끝 ------------------------------------------},
 };
 </script>
 

@@ -242,6 +242,8 @@
               placeholder="매물에 대해 상세한 설명을 작성할 수 있습니다."
               rows="3"
               max-rows="6"
+              wrap="hard"
+              cols="20"
             ></b-form-textarea>
           </b-row>
           <b-row class="pt-5">

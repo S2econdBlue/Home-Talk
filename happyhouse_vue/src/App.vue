@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <navi-bar />
-    <router-view />
+    <!-- 
+      style="position: fixed; z-index: 11; width: 100%; top: 0px" -->
+    <navi-bar></navi-bar>
+    <!-- style="position: absolute; top: 70px" -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -24,10 +27,10 @@ a {
 a:hover {
   text-decoration: none;
   font-weight: bold;
-  color: chartreuse;
+  color: rgb(255, 255, 255);
 }
 
 a.router-link-exact-active {
-  color: #3aa4ca;
+  color: #db1637;
 }
 </style>

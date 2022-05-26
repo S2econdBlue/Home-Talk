@@ -157,7 +157,7 @@ public class BoardController {
 			tradeThreadDto.setMonthlyFee((Integer) map.get("monthlyFee"));
 			tradeThreadDto.setCommonMaintainFee((Integer) map.get("commonMaintainFee"));
 			tradeThreadDto.setLoan((Integer) map.get("loan"));
-			tradeThreadDto.setDetail((String) map.get("detail"));
+			tradeThreadDto.setDetail(((String) map.get("detail")).replaceAll("/(?:\r\n|\r|\n)/g","<br/>"));
 			tradeThreadDto.setRoadnameAddress((String) map.get("roadnameAddress"));
 			tradeThreadDto.setDetailAddress((String) map.get("detailAddress"));
 

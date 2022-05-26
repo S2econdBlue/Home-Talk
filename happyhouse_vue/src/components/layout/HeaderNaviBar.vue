@@ -1,79 +1,66 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#">
-        <router-link to="/">
-          <b-img :src="image" thumbnail fluid style="width: 100px"> </b-img>
-        </router-link>
-      </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'home' }" class="link">
-              <b-icon icon="house" font-scale="1.5"></b-icon>
-              메인화면
+    <b-navbar type="dark" variant="dark">
+      <b-row align-h="around" class="w-100" align-v="center">
+        <b-col cols="4">
+          <b-navbar-nav>
+            <b-nav-item href="#">
+              <router-link :to="{ name: 'home' }" class="link">
+                메인화면
+              </router-link>
+            </b-nav-item>
+            <b-nav-item href="#">
+              <router-link :to="{ name: 'board' }" class="link">
+                매물 등록 게시판
+              </router-link>
+            </b-nav-item>
+            <b-nav-item href="#">
+              <router-link :to="{ name: 'chat' }" class="link">
+                상담 관리
+              </router-link>
+            </b-nav-item>
+          </b-navbar-nav>
+        </b-col>
+        <b-col cols="2"></b-col>
+        <b-col cols="1">
+          <b-navbar-brand href="#">
+            <router-link to="/">
+              <b-img :src="image" thumbnail fluid style="width: 100px"> </b-img>
             </router-link>
-          </b-nav-item>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'board' }" class="link">
-              <b-icon icon="journal" font-scale="1.5"> </b-icon>
-              매물 등록 게시판
-            </router-link>
-          </b-nav-item>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'chat' }" class="link">
-              <b-icon icon="inbox-fill" font-scale="1.5"></b-icon>
-              상담 관리
-            </router-link>
-          </b-nav-item>
-
-          <!-- <b-nav-item href="#"
-            ><router-link :to="{ name: 'todo' }" class="link"
-              ><b-icon icon="calendar-check" font-scale="1.5"></b-icon>
-              TodoList</router-link
-            ></b-nav-item
-          > -->
-        </b-navbar-nav>
-
-        <b-navbar-nav class="ml-auto">
-          <b-card class="text-center" v-if="this.loginUser.id"
-            ><div>{{ this.loginUser.id }}님</div></b-card
-          >
-          <b-nav-item-dropdown right>
-            <template #button-content>
-              <b-icon icon="people" font-scale="2"></b-icon>
-            </template>
-
-            <template v-if="!this.loginUser.id">
-              <b-dropdown-item href="#"
-                ><router-link :to="{ name: 'signUp' }" class="link"
-                  ><b-icon icon="person-circle"></b-icon> 회원가입</router-link
-                ></b-dropdown-item
-              >
-              <b-dropdown-item href="#"
-                ><router-link :to="{ name: 'signIn' }" class="link"
-                  ><b-icon icon="key"></b-icon> 로그인</router-link
-                ></b-dropdown-item
-              >
+          </b-navbar-brand>
+        </b-col>
+        <b-col cols="2"></b-col>
+        <b-col cols="3">
+          <b-row align-h="end" align-v="center">
+            <template v-if="this.loginUser.id">
+              <b-col cols="5">
+                <router-link :to="{ name: 'info' }" class="link">
+                  <div style="text-align: center; color: white">
+                    {{ this.loginUser.id }}님
+                  </div>
+                </router-link>
+              </b-col>
+              <b-col cols="4">
+                <router-link :to="{ name: 'home' }" class="link">
+                  로그아웃
+                </router-link>
+              </b-col>
             </template>
             <template v-else>
-              <b-dropdown-item href="#"
-                ><router-link :to="{ name: 'info' }" class="link"
-                  ><b-icon icon="person-circle"></b-icon>회원정보</router-link
-                ></b-dropdown-item
-              >
-              <b-dropdown-item href="#" @click="this.logout"
-                ><router-link :to="{ name: 'home' }" class="link"
-                  ><b-icon icon="key"></b-icon> 로그아웃</router-link
-                ></b-dropdown-item
-              >
+              <b-col>
+                <router-link :to="{ name: 'signUp' }" class="link">
+                  회원가입
+                </router-link>
+              </b-col>
+              <b-col>
+                <router-link :to="{ name: 'signIn' }" class="link">
+                  로그인
+                </router-link>
+              </b-col>
             </template>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
+          </b-row>
+        </b-col>
+      </b-row>
     </b-navbar>
   </div>
 </template>
@@ -98,4 +85,20 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(42, 132, 250);
+}
+
+a.router-link-exact-active {
+  color: rgb(42, 132, 250);
+  font-weight: bold;
+}
+</style>
