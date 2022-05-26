@@ -122,8 +122,11 @@
                     <b-card-body :title="article.title">
                       <b-card-text>
                         <b-row>{{ article.detail }}</b-row>
-                        <b-row>{{ article.deposit }}</b-row>
-                        <b-row>{{ article.monthlyFee }}</b-row>
+                        <b-row
+                          >보증금 : {{ article.deposit }} / 월세 :
+                          {{ article.monthlyFee }}</b-row
+                        >
+                        <b-row>{{ article.roadnameAddress }}</b-row>
                       </b-card-text>
                     </b-card-body>
                   </b-col>
