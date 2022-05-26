@@ -44,4 +44,6 @@ public interface BoardMapper {
 	public List<String> selectEachFeeItem(@Param("boardNo") int boardNo);
 	
 	public List<BoardAllDto> selectall() throws SQLException;
+	
+	public int LAST_INSERT_ID();
 }

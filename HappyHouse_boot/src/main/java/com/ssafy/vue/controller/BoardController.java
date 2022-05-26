@@ -52,17 +52,13 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-	
-	@GetMapping("root")
-	public @ResponseBody HashMap<Object, Object> report(@RequestParam HashMap<Object, Object> param,
-															HttpServletRequest request) {
-		File file = new File(".");
-		String rootPath = file.getAbsolutePath();
-        System.out.println("현재 프로젝트의 경로 : "+rootPath );
 
-		return param;
+	@GetMapping("root")
+	public @ResponseBody int report(HttpServletRequest request) {
+		System.out.println("boardService.LAST_INSERT_ID() : " + boardService.LAST_INSERT_ID());
+		return boardService.LAST_INSERT_ID();
 	}
-	
+
 	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
 	@GetMapping
 	public ResponseEntity<List<Board>> retrieveBoard() throws Exception {
@@ -89,7 +85,7 @@ public class BoardController {
 		TradeThreadDto tradeThreadDto = boardService.selectTradeThread(articleno);
 		tradeThreadDto.setCommonMaintainItem(boardService.selectCommonMaintainItem(articleno));
 		tradeThreadDto.setEachFeeItem(boardService.selectEachFeeItem(articleno));
-		
+
 		return new ResponseEntity<TradeThreadDto>(tradeThreadDto, HttpStatus.OK);
 	}
 
@@ -131,7 +127,7 @@ public class BoardController {
 	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
 	@PostMapping("insertThread")
 	public ResponseEntity<String> insertThread(@RequestBody HashMap<String, Object> map) throws Exception {
-		
+
 		System.out.println("before===================================================");
 		for (Entry<String, Object> set : map.entrySet()) {
 			String key = set.getKey();
@@ -150,7 +146,7 @@ public class BoardController {
 		int rslt = boardService.insertBoard(board);
 
 		if (rslt == 1) {
-			
+
 			// 2.tradeboard에 매매 데이터 삽입
 			TradeThreadDto tradeThreadDto = new TradeThreadDto();
 			tradeThreadDto.setCommonMaintainFee((Integer) map.get("commonMaintainFee"));
@@ -225,29 +221,30 @@ public class BoardController {
 	}
 
 	@GetMapping("image/{board_no}/{original_name}")
-	public ResponseEntity<byte[]> imgLoad(@PathVariable int board_no, @PathVariable String original_name, HttpServletRequest request)
-			throws Exception {
+	public ResponseEntity<byte[]> imgLoad(@PathVariable int board_no, @PathVariable String original_name,
+			HttpServletRequest request) throws Exception {
 //		String absolutePath = request.getSession().getServletContext().getRealPath("/");
-		
+
 		String absolutePath = "C:\\SSAFY\\관통\\final\\HappyHouse_boot";
-		
+
 		BoardFileDto boardFileDto = new BoardFileDto();
 		boardFileDto.setBoard_no(board_no);
 		boardFileDto.setOriginal_name(original_name);
-		
+
 		String save_path = boardService.selectBoardFileRealPath(boardFileDto);
-		System.out.println("save_path : "+save_path);
+		System.out.println("save_path : " + save_path);
 		InputStream imageStream = new FileInputStream(save_path);
 		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
 		imageStream.close();
 		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
 
 	}
+
 	@GetMapping("/allselect")
-	public ResponseEntity<List<BoardAllDto>> selectall() throws Exception{
+	public ResponseEntity<List<BoardAllDto>> selectall() throws Exception {
 		List<BoardAllDto> list = boardService.selectall();
-		for(int i=0;i<list.size();i++) {
-			if(list.get(i).getNoo()==null) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getNoo() == null) {
 				list.remove(i);
 				i--;
 			}

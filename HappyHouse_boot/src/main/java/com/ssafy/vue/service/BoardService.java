@@ -34,11 +34,14 @@ public interface BoardService {
 	public int insertCommonMaintainItem(List<String> commonMaintainItem);
 
 	public int insertEachFeeItem(List<String> EachFeeItem);
-	
+
 	public TradeThreadDto selectTradeThread(@Param("boardNo") int boardNo);
 
 	public List<String> selectCommonMaintainItem(@Param("boardNo") int no);
 
 	public List<String> selectEachFeeItem(@Param("boardNo") int no);
+
 	public List<BoardAllDto> selectall() throws Exception;
+
+	public int LAST_INSERT_ID();
 }
