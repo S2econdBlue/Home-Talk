@@ -122,7 +122,7 @@
                   <b-col md="6">
                     <b-card-body :title="article.title">
                       <b-card-text>
-                        <b-row>{{ article.detail }}</b-row>
+                        <b-row>{{ article.detail | oneLineDetail }}</b-row>
                         <b-row
                           >보증금 : {{ article.deposit }} / 월세 :
                           {{ article.monthlyFee }}</b-row
@@ -255,6 +255,12 @@ export default {
       },
       apt,
     };
+  },
+  filters: {
+    oneLineDetail(data) {
+      if (data == undefined) return "";
+      return data.split("<br>")[0];
+    },
   },
   computed: {
     ...mapState(["sidos", "guguns", "dongs"]),

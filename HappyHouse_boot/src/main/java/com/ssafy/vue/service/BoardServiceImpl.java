@@ -141,4 +141,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.selectall();
 	}
 	
+	public int LAST_INSERT_ID() {
+		return boardMapper.LAST_INSERT_ID();
+	}
+	
 }
