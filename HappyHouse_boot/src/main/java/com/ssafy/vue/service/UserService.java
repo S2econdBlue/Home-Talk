@@ -27,4 +27,6 @@ public interface UserService {
 	int DeleteUser(String id) throws SQLException;
 	
 	int findpw(UserInfoDto userInfoDto) throws SQLException;
+	
+	int setPw(UserInfoDto userInfoDto);
 }

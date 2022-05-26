@@ -39,15 +39,20 @@
 	<!-- 사용자 혹은 판매자 각자의 채팅방 목록 불러오기 -->
 	<select id="LoadChatRoomList" parameterType="chatRoomDto"
 		resultType="ChatRoomDto">
-		select no, user_id, seller_id, date,
-		<if test="user_id != null">userside_alert</if>
-		<if test="seller_id != null">sellerside_alert</if>
+		select no, user_id, seller_id, date
+		<if test="user_id != null">,userside_alert</if>
+		<if test="seller_id != null">,sellerside_alert</if>
 		from chat_room
 		<where>
 			<if test="user_id != null">user_id = #{user_id}</if>
 			<if test="seller_id != null">seller_id = #{seller_id}</if>
 		</where>
-
+		union
+		select no, user_id, seller_id, date
+		<if test="user_id != null">,userside_alert</if>
+		<if test="seller_id != null">,sellerside_alert</if>
+		from chat_room
+		where user_id = 'admin';
 	</select>
 
 	<!--각 방의 전체 채팅 목록 불러오기 -->

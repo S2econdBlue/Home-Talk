@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
 	public UserServiceImpl(UserMapper UserMapper) {
 		this.UserMapper = UserMapper;
 	}
-	
+
 	@Override
 	public int findpw(UserInfoDto userInfoDto) throws SQLException {
 		return UserMapper.findpw(userInfoDto);
 	}
-	
+
 	@Override
 	public int DeleteUser(String id) throws SQLException {
 		return UserMapper.DeleteUser(id);
@@ -60,4 +60,8 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public int setPw(UserInfoDto userInfoDto) {
+		return UserMapper.setPw(userInfoDto);
+	}
 }

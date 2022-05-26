@@ -50,8 +50,8 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<UserInfoDto> login(@RequestBody HashMap<String, Object> map) throws SQLException {
 		UserInfoDto userInfoDto = new UserInfoDto();
-		userInfoDto.setId((String) map.get("userid"));
-		userInfoDto.setPw((String) map.get("userpw"));
+		userInfoDto.setId((String) map.get("id"));
+		userInfoDto.setPw((String) map.get("pw"));
 
 		UserInfoDto user = userService.GetUser(userInfoDto);
 		return new ResponseEntity<UserInfoDto>(user, HttpStatus.OK);
@@ -82,7 +82,7 @@ public class UserController {
 //	}
 
 	@PostMapping("/UpdateUser")
-	public ResponseEntity<String> UpdateUser(UserInfoDto userInfoDto, HttpSession session) throws SQLException {
+	public ResponseEntity<String> UpdateUser(UserInfoDto userInfoDto) throws SQLException {
 		logger.debug("userInfoDto : {}", userInfoDto);
 
 		int rslt = userService.UpdateUser(userInfoDto);
@@ -93,58 +93,37 @@ public class UserController {
 			return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
-//
-//	@RequestMapping(value = "/FindPw", method = RequestMethod.POST, produces = "application/json; charset=utf8")
-//	public void FindPw(@RequestBody HashMap<String, Object> map, HttpSession session, HttpServletResponse response)
-//			throws Exception {
-//		System.out.println("접속 ok");
-//		response.setContentType("application/json;charset=utf-8");
-//		// 비밀번호 찾기 과정 1차, 해당 정보가 mapping된 아이디가 있는지 확인
-//		System.out.println((String) session.getAttribute("confirmed_id"));
-//		if ((String) session.getAttribute("confirmed_id") == null) {
-//
-//			UserInfoDto userinfoDto = new UserInfoDto();
-//			System.out.println();
-//			userinfoDto.setId((String) map.get("id"));
-//			userinfoDto.setEmail((String) map.get("email"));
-//			userinfoDto.setAge((Integer) map.get("age"));
-//			userinfoDto.setName((String) map.get("name"));
-//			userinfoDto.toString();
-//
-//			int rslt = userService.findpw(userinfoDto);
-//			// 동일한 아이디, 이메일, 나이가 있다면
-//			if (rslt == 1) {
-//				// 비밀번호 찾는 과정에 성공
-//				session.setAttribute("confirmed_id", map.get("id"));
-//				response.getWriter().write('1');
-//			} else {
-//				response.getWriter().write('0');
-//			}
-//		}
-//		// 피빌번호 찾기 과정 2차, 처음 변경하려는 아이디의 비밀번호만 변경 가능
-//		else {
-//			String confirmed_id = (String) session.getAttribute("confirmed_id");
-//			session.removeAttribute("confirmed_id");
-//			System.out.println(confirmed_id + " " + (String) map.get("id") + " " + (String) map.get("pw"));
-//			if (((String) map.get("id")).equals(confirmed_id)) {
-//				UserInfoDto userinfoDto = new UserInfoDto();
-//				userinfoDto.setId(confirmed_id);
-//				userinfoDto.setPw((String) map.get("pw"));
-//				int rslt = userService.UpdateUser(userinfoDto);
-//
-//				response.getWriter().write('1');
-//			} else {
-//				response.getWriter().write('2');
-//			}
-//
-//		}
-//	}
 
+	@PostMapping("findPw")
+	public ResponseEntity<String> findPw(@RequestBody UserInfoDto userInfoDto) throws SQLException {
+		System.out.println(userInfoDto);
+		logger.debug("userInfoDto : {}", userInfoDto);
+
+		int rslt = userService.findpw(userInfoDto);
+		if (rslt == 1) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		} else {
+			logger.debug("수정 실패, {}", rslt);
+			return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+	@PostMapping("setPw")
+	public ResponseEntity<String> setPw(@RequestBody UserInfoDto userInfoDto) throws SQLException {
+		logger.debug("userInfoDto : {}", userInfoDto);
+
+		int rslt = userService.setPw(userInfoDto);
+		if (rslt == 1) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		} else {
+			logger.debug("수정 실패, {}", rslt);
+			return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
 	@PutMapping("{id}")
 	public ResponseEntity<String> UpdateUser(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println(map.toString());
 		System.out.println("접속 ok");
-		
+
 		UserInfoDto userInfoDto = new UserInfoDto();
 
 		userInfoDto.setPw((String) map.get("pw"));
@@ -154,7 +133,7 @@ public class UserController {
 
 		logger.debug("userInfoDto : {}", userInfoDto);
 		int rslt = userService.UpdateUser(userInfoDto);
-		if(rslt == 1)
+		if (rslt == 1)
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		else
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);

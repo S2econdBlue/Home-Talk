@@ -19,4 +19,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+a {
+  text-decoration: none;
+}
+#id {
+  background-image: url("http://www.daeguview.com/DATA/photo/thumb_b_20190930102559.jpg");
+}
+</style>

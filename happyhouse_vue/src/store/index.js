@@ -43,7 +43,6 @@ export default new Vuex.Store({
     },
     //////////////////////  회원 관련 기능  //////////////////////
     SET_USER_DATA(state, userdata) {
-      console.log("SET_USER_DATA : ", userdata);
       state.loginUser = userdata;
     },
     CLEAR_USER_DATA(state) {
@@ -89,11 +88,9 @@ export default new Vuex.Store({
     },
     //////////////////////   User start   //////////////////////
     loginSuccess({ commit }, userInfo) {
-      console.log("loginSuccess : ", userInfo);
       commit("SET_USER_DATA", userInfo);
     },
     logout({ commit }) {
-      console.log("logout");
       commit("CLEAR_USER_DATA");
     },
     //////////////////////   observe start   //////////////////////

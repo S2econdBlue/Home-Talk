@@ -51,23 +51,23 @@ public class ChatController {
 			chatService.GenerateRoom(chatRoomDto);
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else
-			return new ResponseEntity<String>(FAIL, HttpStatus.FOUND);
+			return new ResponseEntity<String>(FAIL,HttpStatus.OK);
 	}
 
 	@GetMapping("{id}/{grade}")
 	public ResponseEntity<List<ChatRoomDto>> LoadChatRoomList(@PathVariable String id, @PathVariable int grade)
 			throws Exception {
-		System.out.println("LoadChatRoomList, id : " + id + "grade : " + grade);
-
+		System.out.println("LoadChatRoomList, id : " + id + ", grade : " + grade);
+		List<ChatRoomDto> list = null;
 		ChatRoomDto chatRoomDto = new ChatRoomDto();
 		if (grade == 1) {
 			chatRoomDto.setUser_id(id);
-		} else if (grade == 2) {
+		} else {
 			System.out.println(chatRoomDto.toString());
 			chatRoomDto.setSeller_id(id);
 		}
-
-		List<ChatRoomDto> list = chatService.LoadChatRoomList(chatRoomDto);
+		
+		list = chatService.LoadChatRoomList(chatRoomDto);
 
 		return new ResponseEntity<List<ChatRoomDto>>(list, HttpStatus.OK);
 	}

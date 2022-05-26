@@ -12,17 +12,30 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item href="#">
-            <router-link :to="{ name: 'home' }"> 지도 </router-link>
+            <router-link
+              :to="{ name: 'home' }"
+              style="text-decoration: none; color: black"
+            >
+              지도
+            </router-link>
           </b-nav-item>
           <b-nav-item href="#">
             <template v-if="this.loginUser.grade >= 2">
-              <router-link :to="{ name: 'board' }">
+              <router-link
+                :to="{ name: 'board' }"
+                style="text-decoration: none; color: black"
+              >
                 매물 등록 게시판
               </router-link>
             </template>
           </b-nav-item>
           <b-nav-item href="#">
-            <router-link :to="{ name: 'chat' }"> 상담 관리 </router-link>
+            <router-link
+              :to="{ name: 'chat' }"
+              style="text-decoration: none; color: black"
+            >
+              상담 관리
+            </router-link>
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
@@ -37,12 +50,20 @@
 
           <template v-if="this.loginUser.id">
             <b-nav-item right>
-              <router-link @click.native="logout" :to="{ name: 'home' }">
+              <router-link
+                @click.native="logout"
+                :to="{ name: 'home' }"
+                style="text-decoration: none; color: black"
+              >
                 로그아웃
               </router-link>
             </b-nav-item>
             <b-nav-item right>
-              <router-link :to="{ name: 'info' }">회원정보</router-link>
+              <router-link
+                :to="{ name: 'info' }"
+                style="text-decoration: none; color: black"
+                >회원정보</router-link
+              >
             </b-nav-item>
           </template>
         </b-navbar-nav>
@@ -77,6 +98,9 @@ export default {
 </script>
 
 <style>
+a {
+  text-decoration: none;
+}
 #navbarr {
   text-decoration: none;
   font-weight: bold;
@@ -92,6 +116,6 @@ a:visited {
 }
 
 a:hover {
-  text-decoration: underline;
+  color: gold;
 }
 </style>
