@@ -33,7 +33,7 @@
           <b-list-group class="w-100">
             <!-- 사용자 측면에서 불러오기 -->
             <template v-for="room in chatroomlist">
-              <router-link
+              <!-- <router-link
                 :key="room.no"
                 :to="{
                   name: 'chatList',
@@ -45,38 +45,42 @@
                         : room.user_id,
                   },
                 }"
+              > -->
+              <b-list-group-item
+                :key="room.no"
+                button
+                @click="
+                  loadChatHistory(
+                    room.no,
+                    room.user_id == loginUser.id ? room.seller_id : room.user_id
+                  ),
+                    changeIconState(room),
+                    forceRerender()
+                "
               >
-                <b-list-group-item
-                  button
-                  @click="changeIconState(room), forceRerender()"
+                <template v-if="room.seller_id != loginUser.id">
+                  {{ room.seller_id }}
+                </template>
+                <template v-else>
+                  {{ room.user_id }}
+                </template>
+                <template
+                  v-if="
+                    room.user_id == loginUser.id && room.userside_alert == 1
+                  "
                 >
-                  <template v-if="room.seller_id != loginUser.id">
-                    {{ room.seller_id }}
-                  </template>
-                  <template v-else>
-                    {{ room.user_id }}
-                  </template>
-                  <template
-                    v-if="
-                      room.user_id == loginUser.id && room.userside_alert == 1
-                    "
-                  >
-                    <b-icon icon="messenger" variant="success"></b-icon>
-                  </template>
-                  <template
-                    v-else-if="
-                      room.seller_id == loginUser.id &&
-                      room.sellerside_alert == 1
-                    "
-                  >
-                    <b-icon icon="messenger" variant="success"></b-icon>
-                  </template>
-                </b-list-group-item>
-              </router-link>
+                  <b-icon icon="messenger" variant="success"></b-icon>
+                </template>
+                <template
+                  v-else-if="
+                    room.seller_id == loginUser.id && room.sellerside_alert == 1
+                  "
+                >
+                  <b-icon icon="messenger" variant="success"></b-icon>
+                </template>
+              </b-list-group-item>
+              <!-- </router-link> -->
             </template>
-            <b-button @click="createRoom">
-              debugging [부동산 업자에게 상담 요청]
-            </b-button>
           </b-list-group>
         </b-row>
       </b-col>
@@ -94,7 +98,7 @@
   </b-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import http from "@/api/http.js";
 export default {
   name: "BoardView",
@@ -108,24 +112,13 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["getChatHistory"]),
     forceRerender() {
       this.componentKey++;
     },
     changeIconState(room) {
       if (room.seller_id == this.loginUser.id) room.sellerside_alert = 0;
       else room.userside_alert = 0;
-    },
-    createRoom() {
-      let request = { user_id: this.loginUser.id, seller_id: "seller" };
-      console.log(request);
-      http
-        .post("/chat", JSON.stringify(request))
-        .then((res) => {
-          this.chatroomlist = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
 
     async LoadChatRoomList() {
@@ -137,6 +130,23 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+        });
+    },
+    async loadChatHistory(no, user_id) {
+      console.log("loadChatHistory : ", no, " ", user_id);
+      await http
+        .get(`/chat/${no}`)
+        .then((res) => {
+          console.log("loadChatHistory");
+          this.getChatHistory(res.data);
+          // this.chatHistory = res.data;
+          this.$router.push({
+            name: "chatList",
+            params: { no: no, receiver: user_id },
+          });
+        })
+        .catch((err) => {
+          console.log("loadChatHistory err : ", err);
         });
     },
   },

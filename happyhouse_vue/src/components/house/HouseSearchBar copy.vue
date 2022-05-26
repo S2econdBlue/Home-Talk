@@ -113,7 +113,7 @@
                 <b-row no-gutters>
                   <b-col md="6">
                     <b-card-img
-                      :src="`http://localhost/vue/board/image/${article.articleno}/${article.original_name}`"
+                      :src="`http://localhost/vue/board/image/${article.no}/${article.original_name}`"
                       img-height="50"
                       alt="Image"
                       class="rounded-0 mx-auto"

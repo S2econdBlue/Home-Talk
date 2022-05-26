@@ -84,28 +84,45 @@
               <b-row align-h="between" align-v="center">
                 <b-col><strong>* 가격정보</strong></b-col>
                 <b-col cols="9">
-                  <b-row class="pb-5" align-v="center">
-                    <b-col cols="4">보증금</b-col>
-                    <b-col cols="5">
-                      <b-form-input
-                        :id="`type-number`"
-                        type="number"
-                        v-model="deposit"
-                      ></b-form-input>
-                    </b-col>
-                    <b-col>만원</b-col>
-                  </b-row>
-                  <b-row align-v="center">
-                    <b-col cols="4">월세</b-col>
-                    <b-col cols="5">
-                      <b-form-input
-                        :id="`type-number`"
-                        type="number"
-                        v-model="monthlyFee"
-                      ></b-form-input>
-                    </b-col>
-                    <b-col>만원</b-col>
-                  </b-row>
+                  <template
+                    v-if="selectedContract == 2 || selectedContract == 1"
+                  >
+                    <b-row class="pb-5" align-v="center">
+                      <b-col cols="4">보증금</b-col>
+                      <b-col cols="5">
+                        <b-form-input
+                          :id="`type-number`"
+                          type="number"
+                          v-model="deposit"
+                        ></b-form-input>
+                      </b-col>
+                      <b-col>만원</b-col>
+                    </b-row>
+                    <b-row align-v="center">
+                      <b-col cols="4">월세</b-col>
+                      <b-col cols="5">
+                        <b-form-input
+                          :id="`type-number`"
+                          type="number"
+                          v-model="monthlyFee"
+                        ></b-form-input>
+                      </b-col>
+                      <b-col>만원</b-col>
+                    </b-row>
+                  </template>
+                  <template v-else>
+                    <b-row align-v="center">
+                      <b-col cols="4">매매가</b-col>
+                      <b-col cols="5">
+                        <b-form-input
+                          :id="`type-number`"
+                          type="number"
+                          v-model="deposit"
+                        ></b-form-input>
+                      </b-col>
+                      <b-col>만원</b-col>
+                    </b-row>
+                  </template>
                 </b-col>
               </b-row>
             </b-col>
@@ -186,7 +203,9 @@
               <b-row align-v="center">
                 <b-col cols="4"><strong>* 입주가능일</strong></b-col>
                 <b-col>
-                  <b-button @click="liveNow">즉시입주</b-button>
+                  <b-button @click="liveNow" variant="primary">
+                    즉시입주
+                  </b-button>
                 </b-col>
                 <b-col>
                   <b-button v-b-toggle.collapse-1 variant="primary">
@@ -330,7 +349,7 @@ export default {
       title: "",
       files: [],
 
-      selectedContract: [],
+      selectedContract: 0,
       selectedLoan: [],
       selectedTrade: [],
 
@@ -341,9 +360,9 @@ export default {
       leftPx: "25px",
       topPx: "0px",
 
-      deposit: 0,
-      monthlyFee: 0,
-      commonMaintainFee: 0,
+      deposit: "",
+      monthlyFee: "",
+      commonMaintainFee: "",
 
       calendarValue: "미선택",
       context: null,
@@ -414,7 +433,7 @@ export default {
       );
     },
     liveNow() {
-      this.calendarValue = this.crntDate();
+      this.calendarValue = "즉시입주";
     },
     async sendData() {
       if (this.loginUser.id == undefined) {
@@ -459,9 +478,13 @@ export default {
             id: this.loginUser.id,
             title: this.title,
             contractOpt: Number(this.selectedContract),
-            deposit: Number(this.deposit),
-            monthlyFee: Number(this.monthlyFee),
-            commonMaintainFee: Number(this.commonMaintainFee),
+            deposit: this.deposit == "" ? Number(0) : Number(this.deposit),
+            monthlyFee:
+              this.monthlyFee == "" ? Number(0) : Number(this.monthlyFee),
+            commonMaintainFee:
+              this.commonMaintainFee == ""
+                ? Number(0)
+                : Number(this.commonMaintainFee),
             loan: this.selectedLoan,
             date: this.calendarValue,
             detail: this.detailText,

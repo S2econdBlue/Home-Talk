@@ -48,8 +48,7 @@
 
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
-		delete
-		from threadboard
+		delete from threadboard
 		where no = #{no}
 	</delete>
 	

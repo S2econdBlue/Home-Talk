@@ -1,23 +1,23 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <!-- <b-row class="mb-1">
-      <b-col class="text-left">
-        <b-button variant="outline-primary" @click="listArticle">목록</b-button>
-      </b-col>
-      <b-col class="text-right">
-        <b-button
-          variant="outline-info"
-          size="sm"
-          @click="moveModifyArticle"
-          class="mr-2"
-          >글수정</b-button
-        >
-        <b-button variant="outline-danger" size="sm" @click="deleteArticle"
-          >글삭제</b-button
-        >
-      </b-col>
-    </b-row> -->
     <b-row>
+      <template v-if="loginUser.id == this.article.id">
+        <b-col class="text-right" cols="11">
+          <!-- <b-button
+            variant="outline-info"
+            size="sm"
+            @click="moveModifyArticle"
+            class="mr-2"
+            >글수정</b-button
+          > -->
+          <b-button variant="outline-danger" size="sm" @click="deleteArticle"
+            >글삭제</b-button
+          >
+        </b-col>
+        <b-col></b-col>
+      </template>
+    </b-row>
+    <b-row class="mt-3">
       <b-col cols="7">
         <b-row>
           <div style="max-height: 500px; max-width: 690px">
@@ -74,16 +74,29 @@
             <b-row align-h="between" align-v="center">
               <b-col><strong>가격정보</strong></b-col>
               <b-col cols="9">
-                <b-row class="pb-5" align-v="center">
-                  <b-col cols="4">보증금</b-col>
-                  <b-col cols="4"> </b-col>
-                  <b-col>{{ trade.deposit }} 만원</b-col>
-                </b-row>
-                <b-row align-v="center">
-                  <b-col cols="4">월세</b-col>
-                  <b-col cols="4"> </b-col>
-                  <b-col>{{ trade.monthlyFee }} 만원</b-col>
-                </b-row>
+                <template
+                  v-if="
+                    this.trade.contractOpt == 2 || this.trade.contractOpt == 1
+                  "
+                >
+                  <b-row class="pb-5" align-v="center">
+                    <b-col cols="4">보증금</b-col>
+                    <b-col class="text-right">{{ trade.deposit }} 만원</b-col>
+                  </b-row>
+                  <b-row align-v="center">
+                    <b-col cols="4">월세</b-col>
+                    <b-col class="text-right">
+                      {{ trade.monthlyFee }} 만원
+                    </b-col>
+                  </b-row>
+                </template>
+
+                <template v-else>
+                  <b-row align-v="center">
+                    <b-col cols="4">매매가</b-col>
+                    <b-col class="text-right">{{ trade.deposit }} 만원</b-col>
+                  </b-row>
+                </template>
               </b-col>
             </b-row>
           </b-col>
@@ -109,7 +122,7 @@
                     v-for="(item, index) in trade.commonMaintainItem"
                     :key="index"
                   >
-                    {{ item }}
+                    [{{ item }}]
                   </span>
                 </template>
               </b-col>
@@ -135,7 +148,7 @@
                 </template>
                 <template>
                   <span v-for="(item, index) in trade.eachFeeItem" :key="index">
-                    {{ item }}
+                    [{{ item }}]
                   </span>
                 </template>
               </b-col>
@@ -178,7 +191,7 @@
         </b-row>
         <b-row>
           <b-card class="text-left w-100">
-            {{ computedDetail }}
+            <div v-html="computedDetail"></div>
           </b-card>
         </b-row>
         <b-row class="pt-5 b-between" align-v="center">
@@ -216,7 +229,15 @@
               <b-card-title>
                 <b-row class="text-left">
                   <b-col cols="4">
-                    <b-button variant="outline-primary">월세</b-button>
+                    <b-button variant="outline-primary">
+                      <template v-if="this.trade.contractOpt == 0"
+                        >매매
+                      </template>
+                      <template v-else-if="this.trade.contractOpt == 1"
+                        >전세
+                      </template>
+                      <template v-else> 월세 </template>
+                    </b-button>
                   </b-col>
                   <b-col>
                     <h1>{{ trade.deposit }} / {{ trade.monthlyFee }}</h1>
@@ -230,9 +251,6 @@
           </b-card>
         </b-row>
         <b-row>
-          <b-card class="w-100"> 즐겨찾기☆ </b-card>
-        </b-row>
-        <b-row>
           <b-card class="w-100">
             <b-row align-v="center">
               <b-col cols="3">
@@ -242,13 +260,17 @@
                   size="3.5rem"
                 ></b-avatar>
               </b-col>
-              <b-col class="text-left"> {{ this.article.id }}</b-col>
+              <b-col class="text-left">
+                중개업자 &nbsp;&nbsp; {{ this.article.id }}</b-col
+              >
             </b-row>
           </b-card>
         </b-row>
         <b-row>
           <b-card class="w-100">
-            <b-button variant="outline-primary"> 채팅상담 요청 </b-button>
+            <b-button variant="outline-primary" @click="createRoom">
+              채팅상담 요청
+            </b-button>
           </b-card>
         </b-row>
       </b-col>
@@ -260,6 +282,7 @@
 // import moment from "moment";
 import http from "@/api/http.js";
 import { BASE_URL } from "@/api/index.js";
+import { mapGetters } from "vuex";
 export default {
   name: "BoardDetail",
   data() {
@@ -279,6 +302,11 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["loginUser"]),
+    computedFileList() {
+      if (this.article.fileList == undefined) return {};
+      return this.article.fileList;
+    },
     computedRoadnameAddress() {
       if (this.trade.roadnameAddress == undefined) return "";
       return this.trade.roadnameAddress;
@@ -300,6 +328,7 @@ export default {
       return this.trade.eachFeeItem.length;
     },
     computedContract() {
+      if (this.trade.contractOpt == undefined) return "";
       return this.trade.contractOpt == 0
         ? "매매"
         : this.trade.contractOpt == 1
@@ -308,19 +337,8 @@ export default {
     },
 
     computedLoan() {
+      if (this.trade.loan == undefined) return 0;
       return this.trade.loan == 0 ? "융자금 없음" : "융자금 있음";
-    },
-  },
-  filters: {
-    dateYYYYMMDD(fullDate) {
-      if (fullDate == undefined) return "";
-      // let a = fullDate.split(" ");
-      // let b = a[0].split("-");
-      // return b[0] + "." + b[1] + "." + b[2];
-      return fullDate.split(" ")[0].split("-").join(".");
-    },
-    zeroToSzero(data) {
-      if (data == 0) return "0";
     },
   },
   created() {
@@ -351,11 +369,15 @@ export default {
       //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
     },
     deleteArticle() {
-      if (confirm("정말로 삭제?")) {
-        this.$router.replace({
-          name: "boardDelete",
-          params: { articleno: this.article.no },
-        });
+      if (confirm("글을 삭제합니다.")) {
+        http
+          .delete(`/board/${this.$route.params.articleno}`)
+          .then()
+          .catch((err) => {
+            console.log(err);
+          });
+
+        this.$router.push({ name: "boardDelete" });
       }
     },
 
@@ -372,13 +394,11 @@ export default {
           console.log(err);
         });
     },
-    async abcd() {
-      console.log("abcd1");
+    async setMapLocation() {
       let geocoder = this.geocoder;
       // let mapContainer = this.mapContainer;
       let map = this.map;
       let marker = this.marker;
-      console.log("this.trade.detailaddress :", this.trade.detailaddress);
       // 주소로 상세 정보를 검색
       await geocoder.addressSearch(
         this.trade.roadnameAddress,
@@ -399,10 +419,8 @@ export default {
           }
         }
       );
-      console.log("abcd2");
     },
-    def() {
-      console.log("def1");
+    setMapMounted() {
       // --------------------------------지도 설정 ------------------------------------------
       this.mapContainer = document.getElementById("map");
       this.mapContainer.style.display = "block";
@@ -418,17 +436,33 @@ export default {
         position: new window.daum.maps.LatLng(37.537187, 127.005476),
         map: this.map,
       });
-      console.log("def2");
+    },
+    createRoom() {
+      let request = { user_id: this.loginUser.id, seller_id: this.article.id };
+      console.log(request);
+      http
+        .post("/chat", JSON.stringify(request))
+        .then((res) => {
+          this.chatroomlist = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   async mounted() {
     await this.loadTrade();
-    await this.def();
-    await this.abcd();
+    await this.setMapMounted();
+    await this.setMapLocation();
   },
 
   // --------------------------------지도 설정 끝 ------------------------------------------},
 };
 </script>
 
-<style></style>
+<style>
+.carousel-inner {
+  width: 100%;
+  max-height: 400px !important;
+}
+</style>

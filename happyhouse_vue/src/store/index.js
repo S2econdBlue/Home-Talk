@@ -21,8 +21,12 @@ export default new Vuex.Store({
       grade: null,
       time: null,
     },
+    chatHistory: {},
   },
   getters: {
+    gettersChatHistory(state) {
+      return state.chatHistory;
+    },
     loginUser(state) {
       return state.loginUser;
     },
@@ -34,6 +38,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SET_CHAT_HISTORY(state, chatdata) {
+      state.chatHistory = chatdata;
+    },
     //////////////////////  회원 관련 기능  //////////////////////
     SET_USER_DATA(state, userdata) {
       console.log("SET_USER_DATA : ", userdata);
@@ -77,6 +84,9 @@ export default new Vuex.Store({
     /////////////////////////////// House end /////////////////////////////////////
   },
   actions: {
+    getChatHistory({ commit }, chatData) {
+      commit("SET_CHAT_HISTORY", chatData);
+    },
     //////////////////////   User start   //////////////////////
     loginSuccess({ commit }, userInfo) {
       console.log("loginSuccess : ", userInfo);

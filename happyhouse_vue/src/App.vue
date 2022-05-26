@@ -31,6 +31,6 @@ a:hover {
 }
 
 a.router-link-exact-active {
-  color: #db1637;
+  color: #ffffff;
 }
 </style>

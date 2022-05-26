@@ -131,13 +131,14 @@ public class BoardController {
 	@ApiOperation(value = "게시글마다 이미지를 저장. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = ResponseEntity.class)
 	@PostMapping("insertThread")
 	public ResponseEntity<String> insertThread(@RequestBody HashMap<String, Object> map) throws Exception {
-
+		
+		System.out.println("before===================================================");
 		for (Entry<String, Object> set : map.entrySet()) {
 			String key = set.getKey();
 			Object obj = set.getValue();
 			System.out.println("key :" + key + ", obj :" + obj);
 		}
-
+		System.out.println("before===================================================");
 		// 메인 게시글을 등록 후
 		// 매매 게시글 등록 후
 		// 공용 항목, 개별 항목 등록
@@ -149,6 +150,7 @@ public class BoardController {
 		int rslt = boardService.insertBoard(board);
 
 		if (rslt == 1) {
+			
 			// 2.tradeboard에 매매 데이터 삽입
 			TradeThreadDto tradeThreadDto = new TradeThreadDto();
 			tradeThreadDto.setCommonMaintainFee((Integer) map.get("commonMaintainFee"));
@@ -157,10 +159,13 @@ public class BoardController {
 			tradeThreadDto.setMonthlyFee((Integer) map.get("monthlyFee"));
 			tradeThreadDto.setCommonMaintainFee((Integer) map.get("commonMaintainFee"));
 			tradeThreadDto.setLoan((Integer) map.get("loan"));
-			tradeThreadDto.setDetail(((String) map.get("detail")).replaceAll("/(?:\r\n|\r|\n)/g","<br/>"));
+			String detail = ((String) map.get("detail")).replace("\n", "<br>");
+			tradeThreadDto.setDetail(detail);
 			tradeThreadDto.setRoadnameAddress((String) map.get("roadnameAddress"));
 			tradeThreadDto.setDetailAddress((String) map.get("detailAddress"));
-
+			System.out.println("after===================================================");
+			System.out.println(tradeThreadDto.toString());
+			System.out.println("after===================================================");
 			rslt = boardService.insertTradeThread(tradeThreadDto);
 
 			if (rslt == 1) {
