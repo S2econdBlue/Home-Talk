@@ -6,7 +6,7 @@
 
       <div>
         <b-tabs content-class="mt-3">
-          <b-tab title="시세" active
+          <b-tab title="시세" active @click="linkClass(0)"
             ><div>
               <b-row
                 ><b-col class="mx-auto">
@@ -110,7 +110,7 @@
                 ></b-table>
               </div></div
           ></b-tab>
-          <b-tab title="매물">
+          <b-tab title="매물" @click="linkClass(1)">
             <div id="cardBoard">
               <b-card
                 no-body
@@ -131,7 +131,9 @@
                   <b-col md="6">
                     <b-card-body :title="article.title">
                       <b-card-text>
-                        <b-row>{{ article.detail | oneLineDetail }}</b-row>
+                        <b-row hover>{{
+                          article.detail | oneLineDetail
+                        }}</b-row>
                         <b-row v-if="article.monthlyFee > 0"
                           >보증금 : {{ article.deposit }} / 월세 :
                           {{ article.monthlyFee }}</b-row
@@ -189,6 +191,8 @@ import {
   setCoffeeMarkers,
   setStoreMarkers,
   geo,
+  deleMaker,
+  atoll,
 } from "@/api/map";
 import http from "@/api/http";
 export default {
@@ -426,6 +430,7 @@ export default {
       this.worth.value = [0, 500000];
       this.term.value = [1990, 2022];
       this.trade.value = [1990, 2022];
+      deleMaker();
     },
     viewArticle(article) {
       this.$router.push({
@@ -435,6 +440,14 @@ export default {
     },
     changeSlider() {
       this.getDeal();
+    },
+    linkClass(data) {
+      if (data == 1) {
+        this.clear();
+        atoll(this.houseboards);
+      } else if (data == 0) {
+        this.clear();
+      }
     },
   },
 };

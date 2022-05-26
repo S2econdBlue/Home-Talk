@@ -11,7 +11,23 @@ var mapContainer;
 var mapOption;
 var starbuckmarker = [];
 var subwaysmarker = [];
+var infowindows = [];
 var geocoder = new kakao.maps.services.Geocoder();
+function deleMaker() {
+  // infowindow.close();
+  if (infowindows.length > 0) {
+    infowindows.forEach((item) => {
+      item.close();
+    });
+    infowindows = [];
+  }
+  if (markers.length > 0) {
+    markers.forEach((item) => {
+      item.setMap(null);
+    });
+    markers = [];
+  }
+}
 function getMarker(items) {
   if (markers.length > 0) {
     markers.forEach((item) => {
@@ -148,6 +164,33 @@ function geo(cb) {
     });
   }
 }
+function atoll(data) {
+  var bounds = new kakao.maps.LatLngBounds();
+  data.forEach((item) => {
+    geocoder.addressSearch(item.roadnameAddress, function (result, status) {
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: coords,
+        });
+        markers.push(marker);
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+          content: `<div style="width:150px;text-align:center;padding:6px 0;">${item.title}</div>`,
+        });
+        infowindows.push(infowindow);
+        infowindow.open(map, marker);
+        bounds.extend(coords);
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setBounds(bounds);
+      }
+    });
+  });
+}
 export {
   getMarker,
   starbucksStore,
@@ -156,4 +199,6 @@ export {
   setCoffeeMarkers,
   setStoreMarkers,
   geo,
+  deleMaker,
+  atoll,
 };

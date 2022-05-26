@@ -54,7 +54,7 @@
 <script>
 import image from "@/assets/logo.jpg";
 import { mapGetters, mapActions } from "vuex";
-import http from "@/api/http";
+// import http from "@/api/http";
 export default {
   name: "HeaderNaviBar",
   data() {
@@ -65,11 +65,11 @@ export default {
   computed: {
     ...mapGetters(["loginUser"]),
   },
-  created() {
-    http.get("board/root").then(({ res }) => {
-      console.log(res);
-    });
-  },
+  // created() {
+  //   http.get("board/root").then(({ res }) => {
+  //     console.log(res);
+  //   });
+  // },
   methods: {
     ...mapActions(["logout"]),
   },
