@@ -82,7 +82,7 @@ const routes = [
         component: () => import("@/components/board/BoardModify.vue"),
       },
       {
-        path: "delete/:articleno",
+        path: "delete",
         name: "boardDelete",
         component: () => import("@/components/board/BoardDelete.vue"),
       },

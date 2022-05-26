@@ -34,25 +34,37 @@
           <b-row align-h="end" align-v="center">
             <template v-if="this.loginUser.id">
               <b-col cols="5">
-                <router-link :to="{ name: 'info' }" class="link">
-                  <div style="text-align: center; color: white">
-                    {{ this.loginUser.id }}님
-                  </div>
-                </router-link>
+                <!-- <router-link :to="{ name: 'info' }" class="link"> -->
+                <div style="text-align: center; color: white; cursor: default">
+                  {{ this.loginUser.id }}님
+                </div>
+                <!-- </router-link> -->
               </b-col>
               <b-col cols="4">
-                <router-link :to="{ name: 'home' }" class="link">
+                <router-link
+                  @click.native="logout"
+                  :to="{ name: 'home' }"
+                  class="link"
+                >
                   로그아웃
                 </router-link>
               </b-col>
             </template>
             <template v-else>
+<<<<<<< HEAD
               <b-col class="float-right">
+=======
+              <b-col cols="5">
+>>>>>>> 7bd4973a8fc00df0e5a54110ef8806467293a07a
                 <router-link :to="{ name: 'signUp' }" class="link">
                   회원가입
                 </router-link>
               </b-col>
+<<<<<<< HEAD
               <b-col class="float-right">
+=======
+              <b-col cols="4">
+>>>>>>> 7bd4973a8fc00df0e5a54110ef8806467293a07a
                 <router-link :to="{ name: 'signIn' }" class="link">
                   로그인
                 </router-link>
@@ -85,20 +97,4 @@ export default {
 };
 </script>
 
-<style>
-a {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-}
-
-a:hover {
-  text-decoration: none;
-  font-weight: bold;
-  color: rgb(42, 132, 250);
-}
-
-a.router-link-exact-active {
-  color: rgb(42, 132, 250);
-  font-weight: bold;
-}
-</style>
+<style></style>
