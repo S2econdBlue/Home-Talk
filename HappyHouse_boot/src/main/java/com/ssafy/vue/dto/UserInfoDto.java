@@ -8,6 +8,7 @@ public class UserInfoDto {
 	private String name;
 	private int grade;
 	private String time;
+	private String token;
 
 	public String getTime() {
 		return time;
@@ -65,10 +66,18 @@ public class UserInfoDto {
 		this.name = name;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	@Override
 	public String toString() {
 		return "UserInfoDto [id=" + id + ", pw=" + pw + ", email=" + email + ", age=" + age + ", name=" + name
-				+ ", grade=" + grade + ", time=" + time + "]";
+				+ ", grade=" + grade + ", time=" + time + ", token=" + token + "]";
 	}
 
 }

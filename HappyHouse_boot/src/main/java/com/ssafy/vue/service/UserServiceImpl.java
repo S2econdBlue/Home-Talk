@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.vue.dto.UserInfoDto;
 import com.ssafy.vue.mapper.UserMapper;
@@ -44,11 +45,7 @@ public class UserServiceImpl implements UserService {
 		return UserMapper.ListAllUser();
 	}
 
-//	@Override
-//	public UserInfoDto Login(UserInfoDto userInfoDto) throws SQLException {
-//		return UserMapper.GetUser(userInfoDto);
-//	}
-
+	@Transactional
 	@Override
 	public int RegisterMember(UserInfoDto userInfoDto) throws SQLException {
 		return UserMapper.RegisterMember(userInfoDto);

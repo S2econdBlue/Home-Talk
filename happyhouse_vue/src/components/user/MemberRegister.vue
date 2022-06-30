@@ -63,12 +63,19 @@
               type="button"
               variant="primary"
               class="m-1"
-              @click="registUser"
-              >가입하기</b-button
-            >
-            <b-button type="button" variant="success" class="m-1"
-              >돌아가기</b-button
-            >
+              @click="registProcess"
+              >가입하기
+            </b-button>
+            <b-button
+              type="button"
+              variant="danger"
+              class="m-1"
+              @click="sendVerifyMsg"
+              >메일 전송
+            </b-button>
+            <b-button type="button" variant="success" class="m-1">
+              돌아가기
+            </b-button>
           </b-form>
         </b-card>
       </b-col>
@@ -95,6 +102,10 @@ export default {
     };
   },
   methods: {
+    async registProcess() {
+      await this.registUser();
+      await this.sendVerifyMsg();
+    },
     registUser() {
       if (this.registerUserData.id.trim() == "") {
         this.errorMessage = "아이디를 입력해주세요.";
@@ -132,6 +143,16 @@ export default {
             this.isError = true;
             this.errorMessage = "이미 존재하는 아이디입니다.";
           }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    sendVerifyMsg() {
+      http
+        .post("user/mail", this.registerUserData.email)
+        .then((res) => {
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);

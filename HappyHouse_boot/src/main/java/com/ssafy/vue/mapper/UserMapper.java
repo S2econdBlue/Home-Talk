@@ -31,4 +31,6 @@ public interface UserMapper {
 	int findpw(UserInfoDto userInfoDto) throws SQLException;
 	
 	int setPw(UserInfoDto userInfoDto);
+	
+	int verifyAccount(String token);
 }

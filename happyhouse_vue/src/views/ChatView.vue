@@ -14,21 +14,9 @@
         </b-row>
         <b-row>
           <b-list-group class="w-100">
-            <!-- 사용자 측면에서 불러오기 -->
+            <!-- 불러온 채팅 목록을 반복문을 통해 화면에 출력 -->
             <template v-for="room in chatroomlist">
-              <!-- <router-link
-                :key="room.no"
-                :to="{
-                  name: 'chatList',
-                  params: {
-                    no: room.no,
-                    receiver:
-                      room.user_id == loginUser.id
-                        ? room.seller_id
-                        : room.user_id,
-                  },
-                }"
-              > -->
+              <!-- 클릭했을 때 해당 채팅방의 번호와 상대방의 아이디로 채팅 내역을 불러오고 채팅 리스트 router를 실행-->
               <b-list-group-item
                 :key="room.no"
                 button
@@ -37,16 +25,20 @@
                     room.no,
                     room.user_id == loginUser.id ? room.seller_id : room.user_id
                   ),
+                    //새 채팅 알람 아이콘을 무조건 비활성화함
                     changeIconState(room),
+                    //키 값을 변경해서 강제로 라우터를 새로고침
                     forceRerender()
                 "
               >
+                <!-- 상대방 아이디를 표시 -->
                 <template v-if="room.seller_id != loginUser.id">
                   {{ room.seller_id }}
                 </template>
                 <template v-else>
                   {{ room.user_id }}
                 </template>
+                <!-- 새로운 채팅 내역이 도착하면 아이콘으로 표시 -->
                 <template
                   v-if="
                     room.user_id == loginUser.id && room.userside_alert == 1
@@ -67,12 +59,13 @@
           </b-list-group>
         </b-row>
       </b-col>
-      <!-- 채팅창 -->
+      <!-- 오른쪽 8 size의 채팅창 자리 생성-->
       <b-col cols="8">
         <b-jumbotron style="height: 800px">
-          <div id="chartt">
+          <div>
             <b-row>
               <b-col>
+                <!-- 키를 설정해두고 키가 변경되면 강제로 router가 새로고침됨 -->
                 <router-view :key="ComputedComponentKey" />
               </b-col>
             </b-row>
@@ -106,11 +99,13 @@ export default {
       else room.userside_alert = 0;
     },
 
+    //웹 서버에 사용자가 포함된 채팅 목록을 불러옴
     async LoadChatRoomList() {
       await http
         .get(`/chat/${this.loginUser.id}/${this.loginUser.grade}`)
         .then((res) => {
           console.log("LoadChatRoomList : ", res.data);
+          //불러온 데이터를 data()에 저장
           this.chatroomlist = res.data;
         })
         .catch((err) => {
@@ -118,11 +113,9 @@ export default {
         });
     },
     async loadChatHistory(no, user_id) {
-      console.log("loadChatHistory : ", no, " ", user_id);
       await http
         .get(`/chat/${no}`)
         .then((res) => {
-          console.log("loadChatHistory");
           this.getChatHistory(res.data);
           // this.chatHistory = res.data;
           this.$router.push({
@@ -137,6 +130,7 @@ export default {
   },
 
   created() {
+    console.log("chatView created");
     if (!this.loginUser.id) {
       alert("로그인이 필요합니다.");
       this.$router.push({ name: "signIn" });

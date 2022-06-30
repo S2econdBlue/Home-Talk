@@ -53,6 +53,11 @@
             >
               비밀번호 찾기
             </b-button>
+            <b-button type="button" class="m-1" @click="googleLogin">
+              구글 로그인
+            </b-button>
+            <input type="file" name="File" id="File" />
+            <input type="button" value="파일 업로드" @click="uploadFile" />
             <b-modal id="find_pw_modal" hide-footer>
               <template #modal-title> 비밀번호 초기화 </template>
               <b-row class="my-3">
@@ -140,12 +145,30 @@
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 import { mapActions } from "vuex";
 import http from "@/api/http";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+// Initialize Firebase
+// eslint-disable-next-line no-unused-vars
+
 export default {
   name: "MemberLogin",
   data() {
     return {
+      firebaseConfig: {
+        apiKey: "AIzaSyD92P-rVHOq8LqK146HCwke89EDK_AszG0",
+        authDomain: "my-first-firebase-a9ff8.firebaseapp.com",
+        projectId: "my-first-firebase-a9ff8",
+        storageBucket: "gs://my-first-firebase-a9ff8.appspot.com",
+        messagingSenderId: "385212984761",
+        appId: "1:385212984761:web:f510c3952dbf2aa27e5a68",
+      },
       isError: false,
       user: {
         id: "",
@@ -172,7 +195,69 @@ export default {
   },
   methods: {
     ...mapActions(["loginSuccess"]),
+
     // 아이디, 비밀번호 입력하면 db 조회 후 로그인 세팅하기
+    uploadFile() {
+      var file = document.getElementById("File").files[0];
+      console.log(file);
+      var fileName = file.name;
+
+      const storage = getStorage();
+      console.log("check");
+
+      const storageRef = ref(storage, "images");
+      const spaceRef = ref(storageRef, fileName);
+
+      const path = spaceRef.fullPath;
+      console.log("path : ", path);
+
+      // File name is 'space.jpg'
+      const name = spaceRef.name;
+      console.log("name: ", name);
+      // Points to 'images'
+      const imagesRefAgain = spaceRef.parent;
+      console.log("imagesRefAgain :", imagesRefAgain);
+
+      uploadBytes(spaceRef, file).then((snapshot) => {
+        console.log("snapshot : ", snapshot);
+        console.log("Uploaded a blob or file!");
+      });
+    },
+
+    async googleLogin() {
+      const firebaseapp = initializeApp(this.firebaseConfig);
+      const auth = getAuth(firebaseapp);
+      console.log(auth);
+      var user = "";
+      await createUserWithEmailAndPassword(auth, this.id, this.pw)
+        .then((userCredential) => {
+          // Signed in
+          user = userCredential.user;
+
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+
+          const errorMessage = error.message;
+
+          console.log("errorCode : ", errorCode);
+          console.log("errorMessage : ", errorMessage);
+        });
+
+      var db = getFirestore(firebaseapp);
+      try {
+        console.log(user.uid, this.user.id, this.user.pw);
+        const docRef = await addDoc(collection(db, "users"), {
+          UID: user.uid,
+          email: this.user.id,
+          pw: this.user.pw,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document : ", e);
+      }
+    },
     confirm() {
       if (this.user.id.trim() == "" || this.user.pw.trim() == "") {
         this.isError = true;
@@ -191,7 +276,9 @@ export default {
             this.$router.push({ name: "home" });
           }
         })
-        .catch();
+        .catch((err) => {
+          console.log(err);
+        });
     },
     sendFindPw() {
       http

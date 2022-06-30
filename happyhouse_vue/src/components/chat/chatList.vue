@@ -7,11 +7,12 @@
     >
       <b-row>
         <b-col>
-          <!-- 각 채팅 기록만큼 반복 -->
+          <!-- 불러들인 채팅 기록 출력 -->
           <template v-for="(chat, index) in gettersChatHistory">
             {{ DayDevider(index) }}
-            <!-- 내 아이디인 경우 -->
+
             <b-row :key="chat.no" :id="index">
+              <!-- 채팅 기록된 메세지의 아이디가 현재 로그인된 아이디일 경우 오른쪽에 출력 -->
               <template v-if="chat.id == loginUser.id">
                 <b-col>
                   <b-row align-h="end">
@@ -22,6 +23,7 @@
                         }}</b-col>
                       </b-row>
                       <b-row align-h="end">
+                        <!-- 오른쪽에 출력 -->
                         <b-col class="text-right" style="color: white">
                           {{ DateFormatter(chat.date) }}
                         </b-col>
@@ -41,7 +43,7 @@
                   </b-row>
                 </b-col>
               </template>
-
+              <!-- 채팅 아이디가 현재 로그인한 유저의 아이디와 다를 때 == 상대방 아이디일 때 -->
               <template v-else>
                 <b-col>
                   <b-row>
@@ -63,6 +65,7 @@
                             {{ chat.message }}
                           </div>
                         </b-col>
+                        <!-- 왼쪽에 출력 -->
                         <b-col class="text-left" style="color: white">
                           {{ DateFormatter(chat.date) }}
                         </b-col>
@@ -73,7 +76,7 @@
               </template>
             </b-row>
           </template>
-          <!-- 실시간으로 추가되는 메세지들 -->
+          <!-- 입력하는 메세지들을 추가 -->
           <template v-for="chat in computedChatList">
             <b-row :key="chat.crypto" :id="chat.crypto">
               <!-- 송신자가 본인일 경우 -->
@@ -143,6 +146,7 @@
         </b-col>
       </b-row>
     </b-jumbotron>
+    <!-- 관리자 전용 공지 채팅방일 경우 일반 사용자는 입력창이 사라짐, 그 외에는 입력창이 보임 -->
     <template
       v-if="
         this.$route.params.receiver != 'admin' || this.loginUser.id == 'admin'
@@ -160,6 +164,7 @@
                   placeholder="메세지를 입력해주세요."
                 />
               </b-col>
+              <!-- 전송 버튼 -->
               <b-col>
                 <a name="target"></a>
                 <b-button
@@ -187,19 +192,24 @@ export default {
   name: "chatList",
   data() {
     return {
-      crnt_date: "",
+      // 현재 채팅방의 번호
       room_no: "",
+      // 내가 입력한 채팅을 받는 수신자 == 상대방
       receiver: "",
+      // 마지막으로 입력한 메세지
       crntInputMessage: "",
+      // 실시간으로 추가되는 메세지 배열
       realtimeChat: [],
     };
   },
   computed: {
     ...mapGetters(["loginUser", "gettersChatHistory"]),
+    // ChatView.vue에서  vuex에 저장한 채팅 내역을 반환
     computedGettersChatHistory() {
       if (this.gettersChatHistory == undefined) return {};
       return this.gettersChatHistory;
     },
+    // 실시간으로 입력되는 채팅 목록을 반환
     computedChatList() {
       return this.realtimeChat;
     },
@@ -207,11 +217,11 @@ export default {
   methods: {
     ...mapActions(["getChatHistory"]),
     moveToDown() {
-      console.log(Object.keys(this.chatHistory).length);
-
+      //채팅 리스트를 화면에 출력할 때 설정한 아이디를 통해 스크롤을 가장 아래로 이동
       window.location.href =
         "#" + String(Object.keys(this.chatHistory).length - 1);
     },
+    // 새로운 채팅을 입력했을 때 새롭게 생성된 채팅으로 이동
     realTimeChatMoveToDown() {
       if (this.computedChatList[this.computedChatList.length - 2] == undefined)
         return;
@@ -223,6 +233,8 @@ export default {
         String(this.computedChatList[this.computedChatList.length - 1].crypto)
       );
     },
+
+    //일자가 변경되었을 때 그 경계선을 출력
     DayDevider(index) {
       if (index - 1 < 0) {
         let first = this.computedGettersChatHistory[0].date.split(" ");
@@ -247,6 +259,7 @@ export default {
         );
       }
     },
+    //채팅 입력 시간을 시간:분으로 변경 후 반환
     DateFormatter(date) {
       if (date == undefined) {
         let date = new Date();
@@ -259,6 +272,7 @@ export default {
       return Number(splitTIme[0]) + ":" + splitTIme[1];
     },
 
+    //채팅 목록을 불러왔을 때 불러온 유저 쪽에서 보여지는 알람을 off로 변경
     async UpdateAlertOff() {
       //유저라면
       let sendData = {};
@@ -274,7 +288,7 @@ export default {
           console.log("UpdateAlertOff err", err);
         });
     },
-
+    //채팅 목록을 웹서버로부터 가져온 뒤 data()에 저장
     async loadChatHistory() {
       this.room_no = this.$route.params.no;
       this.receiver = this.$route.params.receiver;
@@ -294,14 +308,20 @@ export default {
     sendMessage() {
       if (this.crntInputMessage.trim() != "") {
         let sendMessage = {};
+        //랜덤값 생성
         let random = new Uint32Array(1);
         window.crypto.getRandomValues(random);
+        //랜덤값 생성 완료
+
+        //채팅 데이터 저장
         sendMessage.crypto = Number(random[0]);
         sendMessage.message = this.crntInputMessage;
         sendMessage.sender = this.loginUser.id;
         sendMessage.receiver = this.receiver;
         sendMessage.room_no = Number(this.room_no);
         sendMessage.loginUserGrade = Number(this.loginUser.grade);
+
+        //웹서버로 채팅 데이터 전송
         this.webSocket.send(JSON.stringify(sendMessage));
       }
 
@@ -318,6 +338,8 @@ export default {
 
       this.webSocket.onopen = (event) => {
         console.log("openWebSocket open : ", event);
+        // 채팅이 열리면 현재 아이디로 첫 데이터를 전송
+        //서버는 입력받은 첫 메세지를 통해 현재 아이디와 해당 세션 값을 map을 통해 저장
         this.webSocket.send(
           JSON.stringify({ setSession: 1, id: this.loginUser.id })
         );
@@ -327,6 +349,7 @@ export default {
       this.webSocket.onmessage = (event) => {
         const chatMessageDto = JSON.parse(event.data);
         console.log("onmessage : ", chatMessageDto);
+        //push로 새로운 값이 화면에 뿌려질 수 있도록 함
         this.realtimeChat.push(chatMessageDto);
       };
 
@@ -336,11 +359,17 @@ export default {
     },
   },
   async created() {
+    //현재 채팅방의 채팅목록을 불러옴
     await this.loadChatHistory();
+    //spring boot를 통해 websocket 통신 시작
     await this.openWebSocket();
+    // 웹서버에 알람 아이콘을 끄도록 데이터 전송
     await this.UpdateAlertOff();
+    // 채팅 목록을 불러왔다면 가장 하단으로 채팅창이 옮겨져야 함.
+    // 하지만 현재 렉이 있을 경우 채팅 목록이 덜 불러와진 채로 실행이 되어 중간까지 옮겨짐
     await this.moveToDown();
   },
+  //컴포넌트가 종료된 경우 websocket을 종료
   destroyed() {
     this.closeWebSocket();
   },

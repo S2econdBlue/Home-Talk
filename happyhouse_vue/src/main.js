@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+
 var EventBus = new Vue();
 export default EventBus;
 import { BootstrapVue, IconsPlugin, VBHover } from "bootstrap-vue";

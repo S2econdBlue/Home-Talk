@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,14 +18,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.vue.dto.UserInfoDto;
+import com.ssafy.vue.service.EmailService;
+import com.ssafy.vue.service.EmailServiceImpl;
+//import com.ssafy.vue.service.MailSendService;
+//import com.ssafy.vue.service.MailSendServiceImpl;
 import com.ssafy.vue.service.UserService;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
@@ -39,6 +47,34 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private EmailService emailService;
+
+	@PostMapping("/mail")
+	@ResponseBody
+	public ResponseEntity<String> emaislConfirm(@RequestBody String userId) throws Exception {
+		System.out.println("");
+		logger.info("post emailConfirm");
+		System.out.println("전달 받은 이메일 : " + userId);
+		emailService.sendSimpleMessage(userId);
+		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+	}
+
+	@PostMapping("/verifyCode")
+	@ResponseBody
+	public int verifyCode(String code) {
+		logger.info("Post verifyCode");
+
+		int result = 0;
+		System.out.println("code : " + code);
+		System.out.println("code match : " + EmailServiceImpl.ePw.equals(code));
+		if (EmailServiceImpl.ePw.equals(code)) {
+			result = 1;
+		}
+
+		return result;
+	}
+
 //	회원 목록을 가지고 userlist로 이동
 	@GetMapping("/userlist")
 	public ResponseEntity<List<UserInfoDto>> userinfo() throws SQLException {
@@ -46,13 +82,14 @@ public class UserController {
 		return new ResponseEntity<List<UserInfoDto>>(userList, HttpStatus.OK);
 	}
 
-//	회원 목록을 가지고 userlist로 이동
 	@PostMapping("/login")
-	public ResponseEntity<UserInfoDto> login(@RequestBody HashMap<String, Object> map) throws SQLException {
-		UserInfoDto userInfoDto = new UserInfoDto();
-		userInfoDto.setId((String) map.get("id"));
-		userInfoDto.setPw((String) map.get("pw"));
-
+	public ResponseEntity<UserInfoDto> login(@RequestBody UserInfoDto userInfoDto) throws SQLException {
+//		System.out.println(map.toString());
+//		UserInfoDto userInfoDto = new UserInfoDto();
+//		userInfoDto.setId((String) map.get("id"));
+//		userInfoDto.setPw((String) map.get("pw"));
+		
+		System.out.println(userInfoDto.toString());
 		UserInfoDto user = userService.GetUser(userInfoDto);
 		return new ResponseEntity<UserInfoDto>(user, HttpStatus.OK);
 	}
@@ -76,10 +113,6 @@ public class UserController {
 		}
 	}
 
-//	@GetMapping("/userinfo")
-//	public ResponseEntity<UserInfoDto> userinfo(HttpSession session) throws SQLException {
-//		return new ResponseEntity<UserInfoDto>(user, HttpStatus.OK);
-//	}
 
 	@PostMapping("/UpdateUser")
 	public ResponseEntity<String> UpdateUser(UserInfoDto userInfoDto) throws SQLException {
@@ -107,6 +140,7 @@ public class UserController {
 			return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+
 	@PostMapping("setPw")
 	public ResponseEntity<String> setPw(@RequestBody UserInfoDto userInfoDto) throws SQLException {
 		logger.debug("userInfoDto : {}", userInfoDto);
@@ -119,6 +153,7 @@ public class UserController {
 			return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+
 	@PutMapping("{id}")
 	public ResponseEntity<String> UpdateUser(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println(map.toString());

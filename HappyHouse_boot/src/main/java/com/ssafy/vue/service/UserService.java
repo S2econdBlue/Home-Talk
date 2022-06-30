@@ -13,9 +13,6 @@ public interface UserService {
 	// 아이디 검사
 	public int IdCheck(String id) throws SQLException;
 
-	// 아이디 로긴
-//	public UserInfoDto Login(UserInfoDto userInfoDto) throws SQLException;
-
 	// 전체 회원 조회
 	public List<UserInfoDto> ListAllUser() throws SQLException;
 
