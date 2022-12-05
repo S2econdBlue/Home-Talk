@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`userinfo` (
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `grade` INT NULL DEFAULT NULL,
+  `token` VARCHAR(100) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -254,20 +255,6 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`interestarea` (
     REFERENCES `happyhouse`.`userinfo` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `happyhouse`.`observelocation`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `happyhouse`.`observelocation` (
-  `no` INT NOT NULL AUTO_INCREMENT,
-  `local_name` VARCHAR(10) NULL DEFAULT NULL,
-  `observe_station` VARCHAR(10) NULL DEFAULT NULL,
-  PRIMARY KEY (`no`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 515
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
 

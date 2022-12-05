@@ -1,4 +1,4 @@
-# happyhouse_vue_v2
+# 홈톡 - 부동산 매물 조회 및 매매 플랫폼 
 
 ## Project setup
 ```

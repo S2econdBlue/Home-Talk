@@ -1,8 +1,0 @@
-HappyHouse_boot/.settings/
-HappyHouse_boot/target/
-HappyHouse_boot/log/
-HappyHouse_boot/log/*
-HappyHouse_boot/images/
-HappyHouse_boot/src/main/resources/images/
-HappyHouse_boot/src/main/resources/static/
-*.log
